@@ -1,6 +1,6 @@
 <?php
 
-require_once('/var/www/html/librairie/Database.php');
+require_once('../Database.php');
 
 /**
  * @return string|false
@@ -102,7 +102,7 @@ function createControllerFile(string $model_name, $database_name){
 }
 
 function readDatabaseFile(){
-    $file = fopen("/var/www/html/librairie/config/database.json", 'r');
+    $file = fopen("./database.json", 'r');
     $res = fread($file, 4000);
     fclose($file);
 
@@ -121,7 +121,7 @@ function createDatabase(string $model_name, array $var_ele, string $database_nam
     switch($database->getDatabaseType()){
         case \Database::TYPE_MYSQL: $tq = "`";break;
         case \Database::TYPE_PGSQL: $tq = "\"";break;
-    }   
+    }
 
     if ($database->getDatabaseType() == "mysql")
         $SQL = "SHOW TABLES LIKE '$model_name'";
