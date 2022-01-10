@@ -12,7 +12,7 @@
         <div>
             <nav>
                 <ul>
-                    <li><a href="/"><img src="" alt="Logo"></a></li>
+                    <li><a href="/"><img src="/picture/logo.png" alt="Logo"></a></li>
                     <div>
                         <?php if (isset($_SESSION['id'])): ?>
                             <li><a href="/logout">Déconnexion</a></li>
@@ -22,7 +22,6 @@
                         <?php endif ?>
                     </div>
                 </ul>
-                
             </nav>
             <nav>
                 <ul>

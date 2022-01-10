@@ -52,11 +52,28 @@ header > div{
 header div nav:first-child ul, header div nav:first-child ul div{
     display: flex;
     justify-content: space-between;
+    align-self: center;
+}
+
+header div nav:first-child ul div li:nth-child(2){
+    margin-left: 10px;
+}
+
+header div nav:first-child{
+    border-bottom: 1px #00000075 solid;
 }
 
 header div nav:last-child ul{
     display: flex;
     justify-content: center;
+}
+
+header div nav:last-child{
+    margin-top: 10px;
+}
+
+header div nav ul li a img{
+    height: 61px;
 }
 
 header div nav ul li a{
