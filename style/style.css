@@ -124,6 +124,9 @@ header div nav ul li a{
     padding: 25px;
     max-height: 150px;
     background-color: #ffffffed;
+    text-align: justify;
+    overflow-y: hidden;
+    box-shadow: inset 0px -2px 2px 0px black;
 }
 
 #home .internshipsProposal > div .seeMore{
@@ -147,6 +150,10 @@ header div nav ul li a{
     transform: rotate(90deg);
     zoom: 75%;
 }
+
+/*=================*/
+/*===== LOGIN =====*/
+/*=================*/
 
 /*==================*/
 /*===== FOOTER =====*/

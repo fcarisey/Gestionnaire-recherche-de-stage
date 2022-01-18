@@ -18,7 +18,6 @@
                             <li><a href="/logout">Déconnexion</a></li>
                         <?php else: ?>
                             <li><a href="/login">Connexion</a></li>
-                            <li><a href="/login">Inscription</a></li>
                         <?php endif ?>
                     </div>
                 </ul>

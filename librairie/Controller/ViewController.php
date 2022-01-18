@@ -12,6 +12,7 @@ class ViewController{
 
         switch($page){
             case 'home': require_once("librairie/View/home.php");break;
+            case 'login': require_once("librairie/View/login.php");break;
         }
 
         if (!isset($_POST['ajax']))
@@ -19,7 +20,7 @@ class ViewController{
     }
 
     public static function userPermission($page){
-        $basic = ['home'];
+        $basic = ['home', 'login'];
         
         $allow = false;
         if (!in_array($page, $basic)){
