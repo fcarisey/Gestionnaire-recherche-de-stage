@@ -50,6 +50,10 @@ foreach($db_array as $key => $db){
 
 \Database::$db_array = $db_array;
 
+// tmp 
+$_SESSION['id'] = 0;
+$_SESSION['role'] = "eleve";
+
 \Controller\ViewController::process();
 
 ?>

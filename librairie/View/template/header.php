@@ -26,6 +26,9 @@
                 <ul>
                     <li><a href="/">Accueil</a></li>
                     <li><a href="/contact">Contact</a></li>
+                    <?php if (Controller\ControllerController::keyExist("role", $_SESSION) == "administrateur") : ?>
+                        <li><a href="/dashboard">Dashboard</a></li>
+                    <?php endif ?>
                 </ul>
             </nav>
         </div>

@@ -13,6 +13,10 @@ class ViewController{
         switch($page){
             case 'home': require_once("librairie/View/home.php");break;
             case 'login': require_once("librairie/View/login.php");break;
+            case 'contact': require_once("librairie/View/contact.php");break;
+            case 'internships': require_once("librairie/View/internships.php");break;
+            case 'logout': require_once("librairie/View/logout.php");break;
+            case 'dashboard': require_once("librairie/View/dashboard.php");break;
         }
 
         if (!isset($_POST['ajax']))
@@ -20,11 +24,23 @@ class ViewController{
     }
 
     public static function userPermission($page){
-        $basic = ['home', 'login'];
+        $basic = ['home', 'login', 'contact'];
+        $login = ['logout'];
+        $eleve = array_merge(['internships'], $login);
+        $administrator = array_merge(['dashboard'], $login);
         
         $allow = false;
         if (!in_array($page, $basic)){
-            if (isset($_SESSION['id']));
+            if (isset($_SESSION['id'])){
+
+                if ($_SESSION['role'] == "eleve")
+                    if (in_array($page, $eleve))
+                        $allow = true;
+
+                if ($_SESSION['role'] == "administrateur")
+                    if (in_array($page, $administrator))
+                        $allow = true;
+            }
         }else
             $allow = true;
 

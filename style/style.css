@@ -1,3 +1,8 @@
+@font-face {
+    font-family: MonserratRegular;
+    src: url("./fonts/Montserrat-Regular.ttf") format("truetype");
+}
+
 @keyframes seeMoreUpDown{
     from{
         transform: translateY(0);
@@ -46,7 +51,6 @@ header{
 header > div{
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
 }
 
 header div nav:first-child ul, header div nav:first-child ul div{
@@ -66,10 +70,14 @@ header div nav:first-child{
 header div nav:last-child ul{
     display: flex;
     justify-content: center;
+    margin: auto;
 }
 
-header div nav:last-child{
-    margin-top: 10px;
+header div nav:last-child {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: #396ada;
 }
 
 header div nav ul li a img{
@@ -80,6 +88,16 @@ header div nav ul li a{
     padding: 10px;
 }
 
+header div nav:nth-child(2) ul li a{
+    color: white;
+    transition: background 500ms;
+    border-radius: 5px;
+}
+
+header div nav:nth-child(2) ul li a:hover {
+    background-color: #4F9B8D;
+}
+
 /*================*/
 /*===== HOME =====*/
 /*================*/
@@ -87,62 +105,68 @@ header div nav ul li a{
 #home .internshipsProposal{
     display: flex;
     flex-direction: column;
-    background: url("/picture/internshipBackground.jpg");
-    padding: 20px 0;
-    background-size: cover;
+    margin-bottom: 50px;
 }
 
-#home .internshipsProposal > div{
-    width: 75%;
-    margin-left: 12.5%;
+#home .internshipsProposal > h1{
+    align-self: center;
 }
 
-#home .internshipsProposal > div > h1{
+#home .internshipsProposal .internships{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+}
+
+#home .internshipsProposal .internships .internship{
+    height: fit-content;
+    width: 375px;
+    padding: 40px 30px;
+    border-radius: 40px;
+    box-shadow: 0px 0px 20px 5px #808080a1;
+}
+
+#home .internshipsProposal .internships .internship > h2{
+    color: #0b0c32;
+    margin-top: 20px;
+}
+
+#home .internshipsProposal .internships .internship p:nth-child(2){
+    border-radius: 30px;
+    padding: 15px;
+    box-shadow: 0px 0px 20px 0px #a7a7a7;
+    margin-top: 30px;
+    font-size: large;
+}
+
+#home .internshipsProposal .internships .internship > .seeMore{
     text-align: center;
-    margin-bottom: 25px;
+    margin-top: 30px;
+}
+
+#home .internshipsProposal .internships .internship > .seeMore a{
+    background-color: #396ada;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: bold;
     color: white;
 }
 
-#home .internshipsProposal > div .internships{
-    display: flex;
-    flex-direction: column;
-}
-
-#home .internshipsProposal > div .internships .internshipRow{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-}
-
-#home .internshipsProposal > div .internships .internshipRow:last-child{
-    margin-bottom: auto;
-}
-
-#home .internshipsProposal > div .internships .internshipRow .internship{
-    width: 45%;
-    border-radius: 10px;
-    padding: 25px;
-    max-height: 150px;
-    background-color: #ffffffed;
-    text-align: justify;
-    overflow-y: hidden;
-    box-shadow: inset 0px -2px 2px 0px black;
-}
-
-#home .internshipsProposal > div .seeMore{
+#home .internshipsProposal > .seeMore{
     text-align: center;
-    margin-top: 15px;
     margin-bottom: 10px;
+    margin-top: 15px;
     animation: seeMoreUpDown infinite 1.9s;
 }
 
-#home .internshipsProposal > div .seeMore a{
+#home .internshipsProposal > .seeMore a{
     color: rgb(0 157 70);
     font-size: 1.4em;
     padding: 10px;
 }
 
-#home .internshipsProposal > div .seeMore a::after{
+#home .internshipsProposal > .seeMore a::after{
     content: "⪻";
     position: absolute;
     top: 30px;
