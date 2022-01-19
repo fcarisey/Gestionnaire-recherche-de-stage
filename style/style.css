@@ -95,7 +95,7 @@ header div nav:nth-child(2) ul li a{
 }
 
 header div nav:nth-child(2) ul li a:hover {
-    background-color: #4F9B8D;
+    background-color: #12c9a7;
 }
 
 /*================*/
@@ -110,6 +110,8 @@ header div nav:nth-child(2) ul li a:hover {
 
 #home .internshipsProposal > h1{
     align-self: center;
+    text-decoration: underline;
+    font-style: oblique;
 }
 
 #home .internshipsProposal .internships{
@@ -129,7 +131,7 @@ header div nav:nth-child(2) ul li a:hover {
     width: 325px;
     padding: 40px 30px;
     border-radius: 40px;
-    box-shadow: 0px 0px 20px 5px #808080a1;
+    box-shadow: 0px 0px 20px -8px #4f9b8d;
 }
 
 #home .internshipsProposal .internships .internship > h2{
@@ -140,7 +142,7 @@ header div nav:nth-child(2) ul li a:hover {
 #home .internshipsProposal .internships .internship p:nth-child(2){
     border-radius: 30px;
     padding: 15px;
-    box-shadow: 0px 0px 20px 0px #a7a7a7;
+    box-shadow: 0px 0px 20px -13px #4f9b8d;
     margin-top: 30px;
     font-size: large;
 }
@@ -157,6 +159,11 @@ header div nav:nth-child(2) ul li a:hover {
     font-size: 17px;
     font-weight: bold;
     color: white;
+    transition: 250ms;
+}
+
+#home .internshipsProposal .internships .internship > .seeMore a:hover {
+    background-color: #12c9a7;
 }
 
 #home .internshipsProposal > .seeMore{
@@ -210,11 +217,7 @@ footer div p{
     }
 
     #home .internshipsProposal .internships .internship{
-        height: fit-content;
         width: 365px;
-        padding: 40px 30px;
-        border-radius: 40px;
-        box-shadow: 0px 0px 20px 5px #808080a1;
     }
 }
 
