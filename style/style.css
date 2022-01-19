@@ -114,13 +114,19 @@ header div nav:nth-child(2) ul li a:hover {
 
 #home .internshipsProposal .internships{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     margin-top: 50px;
+}
+
+#home .internshipsProposal .internships > div{
+    display: flex;
+    justify-content: space-evenly;
+    width: 44%;
 }
 
 #home .internshipsProposal .internships .internship{
     height: fit-content;
-    width: 375px;
+    width: 325px;
     padding: 40px 30px;
     border-radius: 40px;
     box-shadow: 0px 0px 20px 5px #808080a1;
@@ -185,4 +191,37 @@ header div nav:nth-child(2) ul li a:hover {
 
 footer div p{
     text-align: center;
+}
+
+@media (min-width: 1388px) {
+    
+}
+
+@media (min-width: 768px) and (max-width: 1388px) {
+    #home .internshipsProposal .internships{
+        flex-direction: column;
+        justify-content: space-between;
+        height: 1160px;
+    }
+
+    #home .internshipsProposal .internships > div{
+        justify-content: space-evenly;
+        width: 100%;
+    }
+
+    #home .internshipsProposal .internships .internship{
+        height: fit-content;
+        width: 365px;
+        padding: 40px 30px;
+        border-radius: 40px;
+        box-shadow: 0px 0px 20px 5px #808080a1;
+    }
+}
+
+@media (min-width: 426px) and (max-width: 767px) {
+    
+}
+
+@media (max-width: 425px) {
+    
 }
