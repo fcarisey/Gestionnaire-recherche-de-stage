@@ -94,6 +94,10 @@ header div nav:nth-child(2) ul li a{
     border-radius: 5px;
 }
 
+header div nav:nth-child(2) ul li a.active{
+    background-color: #12c9a7;
+}
+
 header div nav:nth-child(2) ul li a:hover {
     background-color: #12c9a7;
 }

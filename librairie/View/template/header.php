@@ -24,8 +24,8 @@
             </nav>
             <nav>
                 <ul>
-                    <li><a href="/">Accueil</a></li>
-                    <li><a href="/contact">Contact</a></li>
+                    <li><a <?= ($page == "home") ? 'class="active"' : null ?> href="/">Accueil</a></li>
+                    <li><a <?= ($page == "contact") ? 'class="active"' : null ?> href="/contact">Contact</a></li>
                     <?php if (Controller\ControllerController::keyExist("role", $_SESSION) == "administrateur") : ?>
                         <li><a href="/dashboard">Dashboard</a></li>
                     <?php endif ?>
