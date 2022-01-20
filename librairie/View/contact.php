@@ -10,7 +10,7 @@
                     Courriel:
                     <input type="email" name="courriel">
                 </label>
-            <?php endif />
+            <?php endif ?>
         </div>
         <label>
             Message:
