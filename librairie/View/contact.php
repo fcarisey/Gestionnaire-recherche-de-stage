@@ -5,7 +5,7 @@
                 Objet:
                 <input type="text" name="object">
             </label>
-            <?php if (isset($_SESSION['id'])): ?>
+            <?php if (!isset($_SESSION['id'])): ?>
                 <label>
                     Courriel:
                     <input type="email" name="courriel">
@@ -14,7 +14,7 @@
         </div>
         <label>
             Message:
-            <textbox name="message"></textbox>
+            <textarea name="message"></textarea>
         </label>
     </form>
 <div>
