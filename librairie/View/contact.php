@@ -16,5 +16,6 @@
             Message:
             <textarea name="message"></textarea>
         </label>
+        <button type="button">Envoyer</button>
     </form>
 <div>
