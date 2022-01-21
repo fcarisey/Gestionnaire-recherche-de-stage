@@ -170,11 +170,11 @@ header div nav:nth-child(2) ul li a:hover {
     background-color: #12c9a7;
 }
 
-#home .internshipsProposal > .seeMore{
-    text-align: center;
-    margin-bottom: 10px;
-    margin-top: 15px;
+#home .internshipsProposal > .seeMore {
     animation: seeMoreUpDown infinite 1.9s;
+    margin: auto;
+    margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 #home .internshipsProposal > .seeMore a{
@@ -183,13 +183,13 @@ header div nav:nth-child(2) ul li a:hover {
     padding: 10px;
 }
 
-#home .internshipsProposal > .seeMore a::after{
+#home .internshipsProposal > .seeMore a::after {
     content: "⪻";
     position: absolute;
     top: 30px;
-    right: 49.4%;
     transform: rotate(90deg);
     zoom: 75%;
+    right: 60px;
 }
 
 /*===================*/
@@ -203,7 +203,7 @@ header div nav:nth-child(2) ul li a:hover {
     margin: auto;
 }
 
-#contact form > div {
+#contact form > div:nth-child(1) {
     display: flex;
     justify-content: space-between;
 }
@@ -221,7 +221,11 @@ header div nav:nth-child(2) ul li a:hover {
     resize: none;
 }
 
-#contact form button {
+#contact form div{
+    display: flex;
+}
+
+#contact form div button {
     width: fit-content;
     position: relative;
     left: 20px;
@@ -234,10 +238,25 @@ header div nav:nth-child(2) ul li a:hover {
     transition: 300ms;
 }
 
-#contact form button:hover {
+#contact form div button:hover {
     cursor: pointer;
     border: 1px solid #396ada;
     background-color: #12c9a7;
+}
+
+#contact form div #valide {
+    display: none;
+    background-color: #0080004d;
+    border: 2px solid green;
+    padding: 10px;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+#contact form div #valide.OK{
+    display: block;
 }
 
 #contact form label input {
@@ -247,11 +266,11 @@ header div nav:nth-child(2) ul li a:hover {
     border-radius: 2px 10px 5px/2px 2px;
 }
 
-#contact form label input.OK {
+#contact form label input.OK, #contact form label textarea.OK {
     border-color: #12c9a7;
 }
 
-#contact form label input.KO {
+#contact form label input.KO, #contact form label textarea.KO {
     border-color: red;
 }
 

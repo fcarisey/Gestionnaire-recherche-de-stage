@@ -10,28 +10,56 @@ function contact(){
             if (xhr.readyState === 4 && xhr.status === 200) {
                 let response = JSON.parse(xhr.responseText);
 
+                let objectInput = document.querySelector("#contact form label input[name='object']");
+                let courrielInput = document.querySelector("#contact form label input[name='courriel']");
+                let messageTextarea = document.querySelector("#contact form label textarea[name='message']");
+
+                objectInput.classList.remove("OK", "KO");
+                courrielInput.classList.remove("OK", "KO");
+                messageTextarea.classList.remove("OK", "KO");
+
                 let objectError = document.querySelector("#contact form label #objectError");
                 let courrielError = document.querySelector("#contact form label #courrielError");
                 let messageError = document.querySelector("#contact form label #messageError");
+                let OK = document.querySelector("#contact form div #valide");
 
                 objectError.innerHTML = "";
-                courrielError.innerHTML = "";
+                if (courrielError !== null)
+                    courrielError.innerHTML = "";
                 messageError.innerHTML = "";
+                OK.innerHTML = "";
 
                 if (response.object){
                     objectError.innerHTML = response.object;
-                }
+                    objectInput.classList.add("KO");
+                }else
+                    objectInput.classList.add("OK");
 
                 if (response.courriel){
                     courrielError.innerHTML = response.courriel;
-                }
+                    courrielInput.classList.add("KO");
+                }else
+                    courrielInput.classList.add("OK");
 
                 if (response.message){
                     messageError.innerHTML = response.message;
-                }
+                    messageTextarea.classList.add("KO");
+                }else
+                    messageTextarea.classList.add("OK");
 
                 if (response.valide){
-                    console.log(response.valide);
+                    OK.innerHTML = response.valide;
+
+                    OK.classList.add("OK");
+
+                    setTimeout(() => {
+                        OK.innerHTML = "";
+
+                        OK.classList.remove("OK");
+                        objectInput.classList.remove("OK");
+                        courrielInput.classList.remove("OK");
+                        messageTextarea.classList.remove("OK");
+                    }, 5000);
                 }
             }
         }

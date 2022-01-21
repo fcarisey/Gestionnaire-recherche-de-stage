@@ -20,7 +20,7 @@ if (isset($_POST['ajax'])){
         }else
             $err['courriel'] = "L'adresse mail n'est pas valide !";
     }else
-        $err['courriel'] = "Veuillez renseignez une adresse mail ou vous connecter !";
+        $err['courriel'] = "Veuillez renseignez une adresse mail ou vous connecter.";
 
     $messageParse = false;
     if (!empty($message)){
@@ -30,7 +30,7 @@ if (isset($_POST['ajax'])){
 
     if ($objectParse && $emailParse && $messageParse){
         Controller\MailController::sendMailTo("fcarisey6@gmail.com", $object, $message, $message, true, $email);
-        $err['valide'] = "Votre message à bien été envoyé !";
+        $err['valide'] = "Merci, votre message à bien été envoyé !";
     }
 
     echo json_encode($err);
@@ -45,13 +45,13 @@ if (isset($_POST['ajax'])){
             <label>
                 Objet:
                 <input required autocomplete="off" type="text" name="object">
-                <small id="object"></small>
+                <small id="objectError"></small>
             </label>
             <?php if (!isset($_SESSION['id'])): ?>
                 <label>
                     Courriel:
                     <input type="mail" name="courriel">
-                    <small id="courriel"></small>
+                    <small id="courrielError"></small>
                 </label>
                 
             <?php endif ?>
@@ -59,8 +59,12 @@ if (isset($_POST['ajax'])){
         <label>
             Message:
             <textarea required name="message" rows="5" cols="50"></textarea>
-            <small id="message"></small>
+            <small id="messageError"></small>
         </label>
-        <button type="button">Envoyer</button>
+        <div>
+            <button type="button">Envoyer</button>
+            <p id="valide"></p>
+        </div>
+        
     </form>
 <div>
