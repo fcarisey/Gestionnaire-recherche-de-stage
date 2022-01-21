@@ -196,8 +196,68 @@ header div nav:nth-child(2) ul li a:hover {
 /*===== CONTACT =====*/
 /*===================*/
 
-#contact form{
-    
+#contact form {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    margin: auto;
+}
+
+#contact form > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#contact form label {
+    display: flex;
+    flex-direction: column;
+}
+
+#contact form > label {
+    margin-top: 15px;
+}
+
+#contact form textarea{
+    resize: none;
+}
+
+#contact form button {
+    width: fit-content;
+    position: relative;
+    left: 20px;
+    margin-top: 20px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 1px solid #12c9a7;
+    background-color: #396ada;
+    color: white;
+    transition: 300ms;
+}
+
+#contact form button:hover {
+    cursor: pointer;
+    border: 1px solid #396ada;
+    background-color: #12c9a7;
+}
+
+#contact form label input {
+    border: none;
+    border-left: 1px solid #396ada;
+    border-bottom: 2px solid #396ada;
+    border-radius: 2px 10px 5px/2px 2px;
+}
+
+#contact form label input.OK {
+    border-color: #12c9a7;
+}
+
+#contact form label input.KO {
+    border-color: red;
+}
+
+#contact form label small{
+    color: red;
+    font-size: 0.8em;
 }
 
 /*==================*/

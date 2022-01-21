@@ -51,8 +51,12 @@ foreach($db_array as $key => $db){
 \Database::$db_array = $db_array;
 
 // tmp 
-$_SESSION['id'] = 0;
-$_SESSION['role'] = "eleve";
+// $_SESSION['id'] = 0;
+// $_SESSION['role'] = "eleve";
+// $_SESSION['courriel'] = "test@gmail.com";
+
+Controller\MailController::$username = "fcarisey6@gmail.com";
+Controller\MailController::$password = "fraqdelirelneuyx";
 
 \Controller\ViewController::process();
 
