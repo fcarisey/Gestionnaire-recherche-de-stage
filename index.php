@@ -58,6 +58,13 @@ foreach($db_array as $key => $db){
 Controller\MailController::$username = "fcarisey6@gmail.com";
 Controller\MailController::$password = "fraqdelirelneuyx";
 
+// Controller\UserController::INSERT([
+//     'Username' => "fcarisey",
+//     'Password' => password_hash("812332FFed", PASSWORD_DEFAULT),
+//     'Email' => "fcarisey@groupmontroland.fr",
+//     'IdRole' => 2
+// ]);
+
 \Controller\ViewController::process();
 
 ?>

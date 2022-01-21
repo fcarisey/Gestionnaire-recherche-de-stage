@@ -1,9 +1,9 @@
 <?php 
 
 if (isset($_POST['ajax'])){
-    $object = $_POST['object'];
-    $email = isset($_SESSION['id']) ? $_SESSION['courriel'] : $_POST['courriel'] ;
-    $message = $_POST['message'];
+    $object = htmlspecialchars($_POST['object']);
+    $email = htmlspecialchars(isset($_SESSION['id']) ? $_SESSION['courriel'] : $_POST['courriel']);
+    $message = htmlspecialchars($_POST['message']);
 
     $err = [];
 
@@ -44,13 +44,13 @@ if (isset($_POST['ajax'])){
         <div>
             <label>
                 Objet:
-                <input required autocomplete="off" type="text" name="object">
+                <input required autocomplete="off" type="text" name="object" placeholder="Objet">
                 <small id="objectError"></small>
             </label>
-            <?php if (!isset($_SESSION['id'])): ?>
+            <?php if (!isset($_SESSION['Id'])): ?>
                 <label>
                     Courriel:
-                    <input type="mail" name="courriel">
+                    <input required type="email" name="courriel" placeholder="Courriel">
                     <small id="courrielError"></small>
                 </label>
                 
@@ -58,7 +58,7 @@ if (isset($_POST['ajax'])){
         </div>
         <label>
             Message:
-            <textarea required name="message" rows="5" cols="50"></textarea>
+            <textarea required name="Message" rows="5" cols="50" placeholder="Message"></textarea>
             <small id="messageError"></small>
         </label>
         <div>

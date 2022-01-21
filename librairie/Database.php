@@ -86,6 +86,16 @@ class Database{
             $this->instance = new \PDO($this->database_type.":host=".$this->host.";port=".$this->port.";dbname=".$this->dbname.";user=".$this->user.";password=".$this->password);
         return $this->instance;
     }
+
+    public function specialRequest(string $SQL, array $execute, string $modelName = null){
+        $req = $this->getPDO()->prepare($SQL);
+        if ($req->execute($execute))
+            if ($modelName)
+                return $modelName::format($req->fetchAll());
+            else
+                return $req->fetchAll();
+        return false;
+    }
     
     public function request(int $action, string $table, array $select = null, array $value = null, array $set = null, array $where = null, string $limit = null, array $order_by = null){
         if ($this->database_type == self::TYPE_PGSQL)

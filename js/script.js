@@ -1,5 +1,6 @@
 window.onload = () => {
     contact();
+    login();
 }
 
 function contact(){
@@ -75,6 +76,46 @@ function contact(){
             form.append("courriel", courriel);
         form.append("message", message);
 
+        xhr.send(form);
+    });
+}
+
+function login(){
+    document.querySelector("#login form fieldset button[type='button']")?.addEventListener('click', () => {
+        let username = document.querySelector("#login form fieldset div label input[name='username']");
+        let password = document.querySelector("#login form fieldset div label input[name='password']");
+
+        let form = new FormData();
+        form.append('ajax', true);
+        form.append('username', username.value);
+        form.append('password', password.value);
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', './login');
+        xhr.onreadystatechange = () => {
+            if (xhr.responseText != null && xhr.status == 200 && xhr.readyState == 4){
+                let response = JSON.parse(xhr.responseText);
+
+                username.classList.remove('OK', 'KO');
+                password.classList.remove('OK', 'KO');
+
+                console.log(response);
+
+                if (response.username){
+                    username.classList.add('KO');
+                }else
+                    username.classList.add('OK');
+
+                if (response.password){
+                    password.classList.add('KO');
+                }else
+                    password.classList.add('OK');
+
+                if (response.valide){
+                    window.location.replace("./");
+                }
+            }
+        };
         xhr.send(form);
     });
 }

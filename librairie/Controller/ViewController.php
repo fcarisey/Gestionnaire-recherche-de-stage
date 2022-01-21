@@ -24,8 +24,9 @@ class ViewController{
     }
 
     public static function userPermission($page){
-        $basic = ['home', 'login', 'contact'];
-        $login = ['logout'];
+        $basic = ['home', 'login', 'contact', 'logout'];
+        
+        $login = [];
         $eleve = array_merge(['internships'], $login);
         $administrator = array_merge(['dashboard'], $login);
         

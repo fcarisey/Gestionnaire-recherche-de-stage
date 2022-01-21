@@ -15,7 +15,7 @@
                 <ul>
                     <li><a href="/"><img src="/picture/logo.png" alt="Logo"></a></li>
                     <div>
-                        <?php if (isset($_SESSION['id'])): ?>
+                        <?php if (isset($_SESSION['Id'])): ?>
                             <li><a href="/logout">Déconnexion</a></li>
                         <?php else: ?>
                             <li><a href="/login">Connexion</a></li>
