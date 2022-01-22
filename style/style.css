@@ -324,6 +324,13 @@ header div nav:nth-child(2) ul li a:hover {
     border-color: red;
 }
 
+#login form fieldset div label small {
+    color: red;
+    font-size: 0.8em;
+    width: min-content;
+    min-width: fit-content;
+}
+
 #login form fieldset button {
     width: fit-content;
     position: relative;

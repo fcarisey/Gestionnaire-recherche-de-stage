@@ -17,6 +17,7 @@ class ViewController{
             case 'internships': require_once("librairie/View/internships.php");break;
             case 'logout': require_once("librairie/View/logout.php");break;
             case 'dashboard': require_once("librairie/View/dashboard.php");break;
+            case 'internship': require_once("librairie/View/internship.php");break;
         }
 
         if (!isset($_POST['ajax']))
@@ -27,18 +28,17 @@ class ViewController{
         $basic = ['home', 'login', 'contact', 'logout'];
         
         $login = [];
-        $eleve = array_merge(['internships'], $login);
+        $eleve = array_merge(['internships', 'internship'], $login);
         $administrator = array_merge(['dashboard'], $login);
         
         $allow = false;
         if (!in_array($page, $basic)){
-            if (isset($_SESSION['id'])){
-
-                if ($_SESSION['role'] == "eleve")
+            if (isset($_SESSION['Id'])){
+                if (unserialize($_SESSION['Role'])->getDesignation() == "Eleve")
                     if (in_array($page, $eleve))
                         $allow = true;
 
-                if ($_SESSION['role'] == "administrateur")
+                if (unserialize($_SESSION['Role'])->getDesignation() == "Administrateur")
                     if (in_array($page, $administrator))
                         $allow = true;
             }

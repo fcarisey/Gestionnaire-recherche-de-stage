@@ -52,7 +52,7 @@ foreach($db_array as $key => $db){
 
 // tmp 
 // $_SESSION['id'] = 0;
-// $_SESSION['role'] = "eleve";
+// $_SESSION['role'] = "Eleve";
 // $_SESSION['courriel'] = "test@gmail.com";
 
 Controller\MailController::$username = "fcarisey6@gmail.com";

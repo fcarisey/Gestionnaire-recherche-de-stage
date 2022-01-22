@@ -90,6 +90,12 @@ function login(){
         form.append('username', username.value);
         form.append('password', password.value);
 
+        let usernameError = document.querySelector("#login form fieldset div label #usernameError");
+        let passwordError = document.querySelector("#login form fieldset div label #passwordError");
+
+        usernameError.innerHTML = "";
+        passwordError.innerHTML = "";
+
         let xhr = new XMLHttpRequest();
         xhr.open('POST', './login');
         xhr.onreadystatechange = () => {
@@ -103,11 +109,13 @@ function login(){
 
                 if (response.username){
                     username.classList.add('KO');
+                    usernameError.innerText = response.username;
                 }else
                     username.classList.add('OK');
 
                 if (response.password){
                     password.classList.add('KO');
+                    passwordError.innerText = response.password;
                 }else
                     password.classList.add('OK');
 
