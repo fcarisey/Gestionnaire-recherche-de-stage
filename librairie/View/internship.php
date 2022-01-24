@@ -9,16 +9,16 @@ $internship = \Controller\InternshipController::SELECT(\Database::SELECT_ALL, ['
         <div>
             <h2><?= $internship->getDesignation() ?></h2>
             <form>
-                <?php if (!empty($_SESSION['CV'])): ?>
+                <?php if (empty($_SESSION['CV'])): ?>
                     <label>
                         CV:
-                        <input type="file" name="CV">
+                        <input required type="file" name="CV">
                     </label>
                 <?php endif ?>
-                <?php if (!empty($_SESSION['LM'])): ?>
+                <?php if (empty($_SESSION['LM'])): ?>
                     <label>
                         LM: 
-                        <input type="file" name="LM">
+                        <input required type="file" name="LM">
                     </label>
                 <?php endif ?>
                 
@@ -26,7 +26,7 @@ $internship = \Controller\InternshipController::SELECT(\Database::SELECT_ALL, ['
             </form>
         </div>
         <div>
-
+			<?= $internship->getDescription() ?>
         </div>
     </div>
 </div>
