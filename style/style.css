@@ -274,9 +274,11 @@ header div nav:nth-child(2) ul li a:hover {
     border-color: red;
 }
 
-#contact form label small{
+#contact form label small {
     color: red;
     font-size: 0.8em;
+    width: min-content;
+    min-width: fit-content;
 }
 
 /*=================*/

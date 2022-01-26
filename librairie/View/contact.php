@@ -11,14 +11,14 @@ if (isset($_POST['ajax'])){
     if (!empty($object)){
         $objectParse = true;
     }else
-        $err['object'] = "L'objet du mail est obligatoire !";
+        $err['object'] = "L'objet du mail est obligatoire.";
 
     $emailParse = false;
     if (!empty($email)){
         if (filter_var($email, FILTER_VALIDATE_EMAIL)){
             $emailParse = true;
         }else
-            $err['courriel'] = "L'adresse mail n'est pas valide !";
+            $err['courriel'] = "L'adresse mail n'est pas valide.";
     }else
         $err['courriel'] = "Veuillez renseignez une adresse mail ou vous connecter.";
 
@@ -26,11 +26,11 @@ if (isset($_POST['ajax'])){
     if (!empty($message)){
         $messageParse = true;
     }else
-        $err['message'] = "Le message est obligatoire !";
+        $err['message'] = "Le message est obligatoire.";
 
     if ($objectParse && $emailParse && $messageParse){
         Controller\MailController::sendMailTo("fcarisey6@gmail.com", $object, $message, $message, true, $email);
-        $err['valide'] = "Merci, votre message à bien été envoyé !";
+        $err['valide'] = "Merci, votre message à bien été envoyé.";
     }
 
     echo json_encode($err);
@@ -58,7 +58,7 @@ if (isset($_POST['ajax'])){
         </div>
         <label>
             Message:
-            <textarea required name="Message" rows="5" cols="50" placeholder="Message"></textarea>
+            <textarea required name="message" rows="5" cols="50" placeholder="Message"></textarea>
             <small id="messageError"></small>
         </label>
         <div>

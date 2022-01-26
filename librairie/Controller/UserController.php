@@ -18,16 +18,16 @@ Class UserController extends ControllerController{
             if (!empty($username)){
                 $usernameParse = true;
             }else
-                $err["username"] = "Le nom d'utilisateur est obligatoire !";
+                $err["username"] = "Le nom d'utilisateur est obligatoire.";
 
             $passwordParse = false;
             if (!empty($password)){
                 if (strlen($password) >= 8){
                     $passwordParse = true;
                 }else
-                    $err['password'] = "Le mot de passe doît faire au moins 8 charactères !";
+                    $err['password'] = "Le mot de passe doît faire au moins 8 charactères.";
             }else
-                $err['password'] = "Le mot de passe est obligatoire !";
+                $err['password'] = "Le mot de passe est obligatoire.";
 
             if ($usernameParse && $passwordParse){
                 $user = \Controller\UserController::SELECT(\Database::SELECT_ALL, ['Username' => $username])[0];
