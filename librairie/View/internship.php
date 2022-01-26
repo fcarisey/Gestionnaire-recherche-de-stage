@@ -13,10 +13,16 @@ $internship = \Controller\InternshipController::SELECT(\Database::SELECT_ALL, ['
             </div>
             <form>
                 <?php if (empty($_SESSION['CV'])): ?>
-                    <input required type="file" name="CV" id="">
+                    <label>
+                        CV: 
+                        <input required type="file" name="CV" id="">
+                    </label>
                 <?php endif ?>
                 <?php if (empty($_SESSION['LM'])): ?>
-                    <input required type="file" name="LM" id="">
+                    <label>
+                        LM: 
+                        <input required type="file" name="LM" id="">
+                    </label>
                 <?php endif ?>
 
                 <button>je suis intéressé</button>

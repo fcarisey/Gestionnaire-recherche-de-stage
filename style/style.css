@@ -352,6 +352,23 @@ header div nav:nth-child(2) ul li a:hover {
     background-color: #12c9a75c;
 }
 
+/*=========================*/
+/*===== INTERNSHIP/id =====*/
+/*=========================*/
+
+#internship > div{
+    display: flex;
+}
+
+#internship > div > div{
+    width: 50%;
+}
+
+#internship > div > div:nth-child(1){
+    display: flex;
+    flex-direction: column;
+}
+
 /*==================*/
 /*===== FOOTER =====*/
 /*==================*/
