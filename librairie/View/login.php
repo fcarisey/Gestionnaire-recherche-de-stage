@@ -15,8 +15,8 @@ if (isset($_POST['ajax'])){
             <legend>Connexion</legend>
             <div>
                 <label>
-                    Courriel:
-                    <input autocomplete="username" type="text" name="username" placeholder="Nom d'utilisateur" required>
+                    Nom d'utilisateur:
+                    <input autocomplete="off" type="text" name="username" placeholder="Nom d'utilisateur" required>
                     <small id="usernameError"></small>
                 </label>
                 <label>

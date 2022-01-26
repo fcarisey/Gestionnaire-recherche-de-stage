@@ -25,7 +25,7 @@ Class UserController extends ControllerController{
                 if (strlen($password) >= 8){
                     $passwordParse = true;
                 }else
-                    $err['password'] = "Le mot de passe doît faire au moins 8 charactères.";
+                    $err['password'] = "Le mot de passe fait au moins 8 charactères.";
             }else
                 $err['password'] = "Le mot de passe est obligatoire.";
 

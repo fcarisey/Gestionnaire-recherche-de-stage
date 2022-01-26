@@ -58,7 +58,7 @@ if (isset($_POST['ajax'])){
         </div>
         <label>
             Message:
-            <textarea required name="message" rows="5" cols="50" placeholder="Message"></textarea>
+            <textarea required name="message" rows="8" cols="50" placeholder="Message"></textarea>
             <small id="messageError"></small>
         </label>
         <div>
