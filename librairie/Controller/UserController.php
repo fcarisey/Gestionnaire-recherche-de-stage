@@ -1,8 +1,6 @@
 <?php
     namespace Controller;
 
-use Model\Classe;
-
 Class UserController extends ControllerController{
     protected static $table_name = "User";
     protected static $model_class = \Model\User::class;
@@ -30,22 +28,28 @@ Class UserController extends ControllerController{
                 $err['password'] = "Le mot de passe est obligatoire.";
 
             if ($usernameParse && $passwordParse){
-                $user = \Controller\UserController::SELECT(\Database::SELECT_ALL, ['Username' => $username])[0];
+                $user = \Controller\UserController::SELECT(\Database::SELECT_ALL, ['Username' => $username]);
 
-                if (password_verify($password, $user->getPassword())){
-                    $_SESSION['Id'] = $user->getIdUser();
-                    $_SESSION['Username'] = $user->getUsername();
-                    $_SESSION['Role'] = serialize(\Controller\RoleController::SELECT(\Database::SELECT_ALL, ['IdRole' => $user->getIdRole()])[0]);
-                    $_SESSION['LM'] = $user->getLM();
-                    $_SESSION['CV'] = $user->getCV();
-                    $_SESSION['ProfilPicture'] = $user->getProfilPicture();
-                    $_SESSION['Email'] = $user->getEmail();
-                    if ($user->getIdClasse())
-                        $_SESSION['Class'] = serialize(\Controller\ClasseController::SELECT(\Database::SELECT_ALL, ['IdClasse' => $user->getIdClasse()])[0]);
-                    else
-                        $_SESSION['Class'] = serialize(new Classe());
-
-                    $err['valide'] = true;
+                if (!$user)
+                    $err['account'] = "Ce compte utilisateur n'existe pas !";
+                else{
+                    $user = $user[0];
+                    if (password_verify($password, $user->getPassword())){
+                        $_SESSION['Id'] = $user->getIdUser();
+                        $_SESSION['Username'] = $user->getUsername();
+                        $_SESSION['Role'] = serialize(\Controller\RoleController::SELECT(\Database::SELECT_ALL, ['IdRole' => $user->getIdRole()])[0]);
+                        $_SESSION['LM'] = $user->getLM();
+                        $_SESSION['CV'] = $user->getCV();
+                        $_SESSION['ProfilPicture'] = $user->getProfilPicture();
+                        $_SESSION['Courriel'] = $user->getEmail();
+                        if ($user->getIdClasse())
+                            $_SESSION['Class'] = serialize(\Controller\ClasseController::SELECT(\Database::SELECT_ALL, ['IdClasse' => $user->getIdClasse()])[0]);
+                        else
+                            $_SESSION['Class'] = serialize(new \Model\Classe());
+    
+                        $err['valide'] = true;
+                    }else
+                        $err['account'] = "Ce compte utilisateur n'existe pas !";
                 }
             }
 

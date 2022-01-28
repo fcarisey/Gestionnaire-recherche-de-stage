@@ -26,6 +26,7 @@ if (isset($_POST['ajax'])){
                 </label>
             </div>
             <button type="button">Se connecter</button>
+            <small id="accountError"></small>
         </fieldset>
     </form>
 </div>

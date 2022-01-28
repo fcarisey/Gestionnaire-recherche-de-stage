@@ -16,7 +16,7 @@ function contact(){
                 let messageTextarea = document.querySelector("#contact form label textarea[name='message']");
 
                 objectInput.classList.remove("OK", "KO");
-                courrielInput.classList.remove("OK", "KO");
+                courrielInput?.classList.remove("OK", "KO");
                 messageTextarea.classList.remove("OK", "KO");
 
                 let objectError = document.querySelector("#contact form label #objectError");
@@ -31,16 +31,18 @@ function contact(){
                 OK.innerHTML = "";
 
                 if (response.object){
-                    objectError.innerHTML = response.object;
+                    if (courrielError)
+                        objectError.innerHTML = response.object;
                     objectInput.classList.add("KO");
                 }else
                     objectInput.classList.add("OK");
 
                 if (response.courriel){
-                    courrielError.innerHTML = response.courriel;
-                    courrielInput.classList.add("KO");
+                    if (courrielError)
+                        courrielError.innerHTML = response.courriel;
+                    courrielInput?.classList.add("KO");
                 }else
-                    courrielInput.classList.add("OK");
+                    courrielInput?.classList.add("OK");
 
                 if (response.message){
                     messageError.innerHTML = response.message;
@@ -58,7 +60,7 @@ function contact(){
 
                         OK.classList.remove("OK");
                         objectInput.classList.remove("OK");
-                        courrielInput.classList.remove("OK");
+                        courrielInput?.classList.remove("OK");
                         messageTextarea.classList.remove("OK");
                     }, 5000);
                 }
@@ -92,9 +94,11 @@ function login(){
 
         let usernameError = document.querySelector("#login form fieldset div label #usernameError");
         let passwordError = document.querySelector("#login form fieldset div label #passwordError");
+        let accountError = document.querySelector("#login form fieldset #accountError");
 
         usernameError.innerHTML = "";
         passwordError.innerHTML = "";
+        accountError.innerHTML = "";
 
         let xhr = new XMLHttpRequest();
         xhr.open('POST', './login');
@@ -121,6 +125,10 @@ function login(){
 
                 if (response.valide){
                     window.location.replace("./");
+                }else if (response.account){
+                    username.classList.add('KO');
+                    password.classList.add('KO');
+                    accountError.innerHTML = response.account;
                 }
             }
         };

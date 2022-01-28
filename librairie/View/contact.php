@@ -2,7 +2,7 @@
 
 if (isset($_POST['ajax'])){
     $object = htmlspecialchars($_POST['object']);
-    $email = htmlspecialchars(isset($_SESSION['id']) ? $_SESSION['courriel'] : $_POST['courriel']);
+    $email = htmlspecialchars(isset($_SESSION['Id']) ? $_SESSION['Courriel'] : $_POST['courriel']);
     $message = htmlspecialchars($_POST['message']);
 
     $err = [];

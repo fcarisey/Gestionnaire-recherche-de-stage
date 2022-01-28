@@ -343,7 +343,7 @@ header div nav:nth-child(2) ul li a:hover {
     border: 1px solid red;
 }
 
-#login form fieldset div label small {
+#login form fieldset small{
     color: red;
     font-size: 0.8em;
 }
@@ -391,7 +391,7 @@ header div nav:nth-child(2) ul li a:hover {
 footer{
     position: absolute;
     width: 100%;
-    bottom: 0;
+    top: auto;
 }
 
 footer div p{
