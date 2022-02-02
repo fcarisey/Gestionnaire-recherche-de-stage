@@ -1,58 +1,70 @@
 <?php
-    namespace Controller;
 
-Class UserController extends ControllerController{
-    protected static $table_name = "User";
-    protected static $model_class = \Model\User::class;
-    protected static $database = "grds";
+namespace Controller;
 
-    public static function login(string $username, string $password){
-            $username = htmlspecialchars($_POST['username']);
-            $password = htmlspecialchars($_POST['password']);
+class UserController{
+    public static function login($username, $passowrd, $tableName){
+        $err = [];
 
-            $err = [];
+        // username parse
+        $usernameParse = false;
+        if (!empty($username)){
+            $usernameParse = true;
+        }else
+            $err['username'] = "Le nom d'utilisateur est oligatoire !";
 
-            $usernameParse = false;
-            if (!empty($username)){
-                $usernameParse = true;
+        //password parse
+        $passwordParse = false;
+        if (!empty($password)){
+            if (strlen($passowrd) >= 8){
+                $passowrdParse = true;
             }else
-                $err["username"] = "Le nom d'utilisateur est obligatoire.";
+                $err['password'] = "Le mot de passe contient au moins 8 caractères !";
+        }else
+            $err['password'] = "Le mot de passe est obligatoire !";
 
-            $passwordParse = false;
-            if (!empty($password)){
-                if (strlen($password) >= 8){
-                    $passwordParse = true;
+        if ($tableName == "Student"){
+            $user = StudentController::SELECT(\Database::SELECT_ALL, ['username' => $username], 1);
+
+            if (count($user) == 1){
+                $user = $user[0];
+
+                if (password_verify($passowrd, $user->getPassword())){
+                    $id = $user->getIdsudent();
+                    $firstname = $user->getFirstname();
+                    $lastname = $user->getLastname();
+                    $username = $user->getUsername();
+                    $password = $user->getPassword();
+                    $profilpicture = $user->getProfilpicture();
+                    $courriel = $user->getCourriel();
+                    $cv = $user->getCv();
+                    $lm = $user->getLm();
+                    $classe = serialize(ClasseController::SELECT(\Database::SELECT_ALL, ['idclasse' => (int)$user->getIdclasse()], 1)[0]);
+                    $currentinternship = serialize(CurrentinternshipController::SELECT(\Database::SELECT_ALL, ['idcurrentinternship' => (int)$user->getIdcurrentinternship], 1));
+                    
+                    $_SESSION['id'] = $id;
+                    $_SESSION['firstname'] = $firstname;
+                    $_SESSION['lastname'] = $lastname;
+                    $_SESSION['username'] = $username;
+                    $_SESSION['password'] = $password;
+                    $_SESSION['profilpicture'] = $profilpicture;
+                    $_SESSION['courriel'] = $courriel;
+                    $_SESSION['cv'] = $cv;
+                    $_SESSION['lm'] = $lm;
+                    $_SESSION['classe'] = $classe;
+                    $_SESSION['currentinternship'] = $currentinternship;
+
+                    $err['valide'] = true;
                 }else
-                    $err['password'] = "Le mot de passe fait au moins 8 charactères.";
+                    $err['err'] = "L'utilisateur n'existe pas !";
             }else
-                $err['password'] = "Le mot de passe est obligatoire.";
+                $err['err'] = "L'utilisateur n'existe pas !";
+        }else if ($tableName == "Teacher"){
 
-            if ($usernameParse && $passwordParse){
-                $user = \Controller\UserController::SELECT(\Database::SELECT_ALL, ['Username' => $username]);
+        }else{
 
-                if (!$user)
-                    $err['account'] = "Ce compte utilisateur n'existe pas !";
-                else{
-                    $user = $user[0];
-                    if (password_verify($password, $user->getPassword())){
-                        $_SESSION['Id'] = $user->getIdUser();
-                        $_SESSION['Username'] = $user->getUsername();
-                        $_SESSION['Role'] = serialize(\Controller\RoleController::SELECT(\Database::SELECT_ALL, ['IdRole' => $user->getIdRole()])[0]);
-                        $_SESSION['LM'] = $user->getLM();
-                        $_SESSION['CV'] = $user->getCV();
-                        $_SESSION['ProfilPicture'] = $user->getProfilPicture();
-                        $_SESSION['Courriel'] = $user->getEmail();
-                        if ($user->getIdClasse())
-                            $_SESSION['Class'] = serialize(\Controller\ClasseController::SELECT(\Database::SELECT_ALL, ['IdClasse' => $user->getIdClasse()])[0]);
-                        else
-                            $_SESSION['Class'] = serialize(new \Model\Classe());
-    
-                        $err['valide'] = true;
-                    }else
-                        $err['account'] = "Ce compte utilisateur n'existe pas !";
-                }
-            }
+        }
 
-            return $err;
+        return $err;
     }
 }

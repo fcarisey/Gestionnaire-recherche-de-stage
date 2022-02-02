@@ -1,19 +1,19 @@
 <?php
     namespace Model;
-    Class Internship{
-        private $idinternship,$designation,$description,$website,$enterprise,$email,$phone,$isdone,$idclasse;
+    Class Currentinternship{
+        private $idcurrentinternship,$designation,$description,$website,$enterprise,$phone,$internshipagreement;
 
-        public function __construct($idinternship = null,$designation = null,$description = null,$website = null,$enterprise = null,$email = null,$phone = null,$isdone = null,$idclasse = null){
-           $this->setIdinternship($idinternship)->setDesignation($designation)->setDescription($description)->setWebsite($website)->setEnterprise($enterprise)->setEmail($email)->setPhone($phone)->setIsdone($isdone)->setIdclasse($idclasse);
+        public function __construct($idcurrentinternship = null,$designation = null,$description = null,$website = null,$enterprise = null,$phone = null,$internshipagreement = null){
+           $this->setIdcurrentinternship($idcurrentinternship)->setDesignation($designation)->setDescription($description)->setWebsite($website)->setEnterprise($enterprise)->setPhone($phone)->setInternshipagreement($internshipagreement);
         }
 
         
-        public function setIdinternship($idinternship){
-            $this->idinternship = $idinternship;
+        public function setIdcurrentinternship($idcurrentinternship){
+            $this->idcurrentinternship = $idcurrentinternship;
             return $this;
         }
-        public function getIdinternship(){
-            return $this->idinternship;
+        public function getIdcurrentinternship(){
+            return $this->idcurrentinternship;
         }
 
         public function setDesignation($designation){
@@ -48,14 +48,6 @@
             return $this->enterprise;
         }
 
-        public function setEmail($email){
-            $this->email = $email;
-            return $this;
-        }
-        public function getEmail(){
-            return $this->email;
-        }
-
         public function setPhone($phone){
             $this->phone = $phone;
             return $this;
@@ -64,20 +56,12 @@
             return $this->phone;
         }
 
-        public function setIsdone($isdone){
-            $this->isdone = $isdone;
+        public function setInternshipagreement($internshipagreement){
+            $this->internshipagreement = $internshipagreement;
             return $this;
         }
-        public function getIsdone(){
-            return $this->isdone;
-        }
-
-        public function setIdclasse($idclasse){
-            $this->idclasse = $idclasse;
-            return $this;
-        }
-        public function getIdclasse(){
-            return $this->idclasse;
+        public function getInternshipagreement(){
+            return $this->internshipagreement;
         }
 
         
@@ -89,18 +73,16 @@
 
                 foreach($data as $d){
 
-                    $idinternship = \Controller\ControllerController::keyExist('idinternship', $d);
+                    $idcurrentinternship = \Controller\ControllerController::keyExist('idcurrentinternship', $d);
                     $designation = \Controller\ControllerController::keyExist('designation', $d);
                     $description = \Controller\ControllerController::keyExist('description', $d);
                     $website = \Controller\ControllerController::keyExist('website', $d);
                     $enterprise = \Controller\ControllerController::keyExist('enterprise', $d);
-                    $email = \Controller\ControllerController::keyExist('email', $d);
                     $phone = \Controller\ControllerController::keyExist('phone', $d);
-                    $isdone = \Controller\ControllerController::keyExist('isdone', $d);
-                    $idclasse = \Controller\ControllerController::keyExist('idclasse', $d);
-                    $internship = new self($idinternship,$designation,$description,$website,$enterprise,$email,$phone,$isdone,$idclasse);
+                    $internshipagreement = \Controller\ControllerController::keyExist('internshipagreement', $d);
+                    $currentinternship = new self($idcurrentinternship,$designation,$description,$website,$enterprise,$phone,$internshipagreement);
 
-                    array_push($objs, $internship);
+                    array_push($objs, $currentinternship);
                 }
             }
             return (empty($objs)) ? null : $objs;

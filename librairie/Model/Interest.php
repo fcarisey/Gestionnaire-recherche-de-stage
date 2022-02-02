@@ -1,27 +1,27 @@
 <?php
     namespace Model;
     Class Interest{
-        private $IdUser,$IdInternship;
+        private $idstudent,$idinternship;
 
-        public function __construct($IdUser = null,$IdInternship = null){
-           $this->setIdUser($IdUser)->setIdInternship($IdInternship);
+        public function __construct($idstudent = null,$idinternship = null){
+           $this->setIdstudent($idstudent)->setIdinternship($idinternship);
         }
 
         
-        public function setIdUser($IdUser){
-            $this->IdUser = $IdUser;
+        public function setIdstudent($idstudent){
+            $this->idstudent = $idstudent;
             return $this;
         }
-        public function getIdUser(){
-            return $this->IdUser;
+        public function getIdstudent(){
+            return $this->idstudent;
         }
 
-        public function setIdInternship($IdInternship){
-            $this->IdInternship = $IdInternship;
+        public function setIdinternship($idinternship){
+            $this->idinternship = $idinternship;
             return $this;
         }
-        public function getIdInternship(){
-            return $this->IdInternship;
+        public function getIdinternship(){
+            return $this->idinternship;
         }
 
         
@@ -33,9 +33,9 @@
 
                 foreach($data as $d){
 
-                    $IdUser = \Controller\ControllerController::keyExist('IdUser', $d);
-                    $IdInternship = \Controller\ControllerController::keyExist('IdInternship', $d);
-                    $interest = new self($IdUser,$IdInternship);
+                    $idstudent = \Controller\ControllerController::keyExist('idstudent', $d);
+                    $idinternship = \Controller\ControllerController::keyExist('idinternship', $d);
+                    $interest = new self($idstudent,$idinternship);
 
                     array_push($objs, $interest);
                 }

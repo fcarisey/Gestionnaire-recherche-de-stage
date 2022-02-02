@@ -1,7 +1,7 @@
 [
     {
         "name": "grds",
-        "database": "grds",
+        "database": "grdsnew",
         "host": "127.0.0.1",
         "user": "root",
         "password": "812332",

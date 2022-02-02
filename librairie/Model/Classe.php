@@ -1,35 +1,43 @@
 <?php
     namespace Model;
     Class Classe{
-        private $IdClasse,$Designation,$InternshipDate;
+        private $idclasse,$designation,$internshipdatestart,$internshipdateend;
 
-        public function __construct($IdClasse = null,$Designation = null,$InternshipDate = null){
-           $this->setIdClasse($IdClasse)->setDesignation($Designation)->setInternshipDate($InternshipDate);
+        public function __construct($idclasse = null,$designation = null,$internshipdatestart = null,$internshipdateend = null){
+           $this->setIdclasse($idclasse)->setDesignation($designation)->setInternshipdatestart($internshipdatestart)->setInternshipdateend($internshipdateend);
         }
 
         
-        public function setIdClasse($IdClasse){
-            $this->IdClasse = $IdClasse;
+        public function setIdclasse($idclasse){
+            $this->idclasse = $idclasse;
             return $this;
         }
-        public function getIdClasse(){
-            return $this->IdClasse;
+        public function getIdclasse(){
+            return $this->idclasse;
         }
 
-        public function setDesignation($Designation){
-            $this->Designation = $Designation;
+        public function setDesignation($designation){
+            $this->designation = $designation;
             return $this;
         }
         public function getDesignation(){
-            return $this->Designation;
+            return $this->designation;
         }
 
-        public function setInternshipDate($InternshipDate){
-            $this->InternshipDate = $InternshipDate;
+        public function setInternshipdatestart($internshipdatestart){
+            $this->internshipdatestart = $internshipdatestart;
             return $this;
         }
-        public function getInternshipDate(){
-            return $this->InternshipDate;
+        public function getInternshipdatestart(){
+            return $this->internshipdatestart;
+        }
+
+        public function setInternshipdateend($internshipdateend){
+            $this->internshipdateend = $internshipdateend;
+            return $this;
+        }
+        public function getInternshipdateend(){
+            return $this->internshipdateend;
         }
 
         
@@ -41,10 +49,11 @@
 
                 foreach($data as $d){
 
-                    $IdClasse = \Controller\ControllerController::keyExist('IdClasse', $d);
-                    $Designation = \Controller\ControllerController::keyExist('Designation', $d);
-                    $InternshipDate = \Controller\ControllerController::keyExist('InternshipDate', $d);
-                    $classe = new self($IdClasse,$Designation,$InternshipDate);
+                    $idclasse = \Controller\ControllerController::keyExist('idclasse', $d);
+                    $designation = \Controller\ControllerController::keyExist('designation', $d);
+                    $internshipdatestart = \Controller\ControllerController::keyExist('internshipdatestart', $d);
+                    $internshipdateend = \Controller\ControllerController::keyExist('internshipdateend', $d);
+                    $classe = new self($idclasse,$designation,$internshipdatestart,$internshipdateend);
 
                     array_push($objs, $classe);
                 }

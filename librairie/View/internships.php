@@ -1,1 +1,3 @@
-<h2>internships</h2>
+<div id="internships">
+    
+</div>
