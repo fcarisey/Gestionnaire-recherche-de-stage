@@ -50,22 +50,18 @@ foreach($db_array as $key => $db){
 
 \Database::$db_array = $db_array;
 
-// tmp 
-// $_SESSION['id'] = 0;
-// $_SESSION['role'] = "Eleve";
-// $_SESSION['courriel'] = "test@gmail.com";
-
 Controller\MailController::$username = "fcarisey6@gmail.com";
 Controller\MailController::$password = "fraqdelirelneuyx";
 
-Controller\StudentController::INSERT([
-    'firstname' => "frédéric",
-    'lastname' => "carisey",
-    'username' => "fcarisey",
-    'password' => password_hash("812332FFed", PASSWORD_DEFAULT),
-    'profilpicture' => "default.jpg",    'email' => "fcarisey@groupmontroland.fr",
-    'idRole' => 2
-]);
+// Controller\StudentController::INSERT([
+//     'firstname' => "frédéric",
+//     'lastname' => "carisey",
+//     'username' => "fcarisey",
+//     'password' => password_hash("812332FFed", PASSWORD_DEFAULT),
+//     'profilpicture' => "default.jpg",
+//     'courriel' => "fcarisey@groupmontroland.fr",
+//     'idclasse' => 1
+// ]);
 
 \Controller\ViewController::process();
 
