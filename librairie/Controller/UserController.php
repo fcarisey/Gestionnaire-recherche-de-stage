@@ -53,6 +53,7 @@ class UserController{
                     $_SESSION['lm'] = $lm;
                     $_SESSION['classe'] = $classe;
                     $_SESSION['currentinternship'] = $currentinternship;
+                    $_SESSION['role'] = "Student";
 
                     $err['valide'] = true;
                 }else
@@ -60,11 +61,70 @@ class UserController{
             }else
                 $err['err'] = "L'utilisateur n'existe pas !";
         }else if ($tableName == "Teacher"){
+            $user = TeacherController::SELECT(\Database::SELECT_ALL, ['username' => $username], 1);
 
+            if (count($user) == 1){
+                $user = $user[0];
+
+                if (password_verify($passowrd, $user->getPassword())){
+                    $id = $user->getIdsudent();
+                    $firstname = $user->getFirstname();
+                    $lastname = $user->getLastname();
+                    $username = $user->getUsername();
+                    $password = $user->getPassword();
+                    $profilpicture = $user->getProfilpicture();
+                    $courriel = $user->getCourriel();
+                    
+                    $_SESSION['id'] = $id;
+                    $_SESSION['firstname'] = $firstname;
+                    $_SESSION['lastname'] = $lastname;
+                    $_SESSION['username'] = $username;
+                    $_SESSION['password'] = $password;
+                    $_SESSION['profilpicture'] = $profilpicture;
+                    $_SESSION['courriel'] = $courriel;
+                    $_SESSION['role'] = "Teacher";
+
+                    $err['valide'] = true;
+                }else
+                    $err['err'] = "L'utilisateur n'existe pas !";
+            }else
+                $err['err'] = "L'utilisateur n'existe pas !";
         }else{
+            $user = AdminController::SELECT(\Database::SELECT_ALL, ['username' => $username], 1);
 
+            if (count($user) == 1){
+                $user = $user[0];
+
+                if (password_verify($passowrd, $user->getPassword())){
+                    $id = $user->getIdsudent();
+                    $firstname = $user->getFirstname();
+                    $lastname = $user->getLastname();
+                    $username = $user->getUsername();
+                    $password = $user->getPassword();
+                    $profilpicture = $user->getProfilpicture();
+                    $courriel = $user->getCourriel();
+                    
+                    $_SESSION['id'] = $id;
+                    $_SESSION['firstname'] = $firstname;
+                    $_SESSION['lastname'] = $lastname;
+                    $_SESSION['username'] = $username;
+                    $_SESSION['password'] = $password;
+                    $_SESSION['profilpicture'] = $profilpicture;
+                    $_SESSION['courriel'] = $courriel;
+                    $_SESSION['role'] = "Admin";
+
+                    $err['valide'] = true;
+                }else
+                    $err['err'] = "L'utilisateur n'existe pas !";
+            }else
+                $err['err'] = "L'utilisateur n'existe pas !";
         }
 
         return $err;
+    }
+
+    public static function logout(){
+        session_destroy();
+        ViewController::redirect("/");
     }
 }

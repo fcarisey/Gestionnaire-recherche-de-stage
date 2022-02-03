@@ -1,4 +1,3 @@
 <?php
-session_destroy();
 
-Controller\ViewController::redirect("/");
+Controller\UserController::logout();
