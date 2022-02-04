@@ -1,6 +1,7 @@
 window.onload = () => {
     contact();
     login();
+    dashboard();
 }
 
 function contact(){
@@ -133,5 +134,21 @@ function login(){
             }
         };
         xhr.send(form);
+    });
+}
+
+function dashboard(){
+    document.querySelectorAll("#dashboard nav ul div div a:nth-child(2)")?.forEach((e) => {
+
+        e.addEventListener('click', () => {
+            let p = e.parentNode.parentNode;
+            document.querySelector("#" + p.id + " .submenu").classList.toggle("OK");
+        });
+    });
+
+    document.querySelectorAll("#dashboard nav > ul div > a:last-child")?.forEach((e) => {
+        e.addEventListener('click', () => {
+            e.classList.toggle("active");
+        });
     });
 }

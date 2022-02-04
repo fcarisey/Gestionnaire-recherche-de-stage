@@ -26,10 +26,10 @@
             <nav>
                 <ul>
                     <li><a <?= ($page == "home") ? 'class="active"' : null ?> href="/">Accueil</a></li>
-                    <li><a <?= ($page == "contact") ? 'class="active"' : null ?> href="/contact">Contact</a></li>
-                    <?php if (Controller\ControllerController::keyExist("role", $_SESSION) == "administrateur") : ?>
+                    <?php if ($_SESSION['role'] == "Teacher") : ?>
                         <li><a href="/dashboard">Dashboard</a></li>
                     <?php endif ?>
+                    <li><a <?= ($page == "contact") ? 'class="active"' : null ?> href="/contact">Contact</a></li>
                 </ul>
             </nav>
         </div>

@@ -34,11 +34,11 @@ class ViewController{
         $allow = false;
         if (!in_array($page, $basic)){
             if (isset($_SESSION['id'])){
-                if ($_SESSION['role']->getDesignation() == "Student")
+                if ($_SESSION['role'] == "Student")
                     if (in_array($page, $student))
                         $allow = true;
 
-                if ($_SESSION['role']->getDesignation() == "Teacher")
+                if ($_SESSION['role'] == "Teacher")
                     if (in_array($page, $teacher))
                         $allow = true;
             }
