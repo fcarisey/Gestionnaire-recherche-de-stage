@@ -8,5 +8,6 @@ RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(login|contact|internships|logout|dashboard)$ /?page=$1 [QSD,L]
+RewriteRule ^(dashboard)/(class|student|internship|teacher)$ /?page=$1&subpage1=$2
 RewriteRule ^(internship)/([0-9]+)$ /?page=$1&id=$2 [QSD,L]
 RewriteRule ^(picture)/(.*)$ /img/$2
