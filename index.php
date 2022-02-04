@@ -53,15 +53,15 @@ foreach($db_array as $key => $db){
 Controller\MailController::$username = "fcarisey6@gmail.com";
 Controller\MailController::$password = "fraqdelirelneuyx";
 
-// Controller\StudentController::INSERT([
-//     'firstname' => "frédéric",
-//     'lastname' => "carisey",
-//     'username' => "fcarisey",
-//     'password' => password_hash("812332FFed", PASSWORD_DEFAULT),
-//     'profilpicture' => "default.jpg",
-//     'courriel' => "fcarisey@groupmontroland.fr",
-//     'idclasse' => 1
-// ]);
+Controller\TeacherController::INSERT([
+    'firstname' => "frédéric",
+    'lastname' => "carisey",
+    'username' => "fcarisey",
+    'password' => password_hash("812332FFed", PASSWORD_DEFAULT),
+    'profilpicture' => "default.jpg",
+    'courriel' => "fcarisey@groupmontroland.fr",
+    'idclasse' => 1
+]);
 
 \Controller\ViewController::process();
 

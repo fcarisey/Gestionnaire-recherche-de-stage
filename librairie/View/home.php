@@ -29,7 +29,7 @@ $x = 0;
             <?php endif ?>
         <?php endforeach ?>
         </div>
-            
+
         <p class="seeMore"><a href="/internships">Voir plus</a></p>
     </div>
 </div>

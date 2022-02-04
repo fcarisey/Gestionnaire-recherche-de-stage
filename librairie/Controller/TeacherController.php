@@ -1,7 +1,7 @@
 <?php
     namespace Controller;
     Class TeacherController extends ControllerController{
-        protected static $table_name = "Teacher";
+        protected static $table_name = "teacher";
         protected static $model_class = \Model\Teacher::class;
         protected static $database = "grds";
 

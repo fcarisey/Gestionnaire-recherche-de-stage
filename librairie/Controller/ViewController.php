@@ -28,18 +28,18 @@ class ViewController{
         $basic = ['home', 'login', 'contact', 'logout'];
         
         $login = [];
-        $eleve = array_merge(['internships', 'internship'], $login);
-        $administrator = array_merge(['dashboard'], $login);
+        $student = array_merge(['internships', 'internship'], $login);
+        $teacher = array_merge(['dashboard'], $login);
         
         $allow = false;
         if (!in_array($page, $basic)){
-            if (isset($_SESSION['Id'])){
-                if (unserialize($_SESSION['Role'])->getDesignation() == "Eleve")
-                    if (in_array($page, $eleve))
+            if (isset($_SESSION['id'])){
+                if ($_SESSION['role']->getDesignation() == "Student")
+                    if (in_array($page, $student))
                         $allow = true;
 
-                if (unserialize($_SESSION['Role'])->getDesignation() == "Administrateur")
-                    if (in_array($page, $administrator))
+                if ($_SESSION['role']->getDesignation() == "Teacher")
+                    if (in_array($page, $teacher))
                         $allow = true;
             }
         }else

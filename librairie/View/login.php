@@ -1,11 +1,11 @@
 <?php
 
-(isset($_SESSION['Id'])) ? \Controller\ViewController::redirect("./") : null;
+(isset($_SESSION['id'])) ? \Controller\ViewController::redirect("./") : null;
 
 if (isset($_POST['ajax'])){
     $err = Controller\StudentController::login($_POST['username'], $_POST['password']);
     $err = array_merge($err, Controller\TeacherController::login($_POST['username'], $_POST['password']));
-    $err = array_merge($err, Controller\AdminController::login($_POST['username'], $_POST ('password')));
+    $err = array_merge($err, Controller\AdminController::login($_POST['username'], $_POST['password']));
 
     echo json_encode($err);
     die;

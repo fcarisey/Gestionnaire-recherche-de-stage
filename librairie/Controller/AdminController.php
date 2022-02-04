@@ -1,7 +1,7 @@
 <?php
     namespace Controller;
     Class AdminController extends ControllerController{
-        protected static $table_name = "Admin";
+        protected static $table_name = "admin";
         protected static $model_class = \Model\Admin::class;
         protected static $database = "grds";
 

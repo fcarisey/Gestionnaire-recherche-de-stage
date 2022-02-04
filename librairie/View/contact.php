@@ -2,7 +2,7 @@
 
 if (isset($_POST['ajax'])){
     $object = htmlspecialchars($_POST['object']);
-    $email = htmlspecialchars(isset($_SESSION['Id']) ? $_SESSION['Courriel'] : $_POST['courriel']);
+    $email = htmlspecialchars(isset($_SESSION['id']) ? $_SESSION['courriel'] : $_POST['courriel']);
     $message = htmlspecialchars($_POST['message']);
 
     $err = [];
@@ -47,7 +47,7 @@ if (isset($_POST['ajax'])){
                 <input required autocomplete="off" type="text" name="object" placeholder="Objet">
                 <small id="objectError"></small>
             </label>
-            <?php if (!isset($_SESSION['Id'])): ?>
+            <?php if (!isset($_SESSION['id'])): ?>
                 <label>
                     Courriel:
                     <input required type="email" name="courriel" placeholder="Courriel">
