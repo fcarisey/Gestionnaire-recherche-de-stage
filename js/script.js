@@ -139,7 +139,6 @@ function login(){
 
 function dashboard(){
     document.querySelectorAll("#dashboard nav ul div div a:nth-child(2)")?.forEach((e) => {
-
         e.addEventListener('click', () => {
             let p = e.parentNode.parentNode;
             document.querySelector("#" + p.id + " .submenu").classList.toggle("OK");

@@ -25,8 +25,8 @@ CREATE TABLE IF NOT EXISTS `affiliate` (
   `idteacher` int(11) NOT NULL,
   `idclasse` int(11) NOT NULL,
   PRIMARY KEY (`idteacher`,`idclasse`),
-  KEY `FK_affiliate_classe` (`idclasse`) USING BTREE,
   KEY `FK_affiliate_teacher` (`idteacher`),
+  KEY `FK_affiliate_classe` (`idclasse`) USING BTREE,
   CONSTRAINT `FK_affiliate_classe` FOREIGN KEY (`idclasse`) REFERENCES `classe` (`idclasse`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `FK_affiliate_teacher` FOREIGN KEY (`idteacher`) REFERENCES `teacher` (`idteacher`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -35,12 +35,12 @@ CREATE TABLE IF NOT EXISTS `affiliate` (
 /*!40000 ALTER TABLE `affiliate` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `classe` (
-  `idclasse` int(11) NOT NULL,
+  `idclasse` int(11) NOT NULL AUTO_INCREMENT,
   `designation` varchar(255) NOT NULL,
   `internshipdatestart` date NOT NULL,
   `internshipdateend` date NOT NULL,
   PRIMARY KEY (`idclasse`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*!40000 ALTER TABLE `classe` DISABLE KEYS */;
 INSERT INTO `classe` (`idclasse`, `designation`, `internshipdatestart`, `internshipdateend`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `classe` (`idclasse`, `designation`, `internshipdatestart`, `interns
 /*!40000 ALTER TABLE `classe` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `currentinternship` (
-  `idcurrentinternship` int(11) NOT NULL,
+  `idcurrentinternship` int(11) NOT NULL AUTO_INCREMENT,
   `designation` varchar(50) NOT NULL,
   `description` varchar(50) NOT NULL,
   `website` varchar(50) DEFAULT NULL,
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `interest` (
 /*!40000 ALTER TABLE `interest` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `internship` (
-  `idinternship` int(11) NOT NULL,
+  `idinternship` int(11) NOT NULL AUTO_INCREMENT,
   `designation` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `website` varchar(50) DEFAULT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `internship` (
   PRIMARY KEY (`idinternship`),
   KEY `FK_internship_classe` (`idclasse`),
   CONSTRAINT `FK_internship_classe` FOREIGN KEY (`idclasse`) REFERENCES `classe` (`idclasse`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*!40000 ALTER TABLE `internship` DISABLE KEYS */;
 INSERT INTO `internship` (`idinternship`, `designation`, `description`, `website`, `enterprise`, `email`, `phone`, `isdone`, `idclasse`) VALUES
@@ -97,12 +97,12 @@ INSERT INTO `internship` (`idinternship`, `designation`, `description`, `website
 
 CREATE TABLE IF NOT EXISTS `student` (
   `idstudent` int(11) NOT NULL AUTO_INCREMENT,
-  `firstname` varchar(50) NOT NULL DEFAULT '',
-  `lastname` varchar(50) NOT NULL DEFAULT '',
-  `username` varchar(50) NOT NULL DEFAULT '',
-  `password` varchar(255) NOT NULL DEFAULT '',
-  `profilpicture` varchar(255) NOT NULL DEFAULT '',
-  `courriel` varchar(255) NOT NULL DEFAULT '',
+  `firstname` varchar(50) NOT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `profilpicture` varchar(255) NOT NULL,
+  `courriel` varchar(255) NOT NULL,
   `cv` varchar(255) DEFAULT NULL,
   `lm` varchar(255) DEFAULT NULL,
   `idclasse` int(11) NOT NULL,

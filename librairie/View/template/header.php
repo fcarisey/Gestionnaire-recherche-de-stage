@@ -15,7 +15,9 @@
                 <ul>
                     <li><a href="/"><img src="/picture/logo.png" alt="Logo"></a></li>
                     <div>
-                        <?php if (isset($_SESSION['id'])): ?>
+                        <?php
+
+                        if (isset($_SESSION['id'])): ?>
                             <li><a href="/logout">Déconnexion</a></li>
                         <?php else: ?>
                             <li><a href="/login">Connexion</a></li>
@@ -26,7 +28,7 @@
             <nav>
                 <ul>
                     <li><a <?= ($page == "home") ? 'class="active"' : null ?> href="/">Accueil</a></li>
-                    <?php if ($_SESSION['role'] == "Teacher") : ?>
+                    <?php if (Controller\ControllerController::keyExist('role', $_SESSION) == "Teacher") : ?>
                         <li><a href="/dashboard">Dashboard</a></li>
                     <?php endif ?>
                     <li><a <?= ($page == "contact") ? 'class="active"' : null ?> href="/contact">Contact</a></li>
