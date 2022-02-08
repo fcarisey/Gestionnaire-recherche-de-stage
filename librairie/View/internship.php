@@ -1,6 +1,6 @@
 <?php
 
-$internship = \Controller\InternshipController::SELECT(\Database::SELECT_ALL, ['IdInternship' => $_GET['id']])[0];
+$internship = \Controller\InternshipController::SELECT(\Database::SELECT_ALL, ['idinternship' => $_GET['id']])[0];
 
 if (isset($_SESSION['id'])){
     $isinterest = \Controller\InterestController::SELECT(\Database::SELECT_ALL, [
@@ -19,7 +19,7 @@ if (isset($_SESSION['id'])){
         <div>
             <div class="infos">
                 <h1><?= $internship->getDesignation() ?></h1>
-                <h2><?= $internship->getAuthor() ?></h2>
+                <h2><?= $internship->getEnterprise() ?></h2>
             </div>
             <?php if (isset($_SESSION['id'])): ?>
                 <?php if ($isinterest): ?>
