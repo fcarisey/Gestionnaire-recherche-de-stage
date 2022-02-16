@@ -28,6 +28,7 @@
             <nav>
                 <ul>
                     <li><a <?= ($page == "home") ? 'class="active"' : null ?> href="/">Accueil</a></li>
+                    <li><a <?= (($page == "internships") || ($page == 'internship')) ? 'class="active"' : null ?> href="/internships">Stages</a></li>
                     <?php if (Controller\ControllerController::keyExist('role', $_SESSION) == "Teacher") : ?>
                         <li><a href="/dashboard">Dashboard</a></li>
                     <?php endif ?>

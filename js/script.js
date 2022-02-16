@@ -84,18 +84,18 @@ function contact(){
 }
 
 function login(){
-    document.querySelector("#login form fieldset button[type='button']")?.addEventListener('click', () => {
-        let username = document.querySelector("#login form fieldset div label input[name='username']");
-        let password = document.querySelector("#login form fieldset div label input[name='password']");
+    document.querySelector("#login form button[type='button']")?.addEventListener('click', () => {
+        let username = document.querySelector("#login form div label input[name='username']");
+        let password = document.querySelector("#login form div label input[name='password']");
 
         let form = new FormData();
         form.append('ajax', true);
         form.append('username', username.value);
         form.append('password', password.value);
 
-        let usernameError = document.querySelector("#login form fieldset div label #usernameError");
-        let passwordError = document.querySelector("#login form fieldset div label #passwordError");
-        let accountError = document.querySelector("#login form fieldset #accountError");
+        let usernameError = document.querySelector("#login form div label #usernameError");
+        let passwordError = document.querySelector("#login form div label #passwordError");
+        let accountError = document.querySelector("#login form #accountError");
 
         usernameError.innerHTML = "";
         passwordError.innerHTML = "";

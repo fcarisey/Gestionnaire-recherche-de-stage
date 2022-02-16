@@ -11,7 +11,6 @@ if (isset($_SESSION['id'])){
     ($isinterest) ? (($isinterest[0]) ? $isinterest = true : $isinterest = false) : null;
 }
 
-
 ?>
 
 <div id="internship">
@@ -22,7 +21,7 @@ if (isset($_SESSION['id'])){
                 <h2><?= $internship->getEnterprise() ?></h2>
             </div>
             <?php if (isset($_SESSION['id'])): ?>
-                <?php if ($isinterest): ?>
+                <?php if (!$isinterest): ?>
                     <button class="OK">je suis intéressé</button>
                 <?php else: ?>
                     <button class="KO">Je ne suis plus intéressé</button>

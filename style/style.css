@@ -73,6 +73,10 @@ header div nav:last-child ul{
     margin: auto;
 }
 
+header div nav:last-child ul > li{
+    margin: 0 20px;
+}
+
 header div nav:last-child {
     height: 50px;
     display: flex;
@@ -94,12 +98,12 @@ header div nav:nth-child(2) ul li a{
     border-radius: 5px;
 }
 
-header div nav:nth-child(2) ul li a.active{
-    background-color: #12c9a7;
+header div nav:nth-child(2) ul li a.active {
+    background-color: #0e8972;
 }
 
 header div nav:nth-child(2) ul li a:hover {
-    background-color: #12c9a7;
+    background-color: #0e8972;
 }
 
 /*================*/
@@ -127,14 +131,14 @@ header div nav:nth-child(2) ul li a:hover {
 #home .internshipsProposal .internships > div{
     display: flex;
     justify-content: space-evenly;
-    width: 44%;
+    width: 100%;
 }
 
-#home .internshipsProposal .internships .internship{
+#home .internshipsProposal .internships .internship {
     height: fit-content;
-    width: 325px;
+    width: 645px;
     padding: 40px 30px;
-    box-shadow: 0px 0px 20px -8px #4f9b8d;
+    box-shadow: 1px 2px 0px 1px #00000033;
 }
 
 #home .internshipsProposal .internships .internship > h2{
@@ -201,6 +205,8 @@ header div nav:nth-child(2) ul li a:hover {
     width: 30%;
     margin: auto;
     margin-top: 100px;
+    padding: 30px;
+    box-shadow: 1px 2px 0px 1px #00000033;
 }
 
 #contact form > div:nth-child(1) {
@@ -298,23 +304,16 @@ header div nav:nth-child(2) ul li a:hover {
     margin: auto;
     width: fit-content;
     margin-top: 100px;
+    padding: 30px;
+    box-shadow: 1px 2px 0px 1px #00000033;
 }
 
-#login form fieldset {
+#login form div {
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 25px;
-    border: 6px double threedface;
+    height: 150px;
 }
 
-#login form fieldset div {
-    display: flex;
-    flex-direction: column;
-    height: 200px;
-}
-
-#login form fieldset div label {
+#login form div label {
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -323,7 +322,7 @@ header div nav:nth-child(2) ul li a:hover {
     align-items: center;
 }
 
-#login form fieldset div label input {
+#login form div label input {
     font-size: 1.025em;
     border: none;
     margin-top: 5px;
@@ -333,20 +332,20 @@ header div nav:nth-child(2) ul li a:hover {
     box-shadow: 0 0 9px -7px black inset;
 }
 
-#login form fieldset div label input.OK{
+#login form div label input.OK{
     border: 1px solid #12c9a7;
 }
 
-#login form fieldset div label input.KO{
+#login form div label input.KO{
     border: 1px solid red;
 }
 
-#login form fieldset small{
+#login form small{
     color: red;
     font-size: 0.8em;
 }
 
-#login form fieldset button {
+#login form button {
     width: fit-content;
     position: relative;
     left: 20px;
@@ -359,10 +358,78 @@ header div nav:nth-child(2) ul li a:hover {
     transition: 500ms;
 }
 
-#login form fieldset button:hover{
+#login form button:hover{
     cursor: pointer;
     border: 2px solid #00ffd0;
     background-color: #12c9a75c;
+}
+
+/*=======================*/
+/*===== INTERNSHIPS =====*/
+/*=======================*/
+
+#internships{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+#internships .internships{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+#internships .internships > div {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-bottom: 15px;
+    flex-direction: column;
+}
+
+#internships .internships > div > div {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1550px;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+#internships .internships .internship {
+    height: fit-content;
+    width: 645px;
+    padding: 40px 30px;
+    box-shadow: 1px 2px 0px 1px #00000033;
+}
+
+#internships .internships .internship p:nth-child(2){
+    padding: 15px;
+    box-shadow: 0px 0px 20px -13px #4f9b8d;
+    margin-top: 30px;
+    font-size: large;
+}
+
+#internships .internships .internship > .seeMore{
+    text-align: center;
+    margin-top: 30px;
+}
+
+#internships .internships .internship > .seeMore a{
+    border: 1px solid #396ada;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    color: #396ada;
+    transition: 250ms;
+}
+
+#internships .internships .internship > .seeMore a:hover {
+    background-color: #396ada85;
+    color: white;
 }
 
 /*=========================*/
@@ -386,10 +453,10 @@ header div nav:nth-child(2) ul li a:hover {
 /*===== FOOTER =====*/
 /*==================*/
 
-footer{
+footer {
     position: absolute;
     width: 100%;
-    top: auto;
+    bottom: 10px;
 }
 
 footer div p{
