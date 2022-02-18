@@ -487,6 +487,114 @@ header div nav:nth-child(2) ul li a:hover {
     width: 100%;
 }
 
+/*====================*/
+/*===== DAHBOARD =====*/
+/*====================*/
+
+#dashboard{
+    display: flex;
+}
+
+#dashboard nav{
+    width: 15%;
+    background-color: #528AF4;
+    border-radius: 0 10px 10px 0;
+}
+
+#dashboard nav h2{
+    padding: 10px 20px;
+    background-color: white;
+    width: 60%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+#dashboard nav ul{
+    display: flex;
+    flex-direction: column;
+}
+
+#dashboard nav ul a{
+    padding: 5px 10px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+#dashboard nav ul a:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#dashboard nav ul ul a{
+    background-color: #396ADA;
+    padding-left: 20px;
+}
+
+#dashboard nav ul div div{
+    display: flex;
+    justify-content: space-between;
+}
+
+#dashboard nav ul div div *:first-child{
+    width: 68%;
+}
+
+#dashboard nav > ul div div a:first-child::before{
+    zoom: 75%;
+    position: relative;
+    left: -5px;
+}
+
+#dashboard nav > ul > div > div a:first-child::before{
+    content: url('/picture/home.svg');
+    zoom: 75%;
+    position: relative;
+    left: -5px;
+}
+
+#dashboard nav > ul .class div a:first-child::before{
+    content: url('/picture/class.svg');
+}
+
+#dashboard nav > ul .student div a:first-child::before{
+    content: url('/picture/student.svg');
+}
+
+#dashboard nav > ul .internship div a:first-child::before{
+    content: url('/picture/internship.svg');
+}
+
+#dashboard nav > ul .teacher div a:first-child::before{
+    content: url('/picture/teacher.svg');
+}
+
+#dashboard nav > ul > div > div > a:nth-child(2)::after {
+    content: '▼';
+    color: black;
+    zoom: 120%;
+    transition: transform 500ms;
+}
+
+#dashboard nav > ul > div > div > a.active:nth-child(2)::after{
+    transform: rotate(180deg);
+}
+
+#dashboard nav > ul div > a:last-child:hover{
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#dashboard nav ul div .toggler{
+    display: none;
+}
+
+#dashboard nav ul div .toggler.OK{
+    display: flex;
+}
+
 /*==================*/
 /*===== FOOTER =====*/
 /*==================*/
@@ -500,6 +608,7 @@ footer {
 footer div p {
     text-align: center;
 }
+
 
 @media (min-width: 1388px) {
     
