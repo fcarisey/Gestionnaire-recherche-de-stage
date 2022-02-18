@@ -28,7 +28,7 @@
             <nav>
                 <ul>
                     <li><a <?= ($page == "home") ? 'class="active"' : null ?> href="/">Accueil</a></li>
-                    <?php if (isset($_SESSION['id'])): ?>
+                    <?php if (isset($_SESSION['id']) && Controller\ControllerController::keyExist('role', $_SESSION) == "Student"): ?>
                         <li><a <?= (($page == "internships") || ($page == 'internship')) ? 'class="active"' : null ?> href="/internships">Stages</a></li>
                     <?php endif ?>
                     <?php if (Controller\ControllerController::keyExist('role', $_SESSION) == "Teacher") : ?>
