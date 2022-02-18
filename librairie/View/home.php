@@ -14,7 +14,7 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == "Student"){
 
 <div id="home">
     <?php if (isset($_SESSION['id'], $internships)): ?>
-        <?php if ($internship): ?>
+        <?php if ($internships): ?>
             <div class="internshipsProposal">
                 <h1>Proposition de stage</h1>
                 <div class="internships">
@@ -22,7 +22,7 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == "Student"){
                         <?php foreach($internships as $internship): ?>
                             <div class="internship">
                                 <h2><?= $internship->getDesignation() ?></h2>
-                                <p><?= $internship->getDescription() ?></p>
+                                <p><?= $internship->getshortdescription() ?></p>
                                 <p class="seeMore"><a href="./internship/<?= $internship->getIdInternship() ?>">Voir plus</a></p>
                             </div>
                         <?php endforeach ?>
