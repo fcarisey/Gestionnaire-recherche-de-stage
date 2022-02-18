@@ -32,7 +32,7 @@
                         <li><a <?= (($page == "internships") || ($page == 'internship')) ? 'class="active"' : null ?> href="/internships">Stages</a></li>
                     <?php endif ?>
                     <?php if (Controller\ControllerController::keyExist('role', $_SESSION) == "Teacher") : ?>
-                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a <?= (($page == "dashboard")) ? 'class="active"' : null ?> href="/dashboard">Dashboard</a></li>
                     <?php endif ?>
                     <li><a <?= ($page == "contact") ? 'class="active"' : null ?> href="/contact">Contact</a></li>
                 </ul>
