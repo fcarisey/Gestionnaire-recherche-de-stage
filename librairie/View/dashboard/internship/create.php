@@ -1,0 +1,1 @@
+<h2>dashboard/internship/create</h2>

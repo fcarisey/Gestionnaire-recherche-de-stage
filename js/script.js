@@ -142,13 +142,53 @@ function dashboard(){
     document.querySelectorAll("#dashboard nav ul div div a:nth-child(2)")?.forEach((e) => {
         e.addEventListener('click', () => {
             let p = e.parentNode.parentNode;
-            document.querySelector("#" + p.id + " .submenu").classList.toggle("OK");
+            document.querySelector("." + p.classList.item(0) + " .submenu").classList.toggle("OK");
         });
     });
 
-    document.querySelectorAll("#dashboard nav > ul div > a:last-child")?.forEach((e) => {
+    document.querySelectorAll("#dashboard nav > ul > div > div > a:nth-child(2)")?.forEach((e) => {
         e.addEventListener('click', () => {
             e.classList.toggle("active");
+        });
+    });
+
+    document.querySelectorAll("#dashboard nav ul > div > div a:first-child")?.forEach((e) => {
+        e.addEventListener('click', () => {
+            
+            window.history.pushState({}, document.title, "/dashboard/" + e.dataset.subpage)
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', window.location.pathname)
+            xhr.onreadystatechange = () => {
+                if (xhr.responseText && xhr.readyState == 4 && xhr.status == 200){
+                    document.getElementById('subpage').innerHTML = xhr.responseText
+                }
+            }
+
+            let form = new FormData()
+            form.append('ajax', true)
+
+            xhr.send(form)
+        });
+    });
+
+    document.querySelectorAll("#dashboard nav ul > div > ul a")?.forEach((e) => {
+        e.addEventListener('click', () => {
+
+            window.history.pushState({}, document.title, "/dashboard/" + e.dataset.subpage)
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', window.location.pathname)
+            xhr.onreadystatechange = () => {
+                if (xhr.responseText && xhr.readyState == 4 && xhr.status == 200){
+                    document.getElementById('subpage').innerHTML = xhr.responseText
+                }
+            }
+
+            let form = new FormData()
+            form.append('ajax', true)
+
+            xhr.send(form)
         });
     });
 }
@@ -182,3 +222,6 @@ function internshipInterest(){
         xhr.send(form)
     });
 }
+
+
+// console.clear()
