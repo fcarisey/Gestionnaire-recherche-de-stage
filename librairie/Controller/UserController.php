@@ -2,8 +2,8 @@
 
 namespace Controller;
 
-class UserController{
-    public static function login($username, $password, $tableName){
+class UserController extends ControllerController{
+    public static function login($username, $password){
         $err = [];
 
         // username parse
@@ -24,7 +24,7 @@ class UserController{
             $err['password'] = "Le mot de passe est obligatoire !";
 
         if ($usernameParse && $passwordParse){
-            if ($tableName == "student"){
+            if (static::$table_name == "student"){
                 $user = StudentController::SELECT(\Database::SELECT_ALL, ['username' => $username], 1);
     
                 if ($user){
@@ -61,7 +61,7 @@ class UserController{
                         $err['account'] = "L'utilisateur n'existe pas !";
                 }else
                     $err['account'] = "L'utilisateur n'existe pas !";
-            }else if ($tableName == "teacher"){
+            }else if (static::$table_name == "teacher"){
                 $user = TeacherController::SELECT(\Database::SELECT_ALL, ['username' => $username], 1);
     
                 if ($user){
