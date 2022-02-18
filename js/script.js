@@ -2,6 +2,7 @@ window.onload = () => {
     contact();
     login();
     dashboard();
+    internshipInterest();
 }
 
 function contact(){
@@ -149,5 +150,35 @@ function dashboard(){
         e.addEventListener('click', () => {
             e.classList.toggle("active");
         });
+    });
+}
+
+function internshipInterest(){
+    document.querySelector("#internship > div input")?.addEventListener('click', () => {
+        let xhr = new XMLHttpRequest();
+
+        let id = window.location.pathname.split('/')[2];
+        console.log(id)
+        xhr.open('POST', '/internship/' + id)
+        xhr.onreadystatechange = () => {
+            if (xhr.responseText && xhr.readyState == 4 && xhr.status == 200){
+                let response = JSON.parse(xhr.response);
+                
+                if (response.valide){
+                    document.querySelector("#internship > div input").value = response.text;
+                    document.querySelector("#internship > div input").classList.toggle('KO');
+                }
+            }
+        }
+
+        let form = new FormData();
+        form.append('ajax', true);
+
+        if (document.querySelector("#internship > div input").classList.contains('KO'))
+            form.append('type', 'ni');
+        else
+            form.append('type', 'i');
+
+        xhr.send(form)
     });
 }

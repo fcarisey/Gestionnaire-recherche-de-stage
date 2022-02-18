@@ -389,11 +389,10 @@ header div nav:nth-child(2) ul li a:hover {
 }
 
 #internships .internships > div > div {
-    margin-bottom: 15px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 1550px;
+    width: 80%;
     margin: auto;
     margin-bottom: 15px;
 }
@@ -436,17 +435,56 @@ header div nav:nth-child(2) ul li a:hover {
 /*===== INTERNSHIP/id =====*/
 /*=========================*/
 
-#internship > div{
+#internship {
     display: flex;
+    width: 90%;
+    margin: auto;
 }
 
-#internship > div > div{
-    width: 50%;
-}
-
-#internship > div > div:nth-child(1){
+#internship > div {
     display: flex;
     flex-direction: column;
+    width: 50%;
+    min-height: 250px;
+    justify-content: space-between;
+}
+
+#internship > div > div:first-child h2{
+    color: #02007C;
+}
+
+#internship > div > div:first-child h3{
+    color: gray;
+    margin-top: 5px;
+}
+
+#internship > div input {
+    border: 1px solid #396ADA;
+    border-radius: 10px;
+    color: #396ADA;
+    margin: auto;
+    padding: 10px;
+    margin-left: 100px;
+    transition: background 200ms;
+}
+
+#internship > div input.KO {
+    border: 1px solid #DA3939;
+    color: #DA3939;
+}
+
+#internship > div input:hover {
+    cursor: pointer;
+    background-color: rgb(57 105 219 / 25%);
+}
+
+#internship > div input.KO:hover {
+    background-color: rgba(219, 57, 57, 0.25);
+}
+
+#internship > p {
+    text-align: justify;
+    width: 100%;
 }
 
 /*==================*/
@@ -459,7 +497,7 @@ footer {
     bottom: 10px;
 }
 
-footer div p{
+footer div p {
     text-align: center;
 }
 
