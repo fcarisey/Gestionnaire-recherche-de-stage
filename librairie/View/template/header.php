@@ -31,7 +31,7 @@
                     <?php if (isset($_SESSION['id']) && Controller\ControllerController::keyExist('role', $_SESSION) == "Student"): ?>
                         <li><a <?= (($page == "internships") || ($page == 'internship')) ? 'class="active"' : null ?> href="/internships">Stages</a></li>
                     <?php endif ?>
-                    <?php if (Controller\ControllerController::keyExist('role', $_SESSION) == "Teacher") : ?>
+                    <?php if (Controller\ControllerController::keyExist('role', $_SESSION) == "Teacher" || Controller\ControllerController::keyExist('role', $_SESSION) == "Admin") : ?>
                         <li><a <?= (($page == "dashboard")) ? 'class="active"' : null ?> href="/dashboard">Dashboard</a></li>
                     <?php endif ?>
                     <li><a <?= ($page == "contact") ? 'class="active"' : null ?> href="/contact">Contact</a></li>
