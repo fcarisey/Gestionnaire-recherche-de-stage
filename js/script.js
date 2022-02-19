@@ -142,7 +142,9 @@ function dashboard(){
     document.querySelectorAll("#dashboard nav ul div div a:nth-child(2)")?.forEach((e) => {
         e.addEventListener('click', () => {
             let p = e.parentNode.parentNode;
-            document.querySelector("." + p.classList.item(0) + " .submenu").classList.toggle("OK");
+            document.querySelectorAll("." + p.classList.item(0) + " .submenu")?.forEach((e) => {
+                e.classList.toggle("OK");
+            })
         });
     });
 
@@ -154,7 +156,6 @@ function dashboard(){
 
     document.querySelectorAll("#dashboard nav ul > div > div a:first-child")?.forEach((e) => {
         e.addEventListener('click', () => {
-            
             window.history.pushState({}, document.title, "/dashboard/" + e.dataset.subpage)
 
             let xhr = new XMLHttpRequest();
@@ -174,7 +175,6 @@ function dashboard(){
 
     document.querySelectorAll("#dashboard nav ul > div > ul a")?.forEach((e) => {
         e.addEventListener('click', () => {
-
             window.history.pushState({}, document.title, "/dashboard/" + e.dataset.subpage)
 
             let xhr = new XMLHttpRequest();
