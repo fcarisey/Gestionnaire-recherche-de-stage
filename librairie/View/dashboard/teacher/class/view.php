@@ -1,0 +1,1 @@
+<h2>dashboard/class/view/<?= $_GET['class'] ?></h2>

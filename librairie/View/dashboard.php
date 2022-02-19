@@ -14,6 +14,17 @@ if (isset($_POST['ajax']) && isset($_GET['subpage1'])){
     die;
 }
 
+$classes = [];
+if ($_SESSION['role'] == "Teacher"){
+    $affiliates = \Controller\AffiliateController::SELECT(['idclasse'], ['idteacher' => $_SESSION['id']]);
+    if ($affiliates){
+        foreach ($affiliates as $affiliate){
+            $classes = array_merge($classes, \Controller\ClasseController::SELECT(\Database::SELECT_ALL, ['idclasse' => $affiliate->getIdclasse()]));
+        }
+    }
+}
+
+
 ?>
 
 <div id="dashboard">
@@ -31,9 +42,17 @@ if (isset($_POST['ajax']) && isset($_GET['subpage1'])){
                     <a data-subpage="class">Classes</a>
                     <a></a>
                 </div>
-                <ul class="toggler submenu">
-                    <a data-subpage="class/create">Créer</a>
-                </ul>
+                <?php if ($_SESSION['role'] == 'Admin'): ?>
+                    <ul class="toggler submenu">
+                        <a data-subpage="class/create">Créer</a>
+                    </ul>
+                <?php endif ?>
+
+                <?php foreach ($classes as $classe): ?>
+                    <ul class="toggler submenu">
+                        <a data-subpage="class/view/<?= $classe->getDesignation() ?>"><?= $classe->getDesignation() ?></a>
+                    </ul>
+                <?php endforeach ?>
             </div>
 
             <div class="student">
