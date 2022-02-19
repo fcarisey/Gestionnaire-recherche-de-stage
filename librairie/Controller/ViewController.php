@@ -30,6 +30,7 @@ class ViewController{
         $login = [];
         $student = array_merge(['internships', 'internship'], $login);
         $teacher = array_merge(['dashboard'], $login);
+        $admin = array_merge(['dashboard'], $login);
         
         $allow = false;
         if (!in_array($page, $basic)){
@@ -40,6 +41,10 @@ class ViewController{
 
                 if ($_SESSION['role'] == "Teacher")
                     if (in_array($page, $teacher))
+                        $allow = true;
+                
+                if ($_SESSION['role'] == "Admin")
+                    if (in_array($page, $admin))
                         $allow = true;
             }
         }else
