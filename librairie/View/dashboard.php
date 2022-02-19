@@ -3,12 +3,21 @@
 if (isset($_POST['ajax']) && isset($_GET['subpage1'])){
     $subpage = $_GET['subpage1'] ?? 'home';
 
-    switch ($subpage){
-        case 'home' : require_once("librairie/View/dashboard/home.php");break;
-        case 'class' : require_once("librairie/View/dashboard/class.php");break;
-        case 'student' : require_once("librairie/View/dashboard/student.php");break;
-        case 'internship' : require_once("librairie/View/dashboard/internship.php");break;
-        case 'teacher' : require_once("librairie/View/dashboard/teacher.php");break;
+    if ($_SESSION['role'] == "Teacher"){
+        switch ($subpage){
+            case 'home' : require_once("librairie/View/dashboard/teacher/home.php");break;
+            case 'class' : require_once("librairie/View/dashboard/teacher/class.php");break;
+            case 'student' : require_once("librairie/View/dashboard/teacher/student.php");break;
+            case 'internship' : require_once("librairie/View/dashboard/teacher/internship.php");break;
+            case 'teacher' : require_once("librairie/View/dashboard/teacher/teacher.php");break;
+        }
+    }else{
+        switch ($subpage){
+            case 'home' : require_once("librairie/View/dashboard/admin/home.php");break;
+            case 'class' : require_once("librairie/View/dashboard/admin/class.php");break;
+            case 'student' : require_once("librairie/View/dashboard/admin/student.php");break;
+            case 'teacher' : require_once("librairie/View/dashboard/admin/teacher.php");break;
+        }
     }
 
     die;
@@ -58,44 +67,66 @@ if ($_SESSION['role'] == "Teacher"){
             <div class="student">
                 <div>
                     <a data-subpage="student">Eleves</a>
-                    <a></a>
+                    <?php if ($_SESSION['role'] == 'Admin'): ?>
+                        <a></a>
+                    <?php endif ?>
                 </div>
-                <ul class="toggler submenu">
-                    <a data-subpage="student/add">Ajouter/Importer</a>
-                </ul> 
+
+                <?php if ($_SESSION['role'] == 'Admin'): ?>
+                    <ul class="toggler submenu">
+                        <a data-subpage="student/add">Ajouter/Importer</a>
+                    </ul>
+                <?php endif ?>
+
             </div>
             
-            <div class="teacher">
-                <div>
-                    <a data-subpage="teacher">Profs</a>
-                    <a></a>
+            <?php if ($_SESSION['role'] == 'Admin'): ?>
+                <div class="teacher">
+                    <div>
+                        <a data-subpage="teacher">Profs</a>
+                        <?php if ($_SESSION['role'] == 'Admin'): ?>
+                            <a></a>
+                        <?php endif ?>
+                    </div>
+                    <ul class="toggler submenu">
+                        <a data-subpage="teacher/add">Ajouter</a>
+                    </ul>
                 </div>
-                <ul class="toggler submenu">
-                    <a data-subpage="teacher/add">Ajouter</a>
-                </ul>
-            </div>
+            <?php endif ?>
             
-            <div class="internship">
-                <div>
-                    <a data-subpage="internship">Stages</a>
-                    <a></a>
+            <?php if ($_SESSION['role'] == 'Teacher'): ?>
+                <div class="internship">
+                    <div>
+                        <a data-subpage="internship">Stages</a>
+                        <a></a>
+                    </div>
+                    <ul class="toggler submenu">
+                        <a data-subpage="internship/create">Créer</a>
+                    </ul>
                 </div>
-                <ul class="toggler submenu">
-                    <a data-subpage="internship/create">Créer</a>
-                </ul>
-            </div>
+            <?php endif ?>
         </ul>
     </nav>
     <div id="subpage">
         <?php
             $subpage = (isset($_GET['subpage1'])) ? $_GET['subpage1'] : 'home';
 
-            switch ($subpage){
-                case 'home' : require_once("librairie/View/dashboard/home.php");break;
-                case 'class' : require_once("librairie/View/dashboard/class.php");break;
-                case 'student' : require_once("librairie/View/dashboard/student.php");break;
-                case 'internship' : require_once("librairie/View/dashboard/internship.php");break;
-                case 'teacher' : require_once("librairie/View/dashboard/teacher.php");break;
+            if ($_SESSION['role'] == "Teacher"){
+                switch ($subpage){
+                    case 'home' : require_once("librairie/View/dashboard/teacher/home.php");break;
+                    case 'class' : require_once("librairie/View/dashboard/teacher/class.php");break;
+                    case 'student' : require_once("librairie/View/dashboard/teacher/student.php");break;
+                    case 'internship' : require_once("librairie/View/dashboard/teacher/internship.php");break;
+                    case 'teacher' : require_once("librairie/View/dashboard/teacher/teacher.php");break;
+                }
+            }else{
+                switch ($subpage){
+                    case 'home' : require_once("librairie/View/dashboard/admin/home.php");break;
+                    case 'class' : require_once("librairie/View/dashboard/admin/class.php");break;
+                    case 'student' : require_once("librairie/View/dashboard/admin/student.php");break;
+                    case 'internship' : require_once("librairie/View/dashboard/admin/internship.php");break;
+                    case 'teacher' : require_once("librairie/View/dashboard/admin/teacher.php");break;
+                }
             }
         ?>
     </div>
