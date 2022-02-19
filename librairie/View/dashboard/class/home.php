@@ -1,1 +1,0 @@
-<h2>dashboard/class</h2>

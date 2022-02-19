@@ -1,1 +1,0 @@
-<h2>dashboard/internship</h2>
