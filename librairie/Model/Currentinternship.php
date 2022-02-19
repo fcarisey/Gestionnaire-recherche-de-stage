@@ -1,10 +1,10 @@
 <?php
     namespace Model;
     Class Currentinternship{
-        private $idcurrentinternship,$designation,$description,$website,$enterprise,$phone,$internshipagreement;
+        private $idcurrentinternship,$designation,$description,$website,$enterprise,$phone,$internshipagreement,$idstudent;
 
-        public function __construct($idcurrentinternship = null,$designation = null,$description = null,$website = null,$enterprise = null,$phone = null,$internshipagreement = null){
-           $this->setIdcurrentinternship($idcurrentinternship)->setDesignation($designation)->setDescription($description)->setWebsite($website)->setEnterprise($enterprise)->setPhone($phone)->setInternshipagreement($internshipagreement);
+        public function __construct($idcurrentinternship = null,$designation = null,$description = null,$website = null,$enterprise = null,$phone = null,$internshipagreement = null,$idstudent = null){
+           $this->setIdcurrentinternship($idcurrentinternship)->setDesignation($designation)->setDescription($description)->setWebsite($website)->setEnterprise($enterprise)->setPhone($phone)->setInternshipagreement($internshipagreement)->setIdstudent($idstudent);
         }
 
         
@@ -64,6 +64,14 @@
             return $this->internshipagreement;
         }
 
+        public function setIdstudent($idstudent){
+            $this->idstudent = $idstudent;
+            return $this;
+        }
+        public function getidstudent(){
+            return $this->idstudent;
+        }
+
         
         public static function format($data){
 
@@ -80,7 +88,8 @@
                     $enterprise = \Controller\ControllerController::keyExist('enterprise', $d);
                     $phone = \Controller\ControllerController::keyExist('phone', $d);
                     $internshipagreement = \Controller\ControllerController::keyExist('internshipagreement', $d);
-                    $currentinternship = new self($idcurrentinternship,$designation,$description,$website,$enterprise,$phone,$internshipagreement);
+                    $idstudent = \Controller\ControllerController::keyExist('idstudent', $d);
+                    $currentinternship = new self($idcurrentinternship,$designation,$description,$website,$enterprise,$phone,$internshipagreement,$idstudent);
 
                     array_push($objs, $currentinternship);
                 }

@@ -1,10 +1,10 @@
 <?php
     namespace Model;
     Class Student{
-        private $idstudent,$firstname,$lastname,$username,$password,$profilpicture,$courriel,$cv,$lm,$idclasse,$idcurrentinternship;
+        private $idstudent,$firstname,$lastname,$username,$password,$profilpicture,$courriel,$cv,$lm,$idclasse;
 
-        public function __construct($idstudent = null,$firstname = null,$lastname = null,$username = null,$password = null,$profilpicture = null,$courriel = null,$cv = null,$lm = null,$idclasse = null,$idcurrentinternship = null){
-           $this->setIdstudent($idstudent)->setFirstname($firstname)->setLastname($lastname)->setUsername($username)->setPassword($password)->setProfilpicture($profilpicture)->setCourriel($courriel)->setCv($cv)->setLm($lm)->setIdclasse($idclasse)->setIdcurrentinternship($idcurrentinternship);
+        public function __construct($idstudent = null,$firstname = null,$lastname = null,$username = null,$password = null,$profilpicture = null,$courriel = null,$cv = null,$lm = null,$idclasse = null){
+           $this->setIdstudent($idstudent)->setFirstname($firstname)->setLastname($lastname)->setUsername($username)->setPassword($password)->setProfilpicture($profilpicture)->setCourriel($courriel)->setCv($cv)->setLm($lm)->setIdclasse($idclasse);
         }
 
         
@@ -87,14 +87,6 @@
         public function getIdclasse(){
             return $this->idclasse;
         }
-
-        public function setIdcurrentinternship($idcurrentinternship){
-            $this->idcurrentinternship = $idcurrentinternship;
-            return $this;
-        }
-        public function getIdcurrentinternship(){
-            return $this->idcurrentinternship;
-        }
         
         public static function format($data){
 
@@ -114,8 +106,7 @@
                     $cv = \Controller\ControllerController::keyExist('cv', $d);
                     $lm = \Controller\ControllerController::keyExist('lm', $d);
                     $idclasse = \Controller\ControllerController::keyExist('idclasse', $d);
-                    $idcurrentinternship = \Controller\ControllerController::keyExist('idcurrentinternship', $d);
-                    $student = new self($idstudent,$firstname,$lastname,$username,$password,$profilpicture,$courriel,$cv,$lm,$idclasse,$idcurrentinternship);
+                    $student = new self($idstudent,$firstname,$lastname,$username,$password,$profilpicture,$courriel,$cv,$lm,$idclasse);
 
                     array_push($objs, $student);
                 }
