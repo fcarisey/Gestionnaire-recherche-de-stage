@@ -224,4 +224,61 @@ function internshipInterest(){
 }
 
 
+function dt_studentsearch(){
+    let searchbar = document.querySelector('#dt_student #searchbar input');
+    let results = document.getElementById('presumedresult');
+    results.innerHTML = null
+
+    if (searchbar.value.length >= 3){
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '/dashboard/student')
+        xhr.onreadystatechange = () => {
+            if (xhr.responseText && xhr.status == 200 && xhr.readyState == 4){
+                const nbData = 5
+                const r = JSON.parse(xhr.responseText)
+                const a = Object.values(r)
+                const nbStudents = a.length/nbData
+
+                for (let i = 0; i < nbStudents; i++) {
+                    let div = document.createElement('div')
+
+                    let img = document.createElement('img')
+                    img.alt = "PP"
+                    // img.src = "/picture/"+a[((i * nbData) + 3)]
+                    img.src = "//via.placeholder.com/50"
+
+                    let sdiv = document.createElement('div')
+
+                    let input = document.createElement('input')
+                    input.type = "hidden"
+                    input.name = "id"
+                    input.value = a[(i * nbData)]
+                        
+                    div.insertAdjacentElement('afterbegin', input)
+                    div.insertAdjacentElement('afterbegin', sdiv)
+                    div.insertAdjacentElement('afterbegin', img)
+
+                    let pf = document.createElement('p')
+                    pf.innerText = a[((i * nbData) + 1)]
+
+                    let pl = document.createElement('p')
+                    pl.innerText = a[((i * nbData) + 2)]
+
+                    sdiv.insertAdjacentElement('afterbegin', pf)
+                    sdiv.insertAdjacentElement('afterbegin', pl)
+
+                    results.insertAdjacentElement('beforeend', div)
+                }
+            }
+        }
+    
+        let form = new FormData()
+        form.append('ajax', true)
+        form.append('value', searchbar.value)
+    
+        xhr.send(form)
+    }
+}
+
+
 // console.clear()
