@@ -653,6 +653,72 @@ header div nav:nth-child(2) ul li a:hover {
     text-align: center;
 }
 
+/*=======================================*/
+/*===== DASHBOARD/STUDENT (Teacher) =====*/
+/*=======================================*/
+
+#dt_student{
+    display: flex;
+    flex-direction: column;
+}
+
+#dt_student #searchbar{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+#dt_student #searchbar input{
+    border-radius: 5px 0 0 5px;
+    background-color: #dfdfdf;
+    box-shadow: 0 0 9px -7px black inset;
+    border: none;
+    padding-left: 10px;
+    font-size: 17px;
+    width: 500px;
+}
+
+#dt_student #searchbar a{
+    background-color: #f3a847;
+    width: 50px;
+    height: 50px;
+    transition: background 200ms;
+    border-radius: 0 5px 5px 0;
+}
+
+#dt_student #searchbar a:hover{
+    cursor: pointer;
+    background-color: #c38638;
+}
+
+#dt_student #searchbar a img{
+    width: 40px;
+    height: 40px;
+    margin: 10%;
+}
+
+#dt_student #presumedresult{
+    
+}
+
+#dt_student #infos{
+    width: 65%;
+    margin: auto;
+    margin-top: 100px;
+    margin-left: 200px;
+}
+
+#dt_student #infos > h3{
+    margin-bottom: 30px;
+}
+
+#dt_student #infos > div:nth-child(2){
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 /*==================*/
 /*===== FOOTER =====*/
 /*==================*/
