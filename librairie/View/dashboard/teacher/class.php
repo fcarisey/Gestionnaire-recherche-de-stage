@@ -1,6 +1,6 @@
 <?php
 
-$subpage =  $_GET['subpage2'] ?? 'home';
+$subpage = $_GET['subpage2'] ?? 'home';
 
 switch ($subpage){
     case 'home': require_once('librairie/View/dashboard/teacher/class/home.php');break;
