@@ -16,13 +16,12 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `profilpicture` varchar(50) NOT NULL,
   `courriel` varchar(50) NOT NULL,
   PRIMARY KEY (`idadmin`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` (`idadmin`, `firstname`, `lastname`, `username`, `password`, `profilpicture`, `courriel`) VALUES
+	(1, 'frÃ©dÃ©ric', 'carisey', 'administrateur', '$2y$10$GM.1O.TvXYs1Slc/kGA8.uHnFWL4tJl.kB79x0RAtDQPUVjbNpuG2', 'default.jpg', 'admin@grds.fr');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
-
-/*!40000 ALTER TABLE `affiliate` DISABLE KEYS */;
-/*!40000 ALTER TABLE `affiliate` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `classe` (
   `idclasse` int(11) NOT NULL AUTO_INCREMENT,
@@ -37,27 +36,6 @@ INSERT INTO `classe` (`idclasse`, `designation`, `internshipdatestart`, `interns
 	(1, 'BTS SIO', '2022-02-02', '2022-08-13'),
 	(2, 'Licence ASI', '2022-04-05', '2022-09-26');
 /*!40000 ALTER TABLE `classe` ENABLE KEYS */;
-
-CREATE TABLE IF NOT EXISTS `currentinternship` (
-  `idcurrentinternship` int(11) NOT NULL AUTO_INCREMENT,
-  `designation` varchar(50) NOT NULL,
-  `description` varchar(50) NOT NULL,
-  `website` varchar(50) DEFAULT NULL,
-  `enterprise` varchar(50) NOT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `phone` varchar(10) NOT NULL,
-  `internshipagreement` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`idcurrentinternship`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-/*!40000 ALTER TABLE `currentinternship` DISABLE KEYS */;
-/*!40000 ALTER TABLE `currentinternship` ENABLE KEYS */;
-
-/*!40000 ALTER TABLE `interest` DISABLE KEYS */;
-INSERT INTO `interest` (`idstudent`, `idinternship`) VALUES
-	(3, 1),
-	(3, 4);
-/*!40000 ALTER TABLE `interest` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `internship` (
   `idinternship` int(11) NOT NULL AUTO_INCREMENT,
@@ -94,13 +72,15 @@ CREATE TABLE IF NOT EXISTS `student` (
   `cv` varchar(255) DEFAULT NULL,
   `lm` varchar(255) DEFAULT NULL,
   `idclasse` int(11) NOT NULL,
-  `idcurrentinternship` int(11) DEFAULT NULL,
   PRIMARY KEY (`idstudent`),
   KEY `FK_student_classe` (`idclasse`),
-  KEY `FK_student_currentinternship` (`idcurrentinternship`),
-  CONSTRAINT `FK_student_classe` FOREIGN KEY (`idclasse`) REFERENCES `classe` (`idclasse`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  CONSTRAINT `FK_student_currentinternship` FOREIGN KEY (`idcurrentinternship`) REFERENCES `currentinternship` (`idcurrentinternship`) ON DELETE NO ACTION ON UPDATE CASCADE
+  CONSTRAINT `FK_student_classe` FOREIGN KEY (`idclasse`) REFERENCES `classe` (`idclasse`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*!40000 ALTER TABLE `student` DISABLE KEYS */;
+INSERT INTO `student` (`idstudent`, `firstname`, `lastname`, `username`, `password`, `profilpicture`, `courriel`, `cv`, `lm`, `idclasse`) VALUES
+	(3, 'frédéric', 'carisey', 'fcarisey', '$2y$10$Yl1ovO4Fd7oCgZFq0aXJRum9TRB5scSZdX1fnBpUJoefbYxT7j2Nm', 'default.jpg', 'fcarisey@groupmontroland.fr', NULL, NULL, 1);
+/*!40000 ALTER TABLE `student` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `interest` (
   `idstudent` int(11) NOT NULL,
@@ -112,10 +92,29 @@ CREATE TABLE IF NOT EXISTS `interest` (
   CONSTRAINT `FK_interest_student` FOREIGN KEY (`idstudent`) REFERENCES `student` (`idstudent`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` (`idstudent`, `firstname`, `lastname`, `username`, `password`, `profilpicture`, `courriel`, `cv`, `lm`, `idclasse`, `idcurrentinternship`) VALUES
-	(3, 'frédéric', 'carisey', 'fcarisey', '$2y$10$Yl1ovO4Fd7oCgZFq0aXJRum9TRB5scSZdX1fnBpUJoefbYxT7j2Nm', 'default.jpg', 'fcarisey@groupmontroland.fr', NULL, NULL, 1, NULL);
-/*!40000 ALTER TABLE `student` ENABLE KEYS */;
+/*!40000 ALTER TABLE `interest` DISABLE KEYS */;
+INSERT INTO `interest` (`idstudent`, `idinternship`) VALUES
+	(3, 1),
+	(3, 4);
+/*!40000 ALTER TABLE `interest` ENABLE KEYS */;
+
+CREATE TABLE IF NOT EXISTS `currentinternship` (
+  `idcurrentinternship` int(11) NOT NULL AUTO_INCREMENT,
+  `designation` varchar(50) NOT NULL,
+  `description` varchar(50) NOT NULL,
+  `website` varchar(50) DEFAULT NULL,
+  `enterprise` varchar(50) NOT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `phone` varchar(10) NOT NULL,
+  `internshipagreement` varchar(50) DEFAULT NULL,
+  `idstudent` int(11) NOT NULL,
+  PRIMARY KEY (`idcurrentinternship`),
+  KEY `FK_currentinternship_student` (`idstudent`),
+  CONSTRAINT `FK_currentinternship_student` FOREIGN KEY (`idstudent`) REFERENCES `student` (`idstudent`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*!40000 ALTER TABLE `currentinternship` DISABLE KEYS */;
+/*!40000 ALTER TABLE `currentinternship` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `teacher` (
   `idteacher` int(11) NOT NULL AUTO_INCREMENT,
@@ -128,6 +127,11 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   PRIMARY KEY (`idteacher`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+/*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
+INSERT INTO `teacher` (`idteacher`, `firstname`, `lastname`, `username`, `password`, `profilpicture`, `courriel`) VALUES
+	(1, 'sébastien', 'pernelle', 'spernelle', '$2y$10$jKXU7lst.j2/vSYexgTdl.WPIPbT9lhheG9EC0N.IGaVapqpL.F4K', 'default.jpg', 'spernelle@groupmontroland.fr');
+/*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
+
 CREATE TABLE IF NOT EXISTS `affiliate` (
   `idteacher` int(11) NOT NULL,
   `idclasse` int(11) NOT NULL,
@@ -138,10 +142,10 @@ CREATE TABLE IF NOT EXISTS `affiliate` (
   CONSTRAINT `FK_affiliate_teacher` FOREIGN KEY (`idteacher`) REFERENCES `teacher` (`idteacher`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
-INSERT INTO `teacher` (`idteacher`, `firstname`, `lastname`, `username`, `password`, `profilpicture`, `courriel`) VALUES
-	(1, 'sébastien', 'pernelle', 'spernelle', '$2y$10$jKXU7lst.j2/vSYexgTdl.WPIPbT9lhheG9EC0N.IGaVapqpL.F4K', 'default.jpg', 'spernelle@groupmontroland.fr');
-/*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
+/*!40000 ALTER TABLE `affiliate` DISABLE KEYS */;
+INSERT INTO `affiliate` (`idteacher`, `idclasse`) VALUES
+	(1, 1);
+/*!40000 ALTER TABLE `affiliate` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
