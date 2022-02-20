@@ -41,7 +41,6 @@ class UserController extends ControllerController{
                         $cv = $user->getCv();
                         $lm = $user->getLm();
                         $classe = serialize(ClasseController::SELECT(\Database::SELECT_ALL, ['idclasse' => (int)$user->getIdclasse()], 1)[0]);
-                        $currentinternship = serialize(CurrentinternshipController::SELECT(\Database::SELECT_ALL, ['idcurrentinternship' => (int)$user->getIdcurrentinternship()], 1));
                         
                         $_SESSION['id'] = $id;
                         $_SESSION['firstname'] = $firstname;
@@ -53,7 +52,6 @@ class UserController extends ControllerController{
                         $_SESSION['cv'] = $cv;
                         $_SESSION['lm'] = $lm;
                         $_SESSION['classe'] = $classe;
-                        $_SESSION['currentinternship'] = $currentinternship;
                         $_SESSION['role'] = "Student";
     
                         $err['valide'] = true;
