@@ -61,6 +61,10 @@ $students = \Controller\StudentController::SELECT(\Database::SELECT_ALL, ['idcla
 
                     <?php if ($interests): ?>
                         <td>En cours</td>
+                    <?php elseif ($currentinternship): ?>
+                        <td>Trouvé</td>
+                    <?php else: ?>
+                        <td>Pas commencé</td>
                     <?php endif ?>
                 </tr>
             <?php endforeach ?>
