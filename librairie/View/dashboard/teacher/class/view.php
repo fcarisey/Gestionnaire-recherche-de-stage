@@ -50,7 +50,7 @@ $students = \Controller\StudentController::SELECT(\Database::SELECT_ALL, ['idcla
             </thead>
             <tbody>
             <?php foreach ($students as $student): ?>
-                <tr>
+                <tr data-id="<?= $student->getIdstudent() ?>">
                     <td><?= $student->getFirstname() ?></td>
                     <td><?= $student->getLastname() ?></td>
 
