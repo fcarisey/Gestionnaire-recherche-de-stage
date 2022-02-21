@@ -40,6 +40,12 @@
     animation: opa 250ms;
 }
 
+label.mandatory::before{
+    content: '*';
+    color: red;
+    display: contents;
+}
+
 /*==================*/
 /*===== HEADER =====*/
 /*==================*/
