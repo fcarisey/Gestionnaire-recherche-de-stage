@@ -747,12 +747,6 @@ header div nav:nth-child(2) ul li a:hover {
 /*===== FOOTER =====*/
 /*==================*/
 
-footer {
-    position: absolute;
-    top: calc(100vh - 19px);
-    width: 100%;
-}
-
 footer div p {
     text-align: center;
 }
