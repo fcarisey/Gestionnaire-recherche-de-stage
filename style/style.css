@@ -662,13 +662,13 @@ header div nav:nth-child(2) ul li a:hover {
     flex-direction: column;
 }
 
-#dt_student #searchbar{
+#dt_student #searchbar > div:first-child{
     display: flex;
     justify-content: center;
     margin: auto;
 }
 
-#dt_student #searchbar input{
+#dt_student #searchbar > div:first-child input{
     border-radius: 5px 0 0 5px;
     background-color: #dfdfdf;
     box-shadow: 0 0 9px -7px black inset;
@@ -678,7 +678,7 @@ header div nav:nth-child(2) ul li a:hover {
     width: 500px;
 }
 
-#dt_student #searchbar a{
+#dt_student #searchbar > div:first-child a{
     background-color: #f3a847;
     width: 50px;
     height: 50px;
@@ -686,12 +686,12 @@ header div nav:nth-child(2) ul li a:hover {
     border-radius: 0 5px 5px 0;
 }
 
-#dt_student #searchbar a:hover{
+#dt_student #searchbar > div:first-child a:hover{
     cursor: pointer;
     background-color: #c38638;
 }
 
-#dt_student #searchbar a img{
+#dt_student #searchbar > div:first-child a img{
     width: 40px;
     height: 40px;
     margin: 10%;

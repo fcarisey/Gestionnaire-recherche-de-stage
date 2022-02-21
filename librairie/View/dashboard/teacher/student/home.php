@@ -41,22 +41,41 @@ if (isset($_POST['ajax'], $_POST['value'])){
 
 ?>
 
+<style>
+    #dt_student #presumedresult{
+        display: flex;
+        flex-direction: column;
+        width: 550px;
+        margin: auto;
+        max-height: 200px;
+        overflow-y: scroll;
+    }
+
+    #dt_student #presumedresult > *{
+        display: flex;
+    }
+
+    #dt_student #presumedresult > * > div{
+        margin-left: 50px;
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+    }
+
+    #dt_student #presumedresult > * > div > p:last-child{
+        margin-left: 20px;
+    }
+</style>
+
 <div id="dt_student">
     <div>
         <div>
             <div id="searchbar">
-                <input type="text" placeholder="Rechercher un élève ..." onkeyup="dt_studentsearch()">
-                <a><img src="/picture/search ico.png" alt="search"></a>
-            </div>
-            <div id="presumedresult">
-           <!-- <div>
-                    <img src="" alt="PP">
-                    <div>
-                        <p></p>
-                        <p></p>
-                    </div>
-                    <input type="hidden" name="id" value="">
-                </div> -->
+                <div>
+                    <input type="text" placeholder="Rechercher un élève ..." onkeyup="dt_studentsearch()">
+                    <a><img src="/picture/search ico.png" alt="search"></a>
+                </div>
+                <div id="presumedresult"></div>
             </div>
         </div>
     </div>
