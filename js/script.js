@@ -1,8 +1,8 @@
 window.onload = () => {
-    contact();
-    login();
-    dashboard();
-    internshipInterest();
+    contact()
+    login()
+    dashboard()
+    internshipInterest()
 }
 
 function contact(){
@@ -223,7 +223,6 @@ function internshipInterest(){
     });
 }
 
-
 function dt_studentsearch(){
     let searchbar = document.querySelector('#dt_student #searchbar input');
     let results = document.getElementById('presumedresult');
@@ -241,6 +240,72 @@ function dt_studentsearch(){
 
                 for (let i = 0; i < nbStudents; i++) {
                     let div = document.createElement('div')
+                    div.dataset.id = a[(i * nbData)]
+                    div.addEventListener('click', () => {
+                        let xhr = new XMLHttpRequest()
+                        xhr.open('POST', '/dashboard/student')
+                        xhr.onreadystatechange = () => {
+                            if (xhr.responseText && xhr.status == 200 && xhr.readyState == 4){
+                                let response = JSON.parse(xhr.responseText)
+
+                                let infos = document.getElementById('infos')
+                                infos.innerHTML = null
+
+                                let h3 = document.createElement('h3')
+                                h3.id = "name"
+                                h3.innerText = response.lastname.toUpperCase() + " " + response.firstname.charAt(0).toUpperCase() + response.firstname.slice(1) + ", " + response.classe
+                                infos.insertAdjacentElement('beforeend', h3)
+
+                                let div = document.createElement('div')
+                                infos.insertAdjacentElement('beforeend', div)
+                                
+                                let div1 = document.createElement('div')
+                                div.insertAdjacentElement('beforeend', div1)
+
+                                let img = document.createElement('img')
+                                img.id = "profilpicture"
+                                img.src = "//via.placeholder.com/200" // "/picture/" + response.profilpicture
+                                img.alt = "PP"
+                                div1.insertAdjacentElement('beforeend', img)
+
+                                let p = document.createElement('p')
+                                p.id = "stat"
+                                p.innerText = response.stat
+                                div1.insertAdjacentElement('beforeend', p)
+
+                                let div2 = document.createElement('div')
+                                div.insertAdjacentElement('beforeend', div2)
+
+                                let a = document.createElement('a')
+                                a.id = "cv"
+                                a.href = "/file/" + response.cv
+                                a.target = "_blank"
+                                div2.insertAdjacentElement('beforeend', a)
+
+                                let img2 = document.createElement('img')
+                                img2.src = "/picture/cv.png"
+                                img2.alt = "CV"
+                                a.insertAdjacentElement('beforeend', img2)
+
+                                let a2 = document.createElement('a')
+                                a2.id = "lm"
+                                a2.href = "/file/" + response.lm
+                                a2.target = "_blank"
+                                div2.insertAdjacentElement('beforeend', a2)
+
+                                let img3 = document.createElement('img')
+                                img3.src = "/picture/lm.png"
+                                img3.alt = "LM"
+                                a2.insertAdjacentElement('beforeend', img3)
+                            }
+                        }
+
+                        let form = new FormData()
+                        form.append('ajax', true)
+                        form.append('id', div.dataset.id)
+
+                        xhr.send(form)
+                    })
 
                     let img = document.createElement('img')
                     img.alt = "PP"
@@ -249,12 +314,6 @@ function dt_studentsearch(){
 
                     let sdiv = document.createElement('div')
 
-                    let input = document.createElement('input')
-                    input.type = "hidden"
-                    input.name = "id"
-                    input.value = a[(i * nbData)]
-                        
-                    div.insertAdjacentElement('afterbegin', input)
                     div.insertAdjacentElement('afterbegin', sdiv)
                     div.insertAdjacentElement('afterbegin', img)
 

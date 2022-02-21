@@ -698,7 +698,31 @@ header div nav:nth-child(2) ul li a:hover {
 }
 
 #dt_student #presumedresult{
-    
+    display: flex;
+    flex-direction: column;
+    width: 550px;
+    margin: auto;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+#dt_student #presumedresult > *{
+    display: flex;
+}
+
+#dt_student #presumedresult > *:hover{
+    cursor: pointer;
+}
+
+#dt_student #presumedresult > * > div{
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+#dt_student #presumedresult > * > div > p:last-child{
+    margin-left: 20px;
 }
 
 #dt_student #infos{

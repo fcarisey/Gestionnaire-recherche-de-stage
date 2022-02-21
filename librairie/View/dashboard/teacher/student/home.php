@@ -1,39 +1,56 @@
 <?php
 
-if (isset($_POST['ajax'], $_POST['value'])){
-    if (!empty(trim($_POST['value']))){
-        $s = explode(' ', ltrim(rtrim($_POST['value'])));
-        $execute = [];
-        $SQL = "SELECT idstudent, username, firstname, lastname, profilpicture FROM student WHERE";
-    
-        for ($i = 0; $i < count($s); $i++){
-            if ($i > 0 && $i < count($s))
-                $SQL .= " OR";
-    
-            $SQL .= " firstname LIKE :firstname$i OR lastname LIKE :lastname$i OR username LIKE :username$i";
-    
-            $execute[":firstname$i"] = "%$s[$i]%";
-            $execute[":lastname$i"] = "%$s[$i]%";
-            $execute[":username$i"] = "%$s[$i]%";
-        }
-    
-        $data = \Database::$db_array['grds']->specialRequest($SQL, $execute, \Model\Student::class);
-    
-        $students = [];
-        if ($data){
-            foreach ($data as $d){
-                $x = count($students);
-                $students = array_merge($students, [
-                    "idstudent".$x => $d->getIdstudent(),
-                    "firstname".$x => $d->getFirstname(),
-                    "lastname".$x => $d->getLastname(),
-                    "username".$x => $d->getUsername(),
-                    "profilpicture".$x => $d->getProfilpicture()
-                ]);
+if (isset($_POST['ajax']) && (isset($_POST['value']) || isset($_POST['id']))){
+    if (isset($_POST['value'])){
+        if (!empty(trim($_POST['value']))){
+            $s = explode(' ', ltrim(rtrim($_POST['value'])));
+            $execute = [];
+            $SQL = "SELECT idstudent, username, firstname, lastname, profilpicture FROM student WHERE";
+        
+            for ($i = 0; $i < count($s); $i++){
+                if ($i > 0 && $i < count($s))
+                    $SQL .= " OR";
+        
+                $SQL .= " firstname LIKE :firstname$i OR lastname LIKE :lastname$i OR username LIKE :username$i";
+        
+                $execute[":firstname$i"] = "%$s[$i]%";
+                $execute[":lastname$i"] = "%$s[$i]%";
+                $execute[":username$i"] = "%$s[$i]%";
             }
+        
+            $data = \Database::$db_array['grds']->specialRequest($SQL, $execute, \Model\Student::class);
+        
+            $students = [];
+            if ($data){
+                foreach ($data as $d){
+                    $x = count($students);
+                    $students = array_merge($students, [
+                        "idstudent".$x => $d->getIdstudent(),
+                        "firstname".$x => $d->getFirstname(),
+                        "lastname".$x => $d->getLastname(),
+                        "username".$x => $d->getUsername(),
+                        "profilpicture".$x => $d->getProfilpicture()
+                    ]);
+                }
+            }
+    
+            echo json_encode($students, JSON_INVALID_UTF8_IGNORE);
         }
+    }else if (isset($_POST['id'])){
+        $id = $_POST['id'];
+        $user = \Controller\StudentController::SELECT(['lastname', 'firstname', 'profilpicture', 'cv', 'lm', 'idclasse'], ['idstudent' => $id])[0];
 
-        echo json_encode($students, JSON_INVALID_UTF8_IGNORE);
+        $data = [
+            'lastname' => $user->getLastname(),
+            'firstname' => $user->getFirstname(),
+            'profilpicture' => $user->getProfilpicture(),
+            'cv' => $user->getCv(),
+            'lm' => $user->getLm(),
+            'classe' => \Controller\ClasseController::SELECT(['designation'], ['idclasse' => $user->getIdclasse()])[0]->getDesignation(),
+            'stat' => "En cours"
+        ];
+
+        echo json_encode($data, JSON_INVALID_UTF8_IGNORE);
     }
 
     die;
@@ -42,29 +59,7 @@ if (isset($_POST['ajax'], $_POST['value'])){
 ?>
 
 <style>
-    #dt_student #presumedresult{
-        display: flex;
-        flex-direction: column;
-        width: 550px;
-        margin: auto;
-        max-height: 200px;
-        overflow-y: scroll;
-    }
-
-    #dt_student #presumedresult > *{
-        display: flex;
-    }
-
-    #dt_student #presumedresult > * > div{
-        margin-left: 50px;
-        display: flex;
-        align-items: center;
-        font-size: 20px;
-    }
-
-    #dt_student #presumedresult > * > div > p:last-child{
-        margin-left: 20px;
-    }
+    
 </style>
 
 <div id="dt_student">
@@ -79,21 +74,5 @@ if (isset($_POST['ajax'], $_POST['value'])){
             </div>
         </div>
     </div>
-    <div id="infos">
-        <h3 id="name">NOM DE FAMILLE Prénom, Classe</h3>
-        <div>
-            <div>
-                <img id="profilpicture" src="//via.placeholder.com/200" alt="PP">
-                <p id="stat">En cours</p>
-            </div>
-            <div>
-                <a id="cv" href="" target="_blank"><img src="//via.placeholder.com/150" alt="CV"></a>
-                <a id="lm" href="" target="_blank"><img src="//via.placeholder.com/150" alt="LM"></a>
-            </div>
-        </div>
-        <div>
-
-        </div>
-    </div>
-    
+    <div id="infos"></div>
 </div>
