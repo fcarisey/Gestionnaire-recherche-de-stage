@@ -276,27 +276,31 @@ function dt_studentsearch(){
                                 let div2 = document.createElement('div')
                                 div.insertAdjacentElement('beforeend', div2)
 
-                                let a = document.createElement('a')
-                                a.id = "cv"
-                                a.href = "/file/" + response.cv
-                                a.target = "_blank"
-                                div2.insertAdjacentElement('beforeend', a)
+                                if (response.cv){
+                                    let a = document.createElement('a')
+                                    a.id = "cv"
+                                    a.href = "/file/" + response.cv
+                                    a.target = "_blank"
+                                    div2.insertAdjacentElement('beforeend', a)
 
-                                let img2 = document.createElement('img')
-                                img2.src = "/picture/cv.png"
-                                img2.alt = "CV"
-                                a.insertAdjacentElement('beforeend', img2)
-
-                                let a2 = document.createElement('a')
-                                a2.id = "lm"
-                                a2.href = "/file/" + response.lm
-                                a2.target = "_blank"
-                                div2.insertAdjacentElement('beforeend', a2)
-
-                                let img3 = document.createElement('img')
-                                img3.src = "/picture/lm.png"
-                                img3.alt = "LM"
-                                a2.insertAdjacentElement('beforeend', img3)
+                                    let img2 = document.createElement('img')
+                                    img2.src = "/picture/cv.png"
+                                    img2.alt = "CV"
+                                    a.insertAdjacentElement('beforeend', img2)
+                                }
+                                
+                                if (response.lm){
+                                    let a2 = document.createElement('a')
+                                    a2.id = "lm"
+                                    a2.href = "/file/" + response.lm
+                                    a2.target = "_blank"
+                                    div2.insertAdjacentElement('beforeend', a2)
+    
+                                    let img3 = document.createElement('img')
+                                    img3.src = "/picture/lm.png"
+                                    img3.alt = "LM"
+                                    a2.insertAdjacentElement('beforeend', img3)
+                                }
                             }
                         }
 
