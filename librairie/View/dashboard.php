@@ -28,7 +28,7 @@ if ($_SESSION['role'] == "Teacher"){
     $affiliates = \Controller\AffiliateController::SELECT(['idclasse'], ['idteacher' => $_SESSION['id']]);
     if ($affiliates){
         foreach ($affiliates as $affiliate){
-            $classes = array_merge($classes, \Controller\ClasseController::SELECT(\Database::SELECT_ALL, ['idclasse' => $affiliate->getIdclasse()]));
+            $classes = array_merge($classes, \Controller\ClasseController::SELECT(['designation'], ['idclasse' => $affiliate->getIdclasse()]));
         }
     }
 }

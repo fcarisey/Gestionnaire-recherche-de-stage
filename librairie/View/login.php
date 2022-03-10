@@ -23,7 +23,7 @@ if (isset($_POST['ajax'])){
             </label>
             <label>
                 Mot de passe:
-                <input autocomplete="current-password" type="password" name="password" placeholder="Mot de passe" required>
+                <input minlength="8" autocomplete="current-password" type="password" name="password" placeholder="Mot de passe" required>
                 <small id="passwordError"></small>
             </label>
         </div>

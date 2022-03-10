@@ -1,6 +1,12 @@
 <?php
 
-$classes = \Controller\ClasseController::SELECT(\Database::SELECT_ALL)
+$classes = [];
+$affiliates = \Controller\AffiliateController::SELECT(['idclasse'], ['idteacher' => $_SESSION['id']]);
+if ($affiliates){
+    foreach ($affiliates as $affiliate){
+        $classes = array_merge($classes, \Controller\ClasseController::SELECT(['designation'], ['idclasse' => $affiliate->getIdclasse()]));
+    }
+}
 
 ?>
 
