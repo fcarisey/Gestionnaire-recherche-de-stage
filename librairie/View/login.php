@@ -14,7 +14,7 @@ if (isset($_POST['ajax'])){
 ?>
 
 <div id="login">
-    <form action="./login" method="post">
+    <form name="login" action="./login" method="post">
         <div>
             <label>
                 Nom d'utilisateur:
@@ -27,7 +27,7 @@ if (isset($_POST['ajax'])){
                 <small id="passwordError"></small>
             </label>
         </div>
-        <button type="button">Se connecter</button>
+        <button>Se connecter</button>
         <small id="accountError"></small>
     </form>
 </div>

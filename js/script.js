@@ -1,144 +1,148 @@
 window.onload = () => {
-    contact()
-    login()
     dashboard()
     internshipInterest()
+
+    document.forms['contact']?.addEventListener('submit', (e) => {
+        contact()
+        e.preventDefault()
+    })
+
+    document.forms['login']?.addEventListener('submit', (e) => {
+        login()
+        e.preventDefault()
+    })
 }
 
-function contact(){
-    document.querySelector("#contact button[type='button']")?.addEventListener("click", () => {        
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "./contact", true);
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                let response = JSON.parse(xhr.responseText);
+function contact() {
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "./contact", true);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            let response = JSON.parse(xhr.responseText);
 
-                let objectInput = document.querySelector("#contact form label input[name='object']");
-                let courrielInput = document.querySelector("#contact form label input[name='courriel']");
-                let messageTextarea = document.querySelector("#contact form label textarea[name='message']");
+            let objectInput = document.querySelector("#contact form label input[name='object']");
+            let courrielInput = document.querySelector("#contact form label input[name='courriel']");
+            let messageTextarea = document.querySelector("#contact form label textarea[name='message']");
 
-                objectInput.classList.remove("OK", "KO");
-                courrielInput?.classList.remove("OK", "KO");
-                messageTextarea.classList.remove("OK", "KO");
+            objectInput.classList.remove("OK", "KO");
+            courrielInput?.classList.remove("OK", "KO");
+            messageTextarea.classList.remove("OK", "KO");
 
-                let objectError = document.querySelector("#contact form label #objectError");
-                let courrielError = document.querySelector("#contact form label #courrielError");
-                let messageError = document.querySelector("#contact form label #messageError");
-                let OK = document.querySelector("#contact form div #valide");
+            let objectError = document.querySelector("#contact form label #objectError");
+            let courrielError = document.querySelector("#contact form label #courrielError");
+            let messageError = document.querySelector("#contact form label #messageError");
+            let OK = document.querySelector("#contact form div #valide");
 
-                objectError.innerHTML = "";
-                if (courrielError !== null)
-                    courrielError.innerHTML = "";
-                messageError.innerHTML = "";
-                OK.innerHTML = "";
+            objectError.innerHTML = "";
+            if (courrielError !== null)
+                courrielError.innerHTML = "";
+            messageError.innerHTML = "";
+            OK.innerHTML = "";
 
-                if (response.object){
-                    if (courrielError)
-                        objectError.innerHTML = response.object;
-                    objectInput.classList.add("KO");
-                }else
-                    objectInput.classList.add("OK");
+            if (response.object) {
+                if (courrielError)
+                    objectError.innerHTML = response.object;
+                objectInput.classList.add("KO");
+            } else
+                objectInput.classList.add("OK");
 
-                if (response.courriel){
-                    if (courrielError)
-                        courrielError.innerHTML = response.courriel;
-                    courrielInput?.classList.add("KO");
-                }else
-                    courrielInput?.classList.add("OK");
+            if (response.courriel) {
+                if (courrielError)
+                    courrielError.innerHTML = response.courriel;
+                courrielInput?.classList.add("KO");
+            } else
+                courrielInput?.classList.add("OK");
 
-                if (response.message){
-                    messageError.innerHTML = response.message;
-                    messageTextarea.classList.add("KO");
-                }else
-                    messageTextarea.classList.add("OK");
+            if (response.message) {
+                messageError.innerHTML = response.message;
+                messageTextarea.classList.add("KO");
+            } else
+                messageTextarea.classList.add("OK");
 
-                if (response.valide){
-                    OK.innerHTML = response.valide;
+            if (response.valide) {
+                OK.innerHTML = response.valide;
 
-                    OK.classList.add("OK");
+                OK.classList.add("OK");
 
-                    setTimeout(() => {
-                        OK.innerHTML = "";
+                setTimeout(() => {
+                    OK.innerHTML = "";
 
-                        OK.classList.remove("OK");
-                        objectInput.classList.remove("OK");
-                        courrielInput?.classList.remove("OK");
-                        messageTextarea.classList.remove("OK");
-                    }, 5000);
-                }
+                    OK.classList.remove("OK");
+                    objectInput.classList.remove("OK");
+                    courrielInput?.classList.remove("OK");
+                    messageTextarea.classList.remove("OK");
+                }, 5000);
             }
         }
+    }
 
-        let object = document.querySelector("#contact input[name='object']").value;
-        let courriel = document.querySelector("#contact input[name='courriel']")?.value;
-        let message = document.querySelector("#contact textarea[name='message']").value;
+    let object = document.querySelector("#contact input[name='object']").value;
+    let courriel = document.querySelector("#contact input[name='courriel']")?.value;
+    let message = document.querySelector("#contact textarea[name='message']").value;
 
-        let form = new FormData();
-        form.append("ajax", true);
-        form.append("object", object);
-        if (courriel !== null)
-            form.append("courriel", courriel);
-        form.append("message", message);
+    let form = new FormData();
+    form.append("ajax", true);
+    form.append("object", object);
+    if (courriel !== null)
+        form.append("courriel", courriel);
+    form.append("message", message);
 
-        xhr.send(form);
-    });
+    xhr.send(form);
 }
 
-function login(){
-    document.querySelector("#login form button[type='button']")?.addEventListener('click', () => {
-        let username = document.querySelector("#login form div label input[name='username']");
-        let password = document.querySelector("#login form div label input[name='password']");
+function login() {
+    let username = document.querySelector("#login form div label input[name='username']");
+    let password = document.querySelector("#login form div label input[name='password']");
 
-        let form = new FormData();
-        form.append('ajax', true);
-        form.append('username', username.value);
-        form.append('password', password.value);
+    let form = new FormData();
+    form.append('ajax', true);
+    form.append('username', username.value);
+    form.append('password', password.value);
 
-        let usernameError = document.querySelector("#login form div label #usernameError");
-        let passwordError = document.querySelector("#login form div label #passwordError");
-        let accountError = document.querySelector("#login form #accountError");
+    let usernameError = document.querySelector("#login form div label #usernameError");
+    let passwordError = document.querySelector("#login form div label #passwordError");
+    let accountError = document.querySelector("#login form #accountError");
 
-        usernameError.innerHTML = "";
-        passwordError.innerHTML = "";
-        accountError.innerHTML = "";
+    usernameError.innerHTML = "";
+    passwordError.innerHTML = "";
+    accountError.innerHTML = "";
 
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', './login');
-        xhr.onreadystatechange = () => {
-            if (xhr.responseText != null && xhr.status == 200 && xhr.readyState == 4){
-                let response = JSON.parse(xhr.responseText);
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', './login');
+    xhr.onreadystatechange = () => {
+        if (xhr.responseText != null && xhr.status == 200 && xhr.readyState == 4) {
+            let response = JSON.parse(xhr.responseText);
 
-                username.classList.remove('OK', 'KO');
-                password.classList.remove('OK', 'KO');
+            username.classList.remove('OK', 'KO');
+            password.classList.remove('OK', 'KO');
 
-                console.log(response);
+            console.log(response);
 
-                if (response.username){
-                    username.classList.add('KO');
-                    usernameError.innerText = response.username;
-                }else
-                    username.classList.add('OK');
+            if (response.username) {
+                username.classList.add('KO');
+                usernameError.innerText = response.username;
+            } else
+                username.classList.add('OK');
 
-                if (response.password){
-                    password.classList.add('KO');
-                    passwordError.innerText = response.password;
-                }else
-                    password.classList.add('OK');
+            if (response.password) {
+                password.classList.add('KO');
+                passwordError.innerText = response.password;
+            } else
+                password.classList.add('OK');
 
-                if (response.valide){
-                    window.location.replace("./");
-                }else if (response.account){
-                    username.classList.add('KO');
-                    password.classList.add('KO');
-                    accountError.innerHTML = response.account;
-                }
+            if (response.valide) {
+                window.location.replace("./");
+            } else if (response.account) {
+                username.classList.add('KO');
+                password.classList.add('KO');
+                accountError.innerHTML = response.account;
             }
-        };
-        xhr.send(form);
-    });
+        }
+    };
+    xhr.send(form);
 }
 
-function dashboard(){
+function dashboard() {
     document.querySelectorAll("#dashboard nav ul div div a:nth-child(2)")?.forEach((e) => {
         e.addEventListener('click', () => {
             let p = e.parentNode.parentNode;
@@ -161,7 +165,7 @@ function dashboard(){
             let xhr = new XMLHttpRequest();
             xhr.open('POST', window.location.pathname)
             xhr.onreadystatechange = () => {
-                if (xhr.responseText && xhr.readyState == 4 && xhr.status == 200){
+                if (xhr.responseText && xhr.readyState == 4 && xhr.status == 200) {
                     document.getElementById('subpage').innerHTML = xhr.responseText
                 }
             }
@@ -180,7 +184,7 @@ function dashboard(){
             let xhr = new XMLHttpRequest();
             xhr.open('POST', window.location.pathname)
             xhr.onreadystatechange = () => {
-                if (xhr.responseText && xhr.readyState == 4 && xhr.status == 200){
+                if (xhr.responseText && xhr.readyState == 4 && xhr.status == 200) {
                     document.getElementById('subpage').innerHTML = xhr.responseText
                 }
             }
@@ -193,7 +197,7 @@ function dashboard(){
     });
 }
 
-function internshipInterest(){
+function internshipInterest() {
     document.querySelector("#internship > div input")?.addEventListener('click', () => {
         let xhr = new XMLHttpRequest();
 
@@ -201,10 +205,10 @@ function internshipInterest(){
         console.log(id)
         xhr.open('POST', '/internship/' + id)
         xhr.onreadystatechange = () => {
-            if (xhr.responseText && xhr.readyState == 4 && xhr.status == 200){
+            if (xhr.responseText && xhr.readyState == 4 && xhr.status == 200) {
                 let response = JSON.parse(xhr.response);
-                
-                if (response.valide){
+
+                if (response.valide) {
                     document.querySelector("#internship > div input").value = response.text;
                     document.querySelector("#internship > div input").classList.toggle('KO');
                 }
@@ -223,20 +227,20 @@ function internshipInterest(){
     });
 }
 
-function dt_studentsearch(){
+function dt_studentsearch() {
     let searchbar = document.querySelector('#dt_student #searchbar input');
     let results = document.getElementById('presumedresult');
     results.innerHTML = null
 
-    if (searchbar.value.length >= 3){
+    if (searchbar.value.length >= 3) {
         let xhr = new XMLHttpRequest();
         xhr.open('POST', '/dashboard/student')
         xhr.onreadystatechange = () => {
-            if (xhr.responseText && xhr.status == 200 && xhr.readyState == 4){
+            if (xhr.responseText && xhr.status == 200 && xhr.readyState == 4) {
                 const nbData = 5
                 const r = JSON.parse(xhr.responseText)
                 const a = Object.values(r)
-                const nbStudents = a.length/nbData
+                const nbStudents = a.length / nbData
 
                 for (let i = 0; i < nbStudents; i++) {
                     let div = document.createElement('div')
@@ -245,7 +249,7 @@ function dt_studentsearch(){
                         let xhr = new XMLHttpRequest()
                         xhr.open('POST', '/dashboard/student')
                         xhr.onreadystatechange = () => {
-                            if (xhr.responseText && xhr.status == 200 && xhr.readyState == 4){
+                            if (xhr.responseText && xhr.status == 200 && xhr.readyState == 4) {
                                 let response = JSON.parse(xhr.responseText)
 
                                 let infos = document.getElementById('infos')
@@ -258,7 +262,7 @@ function dt_studentsearch(){
 
                                 let div = document.createElement('div')
                                 infos.insertAdjacentElement('beforeend', div)
-                                
+
                                 let div1 = document.createElement('div')
                                 div.insertAdjacentElement('beforeend', div1)
 
@@ -276,7 +280,7 @@ function dt_studentsearch(){
                                 let div2 = document.createElement('div')
                                 div.insertAdjacentElement('beforeend', div2)
 
-                                if (response.cv){
+                                if (response.cv) {
                                     let a = document.createElement('a')
                                     a.id = "cv"
                                     a.href = "/file/" + response.cv
@@ -288,14 +292,14 @@ function dt_studentsearch(){
                                     img2.alt = "CV"
                                     a.insertAdjacentElement('beforeend', img2)
                                 }
-                                
-                                if (response.lm){
+
+                                if (response.lm) {
                                     let a2 = document.createElement('a')
                                     a2.id = "lm"
                                     a2.href = "/file/" + response.lm
                                     a2.target = "_blank"
                                     div2.insertAdjacentElement('beforeend', a2)
-    
+
                                     let img3 = document.createElement('img')
                                     img3.src = "/picture/lm.png"
                                     img3.alt = "LM"
@@ -334,14 +338,13 @@ function dt_studentsearch(){
                 }
             }
         }
-    
+
         let form = new FormData()
         form.append('ajax', true)
         form.append('value', searchbar.value)
-    
+
         xhr.send(form)
     }
 }
-
 
 // console.clear()
