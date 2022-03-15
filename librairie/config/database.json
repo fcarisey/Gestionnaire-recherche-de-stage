@@ -1,10 +1,10 @@
 [
     {
         "name": "grds",
-        "database": "grdsnew",
+        "database": "grds",
         "host": "127.0.0.1",
-        "user": "root",
-        "password": "812332",
+        "user": "GRDS",
+        "password": "GRDS",
         "port": 3306,
         "type": "mysql"
     }
