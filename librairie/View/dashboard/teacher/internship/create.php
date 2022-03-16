@@ -1,10 +1,99 @@
 <?php
 
+if (isset($_POST['ajax']) && isset($_POST['internship-1'])){
+    $designation = $_POST['designation'];
+    $sdescription = $_POST['sdescription'];
+    $description = $_POST['description'];
+    $class = $_POST['class'];
+    $enterprise = $_POST['enterprise'];
+    $website = $_POST['website'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+
+    $err = [];
+
+    $designationParse = false;
+    if (!empty($designation)){
+        $designationParse = true;
+    }else
+        $err['designation'] = "La designation du stage est obligatoire !";
+
+    $sdescriptionParse = false;
+    if (!empty($sdescription)){
+        $sdescriptionParse = true;
+    }else
+        $err['sdescription'] = "La courte description est obligatoire !";
+
+    $descriptionParse = false;
+    if (!empty($description)){
+        $descriptionParse = true;
+    }else
+        $err['description'] = "La description est obligatoire !";
+
+    $classParse = false;
+    if (!empty($class)){
+        $affiliations = \Controller\AffiliateController::SELECT(\Database::SELECT_ALL, [
+            'idteacher' => $_SESSION['id'],
+            'AND' => \Database::WHERE_KEY,
+            'idclasse' => (int)$class
+        ]);
+
+        if (!empty($affiliations)){
+            $classParse = true;
+        }else
+            $err['class'] = "La classe selectionné ne vous a pas été attribuer !";
+    }else
+        $err['class'] = "La classe est obligatoire !";
+
+    $enterpriseParse = false;
+    if (!empty($enterprise)){
+        $enterpriseParse = true;
+    }else
+        $err['enterprise'] = "Le nom de l'entreprise est obligatoire !";
+
+    $websiteParse = false;
+    if (!empty($website) && filter_var($website, FILTER_VALIDATE_URL))
+        $websiteParse = true;
+
+    $phoneParse = false;
+    if (!empty($phone) && preg_match('([0-9]{10})', $phone))
+        $phoneParse = true;
+
+    $emailParse = false;
+    if (!empty($email) && filter_var($website, FILTER_VALIDATE_EMAIL))
+        $emailParse = true;
+
+    if ($designationParse && $sdescriptionParse && $descriptionParse && $classParse && $enterpriseParse){
+        $values = [
+            'designation' => $designation,
+            'description' => $description,
+            'shortdescription' => $sdescription,
+            'enterprise' => $enterprise,
+            'isdone' => 0,
+            'idclasse' => (int)$class
+        ];
+
+        if ($websiteParse) $values['website'] = $website;
+        if ($phoneParse) $values['phone'] = $phone;
+        if ($emailParse) $values['email'] = $email;
+
+        try {
+            \Controller\InternshipController::INSERT($values);
+            $err['valide'] = true;
+        } catch (Exception $e) {
+            $err['err'] = $e->getMessage();
+        }
+    }
+
+    echo json_encode($err);
+    die;
+}
+
 $classes = [];
 $affiliates = \Controller\AffiliateController::SELECT(['idclasse'], ['idteacher' => $_SESSION['id']]);
 if ($affiliates){
     foreach ($affiliates as $affiliate){
-        $classes = array_merge($classes, \Controller\ClasseController::SELECT(['designation'], ['idclasse' => $affiliate->getIdclasse()]));
+        $classes = array_merge($classes, \Controller\ClasseController::SELECT(['designation', 'idclasse'], ['idclasse' => $affiliate->getIdclasse()]));
     }
 }
 
@@ -12,11 +101,14 @@ if ($affiliates){
 
 <style>
     #dt_internship_create{
-        display: flex;
         margin-top: 25px;
     }
 
-    #dt_internship_create > div{
+    #dt_internship_create > form{
+        display: flex;
+    }
+
+    #dt_internship_create > form > div{
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -24,12 +116,12 @@ if ($affiliates){
         justify-content: space-between;
     }
 
-    #dt_internship_create > div > label{
+    #dt_internship_create > form > div > label{
         display: flex;
         flex-direction: column;
     }
 
-    #dt_internship_create > div > label > input, #dt_internship_create > div textarea, #dt_internship_create > div select{
+    #dt_internship_create > form > div > label > input, #dt_internship_create > form > div textarea, #dt_internship_create > form > div select{
         border-radius: 5px;
         box-shadow: 0 0 9px -7px black inset;
         background-color: #dfdfdf;
@@ -37,20 +129,20 @@ if ($affiliates){
         padding: 10px;
     }
 
-    #dt_internship_create > div:first-child{
+    #dt_internship_create > form > div:first-child{
         margin-left: 100px;
         min-height: 800px;
     }
 
-    #dt_internship_create > div:last-child{
+    #dt_internship_create > form > div:last-child{
         height: 400px;
     }
 
-    #dt_internship_create > div:first-child > label > textarea{
-        resize: vertical;
+    #dt_internship_create > form > div:first-child > label > textarea{
+        resize: none;
     }
 
-    #dt_internship_create > div:first-child > button{
+    #dt_internship_create > form > div:first-child > button{
         padding: 10px 15px;
         border: 1px solid #396ADA;
         border-radius: 5px;
@@ -59,7 +151,7 @@ if ($affiliates){
         transition: 200ms;
     }
 
-    #dt_internship_create > div:first-child > button:hover{
+    #dt_internship_create > form > div:first-child > button:hover{
         background-color: #396ada85;
         color: white;
         cursor: pointer;
@@ -68,48 +160,50 @@ if ($affiliates){
 </style>
 
 <div id="dt_internship_create">
-    <div>
-        <label class="mandatory">
-            Designation:
-            <input placeholder="Designation" id="designation" type="text">
-        </label>
-        <label class="mandatory">
-            Courte description:
-            <textarea placeholder="Courte description" id="shortdescription" cols="30" rows="10"></textarea>
-        </label>
-        <label class="mandatory">
-            Description:
-            <textarea placeholder="Description" id="description" cols="50" rows="25"></textarea>
-        </label>
-        <button id="submit">Créer</button>
-    </div>
-    <div>
-        <label class="mandatory">
-            Classe:
-            <select id="class">
-                <option selected value="">Selectioner une classe:</option>
-                <optgroup>
-                    <?php foreach ($classes as $class): ?>
-                        <option value="<?= $class->getIdclasse() ?>"><?= $class->getDesignation() ?></option>
-                    <?php endforeach ?>
-                </optgroup>
-            </select>
-        </label>
-        <label class="mandatory">
-            Entreprise:
-            <input type="text" placeholder="Entreprise" id="enterprise">
-        </label>
-        <label>
-            Site web:
-            <input type="url" placeholder="https://exemple.com" id="website">
-        </label>
-        <label>
-            Téléphone
-            <input type="tel" placeholder="00.00.00.00.00" id="phone">
-        </label>
-        <label>
-            Courriel
-            <input type="email" placeholder="john.doe@exemple.com" id="email">
-        </label>
-    </div>
+    <form name="createinternship">
+        <div>
+            <label class="mandatory">
+                Designation:
+                <input required placeholder="Designation" id="designation" type="text">
+            </label>
+            <label class="mandatory">
+                Courte description:
+                <textarea required placeholder="Courte description" id="shortdescription" cols="30" style="height: 160px;"></textarea>
+            </label>
+            <label class="mandatory">
+                Description:
+                <textarea required placeholder="Description" id="description" cols="50" style="height: 400px;"></textarea>
+            </label>
+            <button id="submit">Créer</button>
+        </div>
+        <div>
+            <label class="mandatory">
+                Classe:
+                <select required id="class">
+                    <option selected value="">Selectioner une classe:</option>
+                    <optgroup>
+                        <?php foreach ($classes as $class): ?>
+                            <option value="<?= $class->getIdclasse() ?>"><?= $class->getDesignation() ?></option>
+                        <?php endforeach ?>
+                    </optgroup>
+                </select>
+            </label>
+            <label class="mandatory">
+                Entreprise:
+                <input required type="text" placeholder="Entreprise" id="enterprise">
+            </label>
+            <label>
+                Site web:
+                <input type="url" placeholder="https://exemple.com" id="website" pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$">
+            </label>
+            <label>
+                Téléphone
+                <input type="tel" placeholder="00.00.00.00.00" id="phone">
+            </label>
+            <label>
+                Courriel
+                <input type="email" placeholder="john.doe@exemple.com" id="email" pattern="(([a-zA-Z0-9.-]+)@([a-zA-Z0-9-_]+).([a-zA-Z0-9-_]+))">
+            </label>
+        </div>
+    </form>
 </div>
