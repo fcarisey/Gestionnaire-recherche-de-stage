@@ -41,6 +41,7 @@ if (isset($_POST['ajax'])){
 
 <div id="contact">
     <form name="contact" method="post" action="./">
+        <h2>Contact</h2>
         <div>
             <label>
                 Objet:
@@ -62,7 +63,7 @@ if (isset($_POST['ajax'])){
             <small id="messageError"></small>
         </label>
         <div>
-            <button>Envoyer</button>
+            <button class="btn">Envoyer</button>
             <p id="valide"></p>
         </div>
         

@@ -51,19 +51,27 @@ if (isset($_POST['ajax']) && isset($_POST['internship-1'])){
     }else
         $err['enterprise'] = "Le nom de l'entreprise est obligatoire !";
 
-    $websiteParse = false;
-    if (!empty($website) && filter_var($website, FILTER_VALIDATE_URL))
-        $websiteParse = true;
+    $websiteParse = true;
+    if (!filter_var($website, FILTER_VALIDATE_URL) && !empty($website)){
+        $err['website'] = "L'url n'est pas valide !";
+        $websiteParse = false;
+    }
+        
 
-    $phoneParse = false;
-    if (!empty($phone) && preg_match('([0-9]{10})', $phone))
-        $phoneParse = true;
+    $phoneParse = true;
+    if (!preg_match('([0-9]{10})', $phone) && !empty($phone)){
+        $err['phone'] = "Le numéro de téléphone n'est pas valide !";
+        $phoneParse = false;
+    }
+        
 
-    $emailParse = false;
-    if (!empty($email) && filter_var($website, FILTER_VALIDATE_EMAIL))
-        $emailParse = true;
+    $emailParse = true;
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($email)){
+        $err['email'] = "Le courriel n'est pas valide !";
+        $emailParse = false;
+    }
 
-    if ($designationParse && $sdescriptionParse && $descriptionParse && $classParse && $enterpriseParse){
+    if ($designationParse && $sdescriptionParse && $descriptionParse && $classParse && $enterpriseParse && $websiteParse && $phoneParse && $emailParse){
         $values = [
             'designation' => $designation,
             'description' => $description,
@@ -160,25 +168,30 @@ if ($affiliates){
 </style>
 
 <div id="dt_internship_create">
-    <form name="createinternship">
+    <form name="createinternship" onsubmit="createInternship(event)">
         <div>
             <label class="mandatory">
                 Designation:
+                <small id="designationError"></small>
                 <input required placeholder="Designation" id="designation" type="text">
             </label>
             <label class="mandatory">
                 Courte description:
+                <small id="sdescriptionError"></small>
                 <textarea required placeholder="Courte description" id="shortdescription" cols="30" style="height: 160px;"></textarea>
             </label>
             <label class="mandatory">
                 Description:
+                <small id="descriptionError"></small>
                 <textarea required placeholder="Description" id="description" cols="50" style="height: 400px;"></textarea>
             </label>
+            <small id="errError"></small>
             <button id="submit">Créer</button>
         </div>
         <div>
             <label class="mandatory">
                 Classe:
+                <small id="classError"></small>
                 <select required id="class">
                     <option selected value="">Selectioner une classe:</option>
                     <optgroup>
@@ -190,18 +203,22 @@ if ($affiliates){
             </label>
             <label class="mandatory">
                 Entreprise:
+                <small id="enterpriseError"></small>
                 <input required type="text" placeholder="Entreprise" id="enterprise">
             </label>
             <label>
                 Site web:
+                <small id="sitewebError"></small>
                 <input type="url" placeholder="https://exemple.com" id="website" pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$">
             </label>
             <label>
                 Téléphone
+                <small id="phoneError"></small>
                 <input type="tel" placeholder="00.00.00.00.00" id="phone">
             </label>
             <label>
                 Courriel
+                <small id="emailError"></small>
                 <input type="email" placeholder="john.doe@exemple.com" id="email" pattern="(([a-zA-Z0-9.-]+)@([a-zA-Z0-9-_]+).([a-zA-Z0-9-_]+))">
             </label>
         </div>

@@ -40,13 +40,13 @@ if ($_SESSION['role'] == "Teacher"){
     <nav>
         <h2>Administration</h2>
         <ul>
-            <div class="home">
+            <div id="home">
                 <div>
                     <a data-subpage="home">Accueil</a>
                 </div>
             </div>
 
-            <div class="class">
+            <div id="class">
                 <div>
                     <a data-subpage="class">Classes</a>
                     <a></a>
@@ -64,7 +64,7 @@ if ($_SESSION['role'] == "Teacher"){
                 <?php endforeach ?>
             </div>
 
-            <div class="student">
+            <div id="student">
                 <div>
                     <a data-subpage="student">Eleves</a>
                     <?php if ($_SESSION['role'] == 'Admin'): ?>
@@ -81,7 +81,7 @@ if ($_SESSION['role'] == "Teacher"){
             </div>
             
             <?php if ($_SESSION['role'] == 'Admin'): ?>
-                <div class="teacher">
+                <div id="teacher">
                     <div>
                         <a data-subpage="teacher">Profs</a>
                         <?php if ($_SESSION['role'] == 'Admin'): ?>
@@ -95,7 +95,7 @@ if ($_SESSION['role'] == "Teacher"){
             <?php endif ?>
             
             <?php if ($_SESSION['role'] == 'Teacher'): ?>
-                <div class="internship">
+                <div id="internship">
                     <div>
                         <a data-subpage="internship">Stages</a>
                         <a></a>

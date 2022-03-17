@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-class ControllerController{
+abstract class ControllerController{
     protected static $table_name;
     protected static $model_class;
     protected static $database;

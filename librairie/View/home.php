@@ -23,7 +23,7 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == "Student"){
                             <div class="internship">
                                 <h2><?= $internship->getDesignation() ?></h2>
                                 <p><?= $internship->getshortdescription() ?></p>
-                                <p class="seeMore"><a href="./internship/<?= $internship->getIdInternship() ?>">Voir plus</a></p>
+                                <p class="seeMore"><a class="btn" href="./internship/<?= $internship->getIdInternship() ?>">Voir plus</a></p>
                             </div>
                         <?php endforeach ?>
                     </div>

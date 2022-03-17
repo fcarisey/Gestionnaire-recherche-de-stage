@@ -3,6 +3,24 @@
 $idclasse = \Controller\ClasseController::SELECT(['idclasse'], ['designation' => $_GET['class']])[0]->getIdclasse();
 $students = \Controller\StudentController::SELECT(\Database::SELECT_ALL, ['idclasse' => (int)$idclasse]);
 
+$inProgress = 0;
+$find = 0;
+$notStart = 0;
+$totalStudent = ($students) ? count($students) : 1;
+
+if ($students)
+    foreach ($students as $student) {
+        $interests = \Controller\InterestController::SELECT(\Database::SELECT_ALL, ['idstudent' => (int)$student->getIdstudent()]);
+        $currentinternship = \Controller\CurrentinternshipController::SELECT(\Database::SELECT_ALL, ['idstudent' => (int)$student->getIdstudent()]);
+    
+        ($interests) ? $inProgress++ : (($currentinternship) ? $find++ : $notStart++);
+    }
+
+
+$inProgress = $inProgress * 100 / $totalStudent;
+$find = $find * 100 / $totalStudent;
+$notStart = $notStart * 100 / $totalStudent;
+
 ?>
 
 <style>
@@ -36,7 +54,7 @@ $students = \Controller\StudentController::SELECT(\Database::SELECT_ALL, ['idcla
     <div>
         <div>
             <h3>Etat de la recherche de stage des élèves</h3>
-            <img src="https://chart.apis.google.com/chart?chs=300x200&chdlp=b&chd=t:67,12,11&cht=p&chdl=67%%20En%20cours|12%%20Non%20commenc%C3%A9|11%%20Trouv%C3%A9&chdlp=&chdls=000000,12&chco=cc8d52,993d3d,408040" alt="chart p">
+            <img src="https://chart.apis.google.com/chart?chs=300x200&chdlp=b&chd=t:<?= $inProgress ?>,<?= $notStart ?>,<?= $find ?>&cht=p&chdl=<?= $inProgress ?>%%20En%20cours|<?= $notStart ?>%%20Non%20commenc%C3%A9|<?= $find ?>%%20Trouv%C3%A9&chdlp=&chdls=000000,12&chco=cc8d52,993d3d,408040" alt="chart p">
         </div>
     </div>
     <div>
@@ -49,25 +67,27 @@ $students = \Controller\StudentController::SELECT(\Database::SELECT_ALL, ['idcla
                 </tr>
             </thead>
             <tbody>
-            <?php foreach ($students as $student): ?>
-                <tr data-id="<?= $student->getIdstudent() ?>">
-                    <td><?= $student->getFirstname() ?></td>
-                    <td><?= $student->getLastname() ?></td>
+            <?php if ($students): ?>
+                <?php foreach ($students as $student): ?>
+                    <tr data-id="<?= $student->getIdstudent() ?>">
+                        <td><?= $student->getFirstname() ?></td>
+                        <td><?= $student->getLastname() ?></td>
 
-                    <?php
-                        $interests = \Controller\InterestController::SELECT(\Database::SELECT_ALL, ['idstudent' => (int)$student->getIdstudent()]);
-                        $currentinternship = \Controller\CurrentinternshipController::SELECT(\Database::SELECT_ALL, ['idstudent' => (int)$student->getIdstudent()]);
-                    ?>
+                        <?php
+                            $interests = \Controller\InterestController::SELECT(\Database::SELECT_ALL, ['idstudent' => (int)$student->getIdstudent()]);
+                            $currentinternship = \Controller\CurrentinternshipController::SELECT(\Database::SELECT_ALL, ['idstudent' => (int)$student->getIdstudent()]);
+                        ?>
 
-                    <?php if ($interests): ?>
-                        <td>En cours</td>
-                    <?php elseif ($currentinternship): ?>
-                        <td>Trouvé</td>
-                    <?php else: ?>
-                        <td>Pas commencé</td>
-                    <?php endif ?>
-                </tr>
-            <?php endforeach ?>
+                        <?php if ($interests): ?>
+                            <td>En cours</td>
+                        <?php elseif ($currentinternship): ?>
+                            <td>Trouvé</td>
+                        <?php else: ?>
+                            <td>Pas commencé</td>
+                        <?php endif ?>
+                    </tr>
+                <?php endforeach ?>
+            <?php endif ?>
             </tbody>
         </table>
     </div>

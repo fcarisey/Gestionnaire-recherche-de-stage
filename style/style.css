@@ -46,6 +46,74 @@ label.mandatory::before{
     display: contents;
 }
 
+/*** INTERNSHIP/TEMPLATE ***/
+
+.internship{
+    display: flex;
+    max-width: 645px;
+    width: 100%;
+    padding: 40px 30px;
+    box-shadow: 1px 1px 0px 2px #00000033;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.internship > h2{
+    color: #403e83;
+}
+
+.internship > p:nth-child(2){
+    padding: 15px;
+    margin-top: 30px;
+    font-size: large;
+}
+
+.internship > p.seeMore{
+    text-align: center;
+    margin-top: 30px;
+}
+
+
+.internship > p.seeMore > a:hover{
+    background-color: #396ada85;
+    color: white; 
+}
+
+/*** BUTTON/TEMPLATE ***/
+
+.btn{
+    border: 1px solid #396ada;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #396ada;
+    transition: 250ms;
+}
+
+.btn:hover{
+    background-color: #396ada85;
+    color: white;
+    cursor: pointer;
+}
+
+.btn.error{
+    border: 1px solid red;
+    color: red;
+}
+
+.btn.error:hover{
+    background-color: rgba(219, 57, 57, 0.25);
+}
+
+.btn.valide{
+    border: 2px solid #00ffd0;
+}
+
+.btn.valide:hover{
+    background-color: #12c9a75c;
+}
+
 /*==================*/
 /*===== HEADER =====*/
 /*==================*/
@@ -140,46 +208,6 @@ header div nav:nth-child(2) ul li a:hover {
     width: 100%;
 }
 
-#home .internshipsProposal .internships .internship {
-    display: flex;
-    width: 645px;
-    padding: 40px 30px;
-    box-shadow: 1px 2px 0px 1px #00000033;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-#home .internshipsProposal .internships .internship > h2{
-    color: #0b0c32;
-    margin-top: 20px;
-}
-
-#home .internshipsProposal .internships .internship p:nth-child(2){
-    padding: 15px;  
-    margin-top: 30px;
-    font-size: large;
-}
-
-#home .internshipsProposal .internships .internship > .seeMore{
-    text-align: center;
-    margin-top: 30px;
-}
-
-#home .internshipsProposal .internships .internship > .seeMore a{
-    border: 1px solid #396ada;
-    padding: 10px 15px;
-    border-radius: 10px;
-    font-size: 17px;
-    font-weight: bold;
-    color: #396ada;
-    transition: 250ms;
-}
-
-#home .internshipsProposal .internships .internship > .seeMore a:hover {
-    background-color: #396ada85;
-    color: white;
-}
-
 #home .internshipsProposal > .seeMore {
     animation: seeMoreUpDown infinite 1.9s;
     margin: auto;
@@ -246,21 +274,7 @@ header div nav:nth-child(2) ul li a:hover {
 }
 
 #contact form div button {
-    width: fit-content;
-    position: relative;
-    left: 20px;
-    border: none;
     margin-top: 20px;
-    padding: 10px 15px;
-    border-radius: 10px;
-    background-color: #396ada8a;
-    color: white;
-    transition: 300ms;
-}
-
-#contact form div button:hover {
-    cursor: pointer;
-    background-color: #7bfdb2;
 }
 
 #contact form div #valide {
@@ -315,6 +329,10 @@ header div nav:nth-child(2) ul li a:hover {
     box-shadow: 1px 2px 0px 1px #00000033;
 }
 
+#login form h2 {
+    text-align: center;
+}
+
 #login form div {
     display: flex;
     height: 150px;
@@ -353,22 +371,8 @@ header div nav:nth-child(2) ul li a:hover {
 }
 
 #login form button {
-    width: fit-content;
-    position: relative;
     left: 20px;
     margin-top: 20px;
-    padding: 10px 15px;
-    border-radius: 10px;
-    border: 2px solid #7693d5;
-    background-color: #396ada8a;
-    color: white;
-    transition: 500ms;
-}
-
-#login form button:hover{
-    cursor: pointer;
-    border: 2px solid #00ffd0;
-    background-color: #12c9a75c;
 }
 
 /*=======================*/
@@ -404,97 +408,6 @@ header div nav:nth-child(2) ul li a:hover {
     margin-bottom: 15px;
 }
 
-#internships .internships .internship {
-    display: flex;
-    width: 645px;
-    padding: 40px 30px;
-    box-shadow: 1px 2px 0px 1px #00000033;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-#internships .internships .internship p:nth-child(2){
-    padding: 15px;
-    margin-top: 30px;
-    font-size: large;
-}
-
-#internships .internships .internship > .seeMore{
-    text-align: center;
-    margin-top: 30px;
-}
-
-#internships .internships .internship > .seeMore a{
-    border: 1px solid #396ada;
-    padding: 10px 15px;
-    border-radius: 10px;
-    font-size: 17px;
-    font-weight: bold;
-    color: #396ada;
-    transition: 250ms;
-}
-
-#internships .internships .internship > .seeMore a:hover {
-    background-color: #396ada85;
-    color: white;
-}
-
-/*=========================*/
-/*===== INTERNSHIP/id =====*/
-/*=========================*/
-
-#internship {
-    display: flex;
-    width: 90%;
-    margin: auto;
-}
-
-#internship > div {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    height: 250px;
-    justify-content: space-between;
-}
-
-#internship > div > div:first-child h2{
-    color: #02007C;
-}
-
-#internship > div > div:first-child h3{
-    color: gray;
-    margin-top: 5px;
-}
-
-#internship > div input {
-    border: 1px solid #396ADA;
-    border-radius: 10px;
-    color: #396ADA;
-    margin: auto;
-    padding: 10px;
-    margin-left: 10%;
-    transition: background 200ms;
-}
-
-#internship > div input.KO {
-    border: 1px solid #DA3939;
-    color: #DA3939;
-}
-
-#internship > div input:hover {
-    cursor: pointer;
-    background-color: rgb(57 105 219 / 25%);
-}
-
-#internship > div input.KO:hover {
-    background-color: rgba(219, 57, 57, 0.25);
-}
-
-#internship > p {
-    text-align: justify;
-    width: 100%;
-}
-
 /*====================*/
 /*===== DAHBOARD =====*/
 /*====================*/
@@ -512,7 +425,7 @@ header div nav:nth-child(2) ul li a:hover {
 #dashboard nav h2{
     padding: 10px 20px;
     background-color: white;
-    width: 60%;
+    width: 80%;
     margin: auto;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -563,19 +476,19 @@ header div nav:nth-child(2) ul li a:hover {
     left: -5px;
 }
 
-#dashboard nav > ul .class div a:first-child::before{
+#dashboard nav > ul #class div a:first-child::before{
     content: url('/picture/class.svg');
 }
 
-#dashboard nav > ul .student div a:first-child::before{
+#dashboard nav > ul #student div a:first-child::before{
     content: url('/picture/student.svg');
 }
 
-#dashboard nav > ul .internship div a:first-child::before{
+#dashboard nav > ul #internship div a:first-child::before{
     content: url('/picture/internship.svg');
 }
 
-#dashboard nav > ul .teacher div a:first-child::before{
+#dashboard nav > ul #teacher div a:first-child::before{
     content: url('/picture/teacher.svg');
 }
 

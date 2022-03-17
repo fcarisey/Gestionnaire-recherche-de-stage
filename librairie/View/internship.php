@@ -42,6 +42,60 @@ if (isset($_POST['ajax'])){
 
 ?>
 
+<style>
+    #internship {
+        display: flex;
+        width: 90%;
+        margin: auto;
+    }
+
+    #internship > div {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        height: 250px;
+        justify-content: space-between;
+    }
+
+    #internship > div > div:first-child h2{
+        color: #403e83;
+    }
+
+    #internship > div > div:first-child h3{
+        color: gray;
+        margin-top: 5px;
+    }
+
+    #internship > div input {
+        border: 1px solid #396ADA;
+        border-radius: 10px;
+        color: #396ADA;
+        margin: auto;
+        padding: 10px;
+        margin-left: 10%;
+        transition: background 200ms;
+    }
+
+    #internship > div input.KO {
+        border: 1px solid #DA3939;
+        color: #DA3939;
+    }
+
+    #internship > div input:hover {
+        cursor: pointer;
+        background-color: rgb(57 105 219 / 25%);
+    }
+
+    #internship > div input.KO:hover {
+        background-color: rgba(219, 57, 57, 0.25);
+    }
+
+    #internship > p {
+        text-align: justify;
+        width: 100%;
+    }
+</style>
+
 <div id="internship">
     <div>
         <div>
