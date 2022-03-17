@@ -48,6 +48,29 @@ label.mandatory::before{
 
 /*** INTERNSHIP/TEMPLATE ***/
 
+.internships{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.internships > div{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-bottom: 15px;
+    flex-direction: column;
+}
+
+.internships > div > div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
 .internship{
     display: flex;
     max-width: 645px;
@@ -379,34 +402,7 @@ header div nav:nth-child(2) ul li a:hover {
 /*===== INTERNSHIPS =====*/
 /*=======================*/
 
-#internships{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 50px;
-}
 
-#internships .internships{
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-}
-
-#internships .internships > div {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    margin-bottom: 15px;
-    flex-direction: column;
-}
-
-#internships .internships > div > div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 80%;
-    margin: auto;
-    margin-bottom: 15px;
-}
 
 /*====================*/
 /*===== DAHBOARD =====*/
