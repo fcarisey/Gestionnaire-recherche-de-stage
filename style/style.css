@@ -112,6 +112,7 @@ label.mandatory::before{
     font-weight: bold;
     color: #396ada;
     transition: 250ms;
+    background-color: white;
 }
 
 .btn:hover{
