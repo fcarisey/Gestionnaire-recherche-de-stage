@@ -25,7 +25,7 @@ $x = 0;
                 <div class="internship">
                     <h2><?= $internship->getDesignation() ?></h2>
                     <p><?= $internship->getShortdescription() ?></p>
-                    <p class="seeMore"><a class="btn" href="./internship/modify/<?= $internship->getIdInternship() ?>">Voir plus</a></p>
+                    <p class="seeMore"><a class="btn" href="./internship/modify/<?= $internship->getIdInternship() ?>">Modifier</a></p>
                 </div>
                 <?php $x++; ?>
                 <?php if ($x == 2): ?>

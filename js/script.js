@@ -394,4 +394,42 @@ function createInternship(e){
     xhr.send(form)
 }
 
+function modifyInternship(e, id){
+    e.preventDefault()
+
+    let designation = document.getElementById('designation').value
+    let sdescription = document.getElementById('shortdescription').value
+    let description = document.getElementById('description').value
+    let classe = document.querySelector('form #class').value
+    let enterprise = document.getElementById('enterprise').value
+    let website = document.getElementById('website').value
+    let phone = document.getElementById('phone').value
+    let email = document.getElementById('email').value
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('POST', "/dashboard/internship/modify")
+    xhr.onreadystatechange = () => {
+        if (xhr.responseText && xhr.status === 200 && xhr.readyState === xhr.DONE){
+            let response = JSON.parse(xhr.responseText)
+
+            console.log(response)
+        }
+    }
+
+    let form = new FormData()
+    form.append('ajax', true)
+    form.append('internship-1', true)
+    form.append('designation', designation)
+    form.append('sdescription', sdescription)
+    form.append('description', description)
+    form.append('class', classe)
+    form.append('enterprise', enterprise)
+    form.append('website', website)
+    form.append('phone', phone)
+    form.append('email', email)
+    form.append('id', id)
+
+    xhr.send(form)
+}
+
 // console.clear()

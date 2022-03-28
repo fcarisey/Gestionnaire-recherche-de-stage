@@ -67,9 +67,6 @@ if (isset($_POST['ajax'])){
     }
 
     #internship > div input {
-        border: 1px solid #396ADA;
-        border-radius: 10px;
-        color: #396ADA;
         margin: auto;
         padding: 10px;
         margin-left: 10%;
@@ -79,11 +76,6 @@ if (isset($_POST['ajax'])){
     #internship > div input.KO {
         border: 1px solid #DA3939;
         color: #DA3939;
-    }
-
-    #internship > div input:hover {
-        cursor: pointer;
-        background-color: rgb(57 105 219 / 25%);
     }
 
     #internship > div input.KO:hover {
@@ -104,9 +96,9 @@ if (isset($_POST['ajax'])){
         </div>
 
         <?php if (!$isinterest): ?>
-            <input type="button" value="Je suis interessé">
+            <input type="button" value="Je suis interessé" class="btn">
         <?php else: ?>
-            <input type="button" value="Je ne suis plus interessé" class="KO">
+            <input type="button" value="Je ne suis plus interessé" class="btn KO">
         <?php endif ?>
         
         <div>

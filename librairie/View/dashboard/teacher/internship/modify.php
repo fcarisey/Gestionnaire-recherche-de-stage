@@ -1,6 +1,7 @@
 <?php
 
 if (isset($_POST['ajax']) && isset($_POST['internship-1'])){
+    $id = $_POST['id'];
     $designation = $_POST['designation'];
     $sdescription = $_POST['sdescription'];
     $description = $_POST['description'];
@@ -41,7 +42,7 @@ if (isset($_POST['ajax']) && isset($_POST['internship-1'])){
         if (!empty($affiliations)){
             $classParse = true;
         }else
-            $err['class'] = "La classe selectionné ne vous a pas été attribuer !";
+            $err['class'] = "La classe selectionné ne vous est pas été attribuer !";
     }else
         $err['class'] = "La classe est obligatoire !";
 
@@ -56,7 +57,6 @@ if (isset($_POST['ajax']) && isset($_POST['internship-1'])){
         $err['website'] = "L'url n'est pas valide !";
         $websiteParse = false;
     }
-        
 
     $phoneParse = true;
     if (!preg_match('([0-9]{10})', $phone) && !empty($phone)){
@@ -72,7 +72,7 @@ if (isset($_POST['ajax']) && isset($_POST['internship-1'])){
     }
 
     if ($designationParse && $sdescriptionParse && $descriptionParse && $classParse && $enterpriseParse && $websiteParse && $phoneParse && $emailParse){
-        $values = [
+        $set = [
             'designation' => $designation,
             'description' => $description,
             'shortdescription' => $sdescription,
@@ -81,12 +81,12 @@ if (isset($_POST['ajax']) && isset($_POST['internship-1'])){
             'idclasse' => (int)$class
         ];
 
-        if ($websiteParse) $values['website'] = $website;
-        if ($phoneParse) $values['phone'] = $phone;
-        if ($emailParse) $values['email'] = $email;
+        if ($websiteParse) $set['website'] = $website;
+        if ($phoneParse) $set['phone'] = $phone;
+        if ($emailParse) $set['email'] = $email;
 
         try {
-            \Controller\InternshipController::INSERT($values);
+            \Controller\InternshipController::UPDATE($set, ['idinternship' => $id]);
             $err['valide'] = true;
         } catch (Exception $e) {
             $err['err'] = $e->getMessage();
@@ -135,15 +135,14 @@ if ($affiliates){
 
     #dt_internship_modify > form > div > label > input, #dt_internship_modify > form > div textarea, #dt_internship_modify > form > div select{
         border-radius: 5px;
-        box-shadow: 0 0 9px -7px black inset;
-        background-color: #dfdfdf;
         border: none;
+        border-bottom: 1px solid black;
         padding: 10px;
     }
 
     #dt_internship_modify > form > div:first-child{
         margin-left: 100px;
-        min-height: 800px;
+        min-height: 750px;
     }
 
     #dt_internship_modify > form > div:last-child{
@@ -152,27 +151,21 @@ if ($affiliates){
 
     #dt_internship_modify > form > div:first-child > label > textarea{
         resize: none;
+        border: 1px solid black;
+    }
+
+    #dt_internship_modify > form > div:first-child > label > textarea:nth-last-of-type(2){
+        overflow: hidden;
     }
 
     #dt_internship_modify > form > div:first-child > button{
-        padding: 10px 15px;
-        border: 1px solid #396ADA;
-        border-radius: 5px;
-        color: #396ADA;
         width: fit-content;
-        transition: 200ms;
-    }
-
-    #dt_internship_modify > form > div:first-child > button:hover{
-        background-color: #396ada85;
-        color: white;
-        cursor: pointer;
     }
     
 </style>
 
 <div id="dt_internship_modify">
-    <form name="createinternship" onsubmit="modifyInternship(event)">
+    <form name="createinternship" onsubmit="modifyInternship(event, <?= $_GET['id'] ?>)">
         <div>
             <label class="mandatory">
                 Designation:
@@ -182,7 +175,7 @@ if ($affiliates){
             <label class="mandatory">
                 Courte description:
                 <small id="sdescriptionError"></small>
-                <textarea required placeholder="Courte description" id="shortdescription" cols="30" style="height: 160px;"><?= $internship->getShortdescription() ?></textarea>
+                <textarea required placeholder="Courte description" id="shortdescription" cols="30" style="height: 100px;" maxlength="250"><?= $internship->getShortdescription() ?></textarea>
             </label>
             <label class="mandatory">
                 Description:
@@ -190,7 +183,7 @@ if ($affiliates){
                 <textarea required placeholder="Description" id="description" cols="50" style="height: 400px;"><?= $internship->getDescription() ?></textarea>
             </label>
             <small id="errError"></small>
-            <button id="submit">Modifier</button>
+            <button id="submit" class="btn">Modifier</button>
         </div>
         <div>
             <label class="mandatory">

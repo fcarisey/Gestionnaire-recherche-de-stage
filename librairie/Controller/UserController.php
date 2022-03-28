@@ -35,7 +35,6 @@ class UserController extends ControllerController{
                         $firstname = $user->getFirstname();
                         $lastname = $user->getLastname();
                         $username = $user->getUsername();
-                        $password = $user->getPassword();
                         $profilpicture = $user->getProfilpicture();
                         $courriel = $user->getCourriel();
                         $cv = $user->getCv();
@@ -46,7 +45,6 @@ class UserController extends ControllerController{
                         $_SESSION['firstname'] = $firstname;
                         $_SESSION['lastname'] = $lastname;
                         $_SESSION['username'] = $username;
-                        $_SESSION['password'] = $password;
                         $_SESSION['profilpicture'] = $profilpicture;
                         $_SESSION['courriel'] = $courriel;
                         $_SESSION['cv'] = $cv;
@@ -70,7 +68,6 @@ class UserController extends ControllerController{
                         $firstname = $user->getFirstname();
                         $lastname = $user->getLastname();
                         $username = $user->getUsername();
-                        $password = $user->getPassword();
                         $profilpicture = $user->getProfilpicture();
                         $courriel = $user->getCourriel();
                         
@@ -78,7 +75,6 @@ class UserController extends ControllerController{
                         $_SESSION['firstname'] = $firstname;
                         $_SESSION['lastname'] = $lastname;
                         $_SESSION['username'] = $username;
-                        $_SESSION['password'] = $password;
                         $_SESSION['profilpicture'] = $profilpicture;
                         $_SESSION['courriel'] = $courriel;
                         $_SESSION['role'] = "Teacher";
@@ -99,7 +95,6 @@ class UserController extends ControllerController{
                         $firstname = $user->getFirstname();
                         $lastname = $user->getLastname();
                         $username = $user->getUsername();
-                        $password = $user->getPassword();
                         $profilpicture = $user->getProfilpicture();
                         $courriel = $user->getCourriel();
                         
@@ -107,7 +102,6 @@ class UserController extends ControllerController{
                         $_SESSION['firstname'] = $firstname;
                         $_SESSION['lastname'] = $lastname;
                         $_SESSION['username'] = $username;
-                        $_SESSION['password'] = $password;
                         $_SESSION['profilpicture'] = $profilpicture;
                         $_SESSION['courriel'] = $courriel;
                         $_SESSION['role'] = "Admin";

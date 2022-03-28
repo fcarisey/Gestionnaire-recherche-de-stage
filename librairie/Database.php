@@ -83,7 +83,7 @@ class Database{
 
     public function getPDO(){
         if ($this->instance == null)
-            $this->instance = new \PDO($this->database_type.":host=".$this->host.";port=".$this->port.";dbname=".$this->dbname.";user=".$this->user.";password=".$this->password);
+            $this->instance = new \PDO($this->database_type.":host=".$this->host.";port=".$this->port.";dbname=".$this->dbname.";user=".$this->user.";password=".$this->password, null, null, [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8']);
         return $this->instance;
     }
 
