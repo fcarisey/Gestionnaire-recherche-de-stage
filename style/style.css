@@ -138,6 +138,18 @@ label.mandatory::before{
     background-color: #12c9a75c;
 }
 
+/** INPUT_TEXTAREA/TEMPLATE **/
+
+input[type='text'], input[type='email'], input[type='password'], input[type='url'], input[type='tel'], textarea, select{
+    border: none;
+    background-color: white;
+    border-bottom: 1px solid black;
+    font-size: 1.025em;
+    border-radius: 0 10px;
+    padding: 10px;
+    box-shadow: 0 0 9px -7px black inset
+}
+
 /*==================*/
 /*===== HEADER =====*/
 /*==================*/
@@ -283,18 +295,13 @@ header div nav:nth-child(2) ul li a:hover {
 }
 
 #contact form textarea{
-    resize: none; 
-    font-size: 1.025em;
-    border: none;
+    resize: none;
     margin-top: 5px;
-    border-radius: 10px;
-    background-color: #dfdfdf;
-    padding: 10px;
-    box-shadow: 0 0 9px -7px black inset;
 }
 
 #contact form div{
     display: flex;
+    justify-content: space-between;
 }
 
 #contact form div button {
@@ -317,13 +324,7 @@ header div nav:nth-child(2) ul li a:hover {
 }
 
 #contact form label input {
-    font-size: 1.025em;
-    border: none;
     margin-top: 5px;
-    border-radius: 10px;
-    background-color: #dfdfdf;
-    padding: 10px;
-    box-shadow: 0 0 9px -7px black inset;
 }
 
 #contact form label input.OK, #contact form label textarea.OK {
@@ -372,13 +373,7 @@ header div nav:nth-child(2) ul li a:hover {
 }
 
 #login form div label input {
-    font-size: 1.025em;
-    border: none;
     margin-top: 5px;
-    border-radius: 10px;
-    background-color: #dfdfdf;
-    padding: 10px;
-    box-shadow: 0 0 9px -7px black inset;
 }
 
 #login form div label input.OK{
@@ -584,10 +579,6 @@ header div nav:nth-child(2) ul li a:hover {
 
 #dt_student #searchbar > div:first-child input{
     border-radius: 5px 0 0 5px;
-    background-color: #dfdfdf;
-    box-shadow: 0 0 9px -7px black inset;
-    border: none;
-    padding-left: 10px;
     font-size: 17px;
     width: 500px;
 }

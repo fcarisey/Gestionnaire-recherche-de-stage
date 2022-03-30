@@ -131,10 +131,6 @@ if ($affiliates){
 
     #dt_internship_create > form > div > label > input, #dt_internship_create > form > div textarea, #dt_internship_create > form > div select{
         border-radius: 5px;
-        box-shadow: 0 0 9px -7px black inset;
-        background-color: #dfdfdf;
-        border: none;
-        padding: 10px;
     }
 
     #dt_internship_create > form > div:first-child{
@@ -151,12 +147,8 @@ if ($affiliates){
     }
 
     #dt_internship_create > form > div:first-child > button{
-        padding: 10px 15px;
-        border: 1px solid #396ADA;
-        border-radius: 5px;
-        color: #396ADA;
+        border-radius: 5px; 
         width: fit-content;
-        transition: 200ms;
     }
 
     #dt_internship_create > form > div:first-child > button:hover{
@@ -186,7 +178,7 @@ if ($affiliates){
                 <textarea required placeholder="Description" id="description" cols="50" style="height: 400px;"></textarea>
             </label>
             <small id="errError"></small>
-            <button id="submit">Créer</button>
+            <button class="btn" id="submit">Créer</button>
         </div>
         <div>
             <label class="mandatory">

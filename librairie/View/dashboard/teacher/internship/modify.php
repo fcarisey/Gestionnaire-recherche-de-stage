@@ -1,5 +1,4 @@
 <?php
-
 if (isset($_POST['ajax']) && isset($_POST['internship-1'])){
     $id = $_POST['id'];
     $designation = $_POST['designation'];
@@ -101,6 +100,15 @@ $internship = \Controller\InternshipController::SELECT(\Database::SELECT_ALL, [
     'idinternship' => $_GET['id']
 ])[0];
 
+$classId = \Controller\AffiliateController::SELECT(\Database::SELECT_ALL, [
+    'idteacher' => $_SESSION['id']
+])[0]->getIdclasse();
+
+if ($internship->getIdclasse() != $classId){
+    header("location:javascript://history.go(-1)");
+    die;
+}
+
 $classes = [];
 $affiliates = \Controller\AffiliateController::SELECT(['idclasse'], ['idteacher' => $_SESSION['id']]);
 if ($affiliates){
@@ -133,13 +141,6 @@ if ($affiliates){
         flex-direction: column;
     }
 
-    #dt_internship_modify > form > div > label > input, #dt_internship_modify > form > div textarea, #dt_internship_modify > form > div select{
-        border-radius: 5px;
-        border: none;
-        border-bottom: 1px solid black;
-        padding: 10px;
-    }
-
     #dt_internship_modify > form > div:first-child{
         margin-left: 100px;
         min-height: 750px;
@@ -151,7 +152,6 @@ if ($affiliates){
 
     #dt_internship_modify > form > div:first-child > label > textarea{
         resize: none;
-        border: 1px solid black;
     }
 
     #dt_internship_modify > form > div:first-child > label > textarea:nth-last-of-type(2){

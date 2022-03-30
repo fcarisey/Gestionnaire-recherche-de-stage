@@ -26,19 +26,25 @@ if (isset($_POST['ajax'])){
     $err['valide'] = true;
 
     echo json_encode($err);
-
     die;
-}else{
-    $internship = \Controller\InternshipController::SELECT(\Database::SELECT_ALL, ['idinternship' => $_GET['id']])[0];
-
-    $isinterest = \Controller\InterestController::SELECT(\Database::SELECT_ALL, [
-        'idstudent' => $_SESSION['id'],
-        'AND' => Database::WHERE_KEY,
-        'idinternship' => $_GET['id']
-    ], 1);
-
-    ($isinterest) ? $isinterest = true : $isinterest = false;
 }
+
+$internship = \Controller\InternshipController::SELECT(\Database::SELECT_ALL, ['idinternship' => $_GET['id']])[0];
+
+$idClass = unserialize($_SESSION['classe'])->getIdclasse();
+
+if ($internship->getIdClasse() != $idClass){
+    header("location:javascript://history.go(-1)");
+    die;
+}
+
+$isinterest = \Controller\InterestController::SELECT(\Database::SELECT_ALL, [
+    'idstudent' => $_SESSION['id'],
+    'AND' => Database::WHERE_KEY,
+    'idinternship' => $_GET['id']
+], 1);
+
+($isinterest) ? $isinterest = true : $isinterest = false;
 
 ?>
 
