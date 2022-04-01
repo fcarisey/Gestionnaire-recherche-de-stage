@@ -13,7 +13,7 @@ if ($students)
         $interests = \Controller\InterestController::SELECT(\Database::SELECT_ALL, ['idstudent' => (int)$student->getIdstudent()]);
         $currentinternship = \Controller\CurrentinternshipController::SELECT(\Database::SELECT_ALL, ['idstudent' => (int)$student->getIdstudent()]);
     
-        ($interests) ? $inProgress++ : (($currentinternship) ? $find++ : $notStart++);
+        ($currentinternship) ? $find++ : (($interests) ? $inProgress++ : $notStart++);
     }
 
 
@@ -78,10 +78,10 @@ $notStart = $notStart * 100 / $totalStudent;
                             $currentinternship = \Controller\CurrentinternshipController::SELECT(\Database::SELECT_ALL, ['idstudent' => (int)$student->getIdstudent()]);
                         ?>
 
-                        <?php if ($interests): ?>
-                            <td>En cours</td>
-                        <?php elseif ($currentinternship): ?>
+                        <?php if ($currentinternship): ?>
                             <td>Trouvé</td>
+                        <?php elseif ($interests): ?>
+                            <td>En cours</td>
                         <?php else: ?>
                             <td>Pas commencé</td>
                         <?php endif ?>
