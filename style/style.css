@@ -48,58 +48,37 @@ label.mandatory::before{
 
 /*** INTERNSHIP/TEMPLATE ***/
 
-.internships{
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-}
-
-.internships > div{
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    margin-bottom: 15px;
-    flex-direction: column;
-}
-
-.internships > div > div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 80%;
+#internships-1{
+    width: 70%;
     margin: auto;
-    margin-bottom: 15px;
+    border-collapse: separate;
+    border-spacing: 20px;
 }
 
 .internship{
-    display: flex;
-    max-width: 645px;
-    width: 100%;
-    padding: 40px 30px;
+    height: 200px;
+    max-height: 200px;
+    width: 50%;
     box-shadow: 1px 1px 0px 2px #00000033;
-    flex-direction: column;
-    justify-content: space-between;
+    padding: 40px 30px;
+    position: relative;
 }
 
 .internship > h2{
     color: #403e83;
+    position: absolute;
+    top: 25px;
 }
 
-.internship > p:nth-child(2){
-    padding: 15px;
-    margin-top: 30px;
-    font-size: large;
+.internship > p{
+    padding: 30px 60px;
 }
 
-.internship > p.seeMore{
-    text-align: center;
-    margin-top: 30px;
-}
-
-
-.internship > p.seeMore > a:hover{
-    background-color: #396ada85;
-    color: white; 
+.internship .btn{
+    margin: auto;
+    position: absolute;
+    bottom: 25px;
+    left: calc(50% - 74px);
 }
 
 /*** BUTTON/TEMPLATE ***/
@@ -220,29 +199,6 @@ header div nav:nth-child(2) ul li a:hover {
 /*===== HOME =====*/
 /*================*/
 
-#home .internshipsProposal{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 50px;
-}
-
-#home .internshipsProposal > h1{
-    align-self: center;
-    text-decoration: underline;
-    font-style: oblique;
-}
-
-#home .internshipsProposal .internships{
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-}
-
-#home .internshipsProposal .internships > div{
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-}
 
 #home .internshipsProposal > .seeMore {
     animation: seeMoreUpDown infinite 1.9s;

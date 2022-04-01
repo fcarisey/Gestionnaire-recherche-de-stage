@@ -14,24 +14,26 @@ $x = 0;
 
 <div id="internships">
     <?php if ($internships): ?>
-        <div class="internships">
-            <div>
-            <?php foreach($internships as $internship): ?>
+    <table id="internships-1">
+        <tbody>
+            <?php foreach ($internships as $internship): ?>
                 <?php if ($x == 0): ?>
-                    <div>
+                    <tr>
                 <?php endif ?>
-                <div class="internship">
+
+                <td class="internship">
                     <h2><?= $internship->getDesignation() ?></h2>
                     <p><?= $internship->getShortdescription() ?></p>
-                    <p class="seeMore"><a class="btn" href="./internship/<?= $internship->getIdInternship() ?>">Voir plus</a></p>
-                </div>
+                    <a class="btn" href="./internship/<?= $internship->getIdInternship() ?>">Voir plus</a>
+                </td>
+                
                 <?php $x++; ?>
                 <?php if ($x == 2): ?>
                     <?php $x = 0; ?>
-                    </div>
+                    </tr>
                 <?php endif ?>
             <?php endforeach ?>
-            </div>
-        </div>
+        </tbody>
+    </table>
     <?php endif ?>
 </div>

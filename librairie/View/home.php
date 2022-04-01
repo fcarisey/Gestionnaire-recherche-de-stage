@@ -20,20 +20,19 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == "Student"){
 
 <div id="home">
     <?php if (isset($_SESSION['id'], $internships)): ?>
-        <?php if ($internships): ?>
-            <div class="internshipsProposal">
-                <h1>Proposition de stage</h1>
-                <div class="internships">
-                    <?php foreach($internships as $internship): ?>
-                        <div class="internship">
-                            <h2><?= $internship->getDesignation() ?></h2>
-                            <p><?= $internship->getshortdescription() ?></p>
-                            <p class="seeMore"><a class="btn" href="./internship/<?= $internship->getIdInternship() ?>">Voir plus</a></p>
-                        </div>
-                    <?php endforeach ?>
-                </div>
-                <p class="seeMore"><a href="/internships">Voir plus</a></p>
-            </div>
-        <?php endif ?>
+        <table id="internships-1">
+            <tbody>
+                <tr>
+                <?php foreach ($internships as $internship): ?>
+                    <td class="internship">
+                        <h2><?= $internship->getDesignation() ?></h2>
+                        <p><?= $internship->getShortdescription() ?></p>
+                        <a class="btn" href="./internship/<?= $internship->getIdInternship() ?>">Voir plus</a>
+                    </td>
+                <?php endforeach ?>
+                </tr>
+            </tbody>
+        </table>
+        <p id="seeMore"><a href="/internships">Voir plus</a></p>
     <?php endif ?>
 </div>

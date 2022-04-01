@@ -16,24 +16,26 @@ $x = 0;
 
 <div id="dt_internships_home">
     <?php if ($internships): ?>
-        <div class="internships">
-            <div>
-            <?php foreach($internships as $internship): ?>
-                <?php if ($x == 0): ?>
-                    <div>
-                <?php endif ?>
-                <div class="internship">
-                    <h2><?= $internship->getDesignation() ?></h2>
-                    <p><?= $internship->getShortdescription() ?></p>
-                    <p class="seeMore"><a class="btn" href="./internship/modify/<?= $internship->getIdInternship() ?>">Modifier</a></p>
-                </div>
-                <?php $x++; ?>
-                <?php if ($x == 2): ?>
-                    <?php $x = 0; ?>
-                    </div>
-                <?php endif ?>
-            <?php endforeach ?>
-            </div>
-        </div>
+        <table id="internships-1">
+            <tbody>
+                <?php foreach ($internships as $internship): ?>
+                    <?php if ($x == 0): ?>
+                        <tr>
+                    <?php endif ?>
+
+                    <td class="internship">
+                        <h2><?= $internship->getDesignation() ?></h2>
+                        <p><?= $internship->getShortdescription() ?></p>
+                        <a class="btn" href="./internship/modify/<?= $internship->getIdInternship() ?>">Modifier</a>
+                    </td>
+                    
+                    <?php $x++; ?>
+                    <?php if ($x == 2): ?>
+                        <?php $x = 0; ?>
+                        </tr>
+                    <?php endif ?>
+                <?php endforeach ?>
+            </tbody>
+        </table>
     <?php endif ?>
 </div>
