@@ -49,6 +49,6 @@ for ($i = 0; $i < count($interests); $i++){
     </div>
     <div>
         <h3>Proposition de stage ayant le plus d'élève interessé</h3>
-        <img src="https://chart.apis.google.com/chart?chs=700x400&chd=t:<?= $values ?>&cht=bhg&chco=ff9900|d6b79a&chds=a&chxt=y&chxl=0:|<?= $names ?>&chbh=a" alt="chart b">
+        <img src="https://chart.apis.google.com/chart?chs=300x100&chd=t:<?= $values ?>&cht=p&chco=ff9900|d6b79a&chdl=<?= $names ?>" alt="chart b">
     </div>
 </div>
