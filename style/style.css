@@ -129,6 +129,10 @@ input[type='text'], input[type='email'], input[type='password'], input[type='url
     box-shadow: 0 0 9px -7px black inset
 }
 
+textarea, select{
+    border: 1px solid black;
+}
+
 /*==================*/
 /*===== HEADER =====*/
 /*==================*/
