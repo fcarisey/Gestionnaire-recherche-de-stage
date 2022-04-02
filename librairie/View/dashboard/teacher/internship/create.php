@@ -129,10 +129,6 @@ if ($affiliates){
         flex-direction: column;
     }
 
-    #dt_internship_create > form > div > label > input, #dt_internship_create > form > div textarea, #dt_internship_create > form > div select{
-        border-radius: 5px;
-    }
-
     #dt_internship_create > form > div:first-child{
         margin-left: 100px;
         min-height: 800px;
