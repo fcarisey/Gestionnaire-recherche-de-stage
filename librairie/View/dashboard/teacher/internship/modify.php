@@ -1,14 +1,14 @@
 <?php
 if (isset($_POST['ajax']) && isset($_POST['internship-1'])){
-    $id = $_POST['id'];
-    $designation = $_POST['designation'];
-    $sdescription = $_POST['sdescription'];
-    $description = $_POST['description'];
-    $class = $_POST['class'];
-    $enterprise = $_POST['enterprise'];
-    $website = $_POST['website'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
+    $id = htmlspecialchars($_POST['id']);
+    $designation = htmlspecialchars($_POST['designation']);
+    $sdescription = htmlspecialchars($_POST['sdescription']);
+    $description = htmlspecialchars($_POST['description']);
+    $class = htmlspecialchars($_POST['class']);
+    $enterprise = htmlspecialchars($_POST['enterprise']);
+    $website = htmlspecialchars($_POST['website']);
+    $phone = htmlspecialchars($_POST['phone']);
+    $email = htmlspecialchars($_POST['email']);
 
     $err = [];
 

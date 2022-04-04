@@ -3,9 +3,12 @@
 (isset($_SESSION['id'])) ? \Controller\ViewController::redirect("./") : null;
 
 if (isset($_POST['ajax'])){
-    $err = Controller\StudentController::login($_POST['username'], $_POST['password']);
-    $err = array_merge($err, Controller\TeacherController::login($_POST['username'], $_POST['password']));
-    $err = array_merge($err, Controller\AdminController::login($_POST['username'], $_POST['password']));
+    $username = htmlspecialchars($_POST['username']);
+    $password = htmlspecialchars($_POST['password']);
+
+    $err = Controller\StudentController::login($username, $password);
+    $err = array_merge($err, Controller\TeacherController::login($username, $password));
+    $err = array_merge($err, Controller\AdminController::login($username, $password));
 
     echo json_encode($err);
     die;
