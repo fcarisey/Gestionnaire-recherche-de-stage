@@ -98,7 +98,14 @@ if (isset($_POST['ajax']) && isset($_POST['internship-1'])){
 
 $internship = \Controller\InternshipController::SELECT(\Database::SELECT_ALL, [
     'idinternship' => $_GET['id']
-])[0];
+]);
+
+if ($internship)
+    $internship = $internship[0];
+else{
+    header("location:javascript://history.go(-1)");
+    die;
+}
 
 $classId = \Controller\AffiliateController::SELECT(\Database::SELECT_ALL, [
     'idteacher' => $_SESSION['id']
