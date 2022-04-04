@@ -72,17 +72,18 @@ for ($i = 0; $i < count($interests); $i++){
 </style>
 
 <div id='dt_home'>
-    <div>
-        <div>
-            <h3>Elèves ayant trouvé un stage</h3>
-            <div>
-                <p><?= $find ?>%</p>
-                <img src="https://chart.apis.google.com/chart?chs=200x200&chdlp=b&chd=t:<?= $inProgress + $notStart ?>,<?= $find ?>&cht=p&chdl=<?= $inProgress + $notStart ?>%Non%20trouv%C3%A9|<?= $find ?>%Trouv%C3%A9&chdlp=&chdls=000000,12" alt="chart p">
-            </div>
-        </div>
-    </div>
-    <div>
-        <h3>Proposition de stage ayant le plus d'élève interessé</h3>
-        <img src="https://chart.apis.google.com/chart?chs=300x100&chd=t:<?= $values ?>&cht=p&chco=ff9900|d6b79a&chdl=<?= $names ?>" alt="chart b">
-    </div>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <h3>Elèves ayant trouvé un stage</h3>
+                    <img src="https://chart.apis.google.com/chart?chs=200x200&chdlp=b&chd=t:<?= $inProgress + $notStart ?>,<?= $find ?>&cht=p&chdl=<?= $inProgress + $notStart ?>%Non%20trouv%C3%A9|<?= $find ?>%Trouv%C3%A9&chdlp=&chdls=000000,12" alt="chart p">
+                </td>
+                <td>
+                    <h3>Proposition de stage ayant le plus d'élève interessé</h3>
+                    <img src="https://chart.apis.google.com/chart?chs=300x100&chd=t:<?= $values ?>&cht=p&chco=ff9900|d6b79a&chdl=<?= $names ?>" alt="chart b">
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
