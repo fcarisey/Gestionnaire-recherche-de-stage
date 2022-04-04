@@ -22,9 +22,21 @@ $x = 0;
                 <?php endif ?>
 
                 <td class="internship">
+                    <?php
+                        $intersted = \Controller\InterestController::SELECT(\Database::SELECT_ALL, [
+                            'idstudent' => $_SESSION['id'],
+                            'AND' => \Database::WHERE_KEY,
+                            'idinternship' => $internship->getIdinternship()
+                        ]);
+                    ?>
+
+                    <?php if ($intersted): ?>
+                        <div class="interested"></div>
+                    <?php endif ?>
+                    <div></div>
                     <h2><?= $internship->getDesignation() ?></h2>
                     <p><?= $internship->getShortdescription() ?></p>
-                    <a class="btn" href="./internship/<?= $internship->getIdInternship() ?>">Voir plus</a>
+                    <a class="btn" href="./internship/<?= $internship->getIdinternship() ?>">Voir plus</a>
                 </td>
                 
                 <?php $x++; ?>

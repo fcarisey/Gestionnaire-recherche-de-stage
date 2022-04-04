@@ -81,6 +81,16 @@ label.mandatory::before{
     left: calc(50% - 74px);
 }
 
+.internship .interested{
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: green;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
 /*** BUTTON/TEMPLATE ***/
 
 .btn{

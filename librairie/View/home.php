@@ -25,6 +25,17 @@ if (isset($_SESSION['id']) && $_SESSION['role'] == "Student"){
                 <tr>
                 <?php foreach ($internships as $internship): ?>
                     <td class="internship">
+                        <?php
+                            $intersted = \Controller\InterestController::SELECT(\Database::SELECT_ALL, [
+                                'idstudent' => $_SESSION['id'],
+                                'AND' => \Database::WHERE_KEY,
+                                'idinternship' => $internship->getIdinternship()
+                            ]);
+                        ?>
+
+                        <?php if ($intersted): ?>
+                            <div class="interested"></div>
+                        <?php endif ?>
                         <h2><?= $internship->getDesignation() ?></h2>
                         <p><?= $internship->getShortdescription() ?></p>
                         <a class="btn" href="./internship/<?= $internship->getIdInternship() ?>">Voir plus</a>
