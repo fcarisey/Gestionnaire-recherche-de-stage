@@ -20,9 +20,9 @@ function contact() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let response = JSON.parse(xhr.responseText);
 
-            let objectInput = document.querySelector("#contact form label input[name='object']");
-            let courrielInput = document.querySelector("#contact form label input[name='courriel']");
-            let messageTextarea = document.querySelector("#contact form label textarea[name='message']");
+            let objectInput = document.forms['contact']['object'];
+            let courrielInput = document.forms['contact']['courriel'];
+            let messageTextarea = document.forms['contact']['message'];
 
             objectInput.classList.remove("OK", "KO");
             courrielInput?.classList.remove("OK", "KO");
@@ -90,8 +90,8 @@ function contact() {
 }
 
 function login() {
-    let username = document.querySelector("#login form div label input[name='username']")
-    let password = document.querySelector("#login form div label input[name='password']")
+    let username = document.forms['login']['username']
+    let password = document.forms['login']['password']
 
     let form = new FormData()
     form.append('ajax', true)
@@ -353,14 +353,14 @@ function dt_studentsearch() {
 function createInternship(e){
     e.preventDefault()
 
-    let designation = document.getElementById('designation').value
-    let sdescription = document.getElementById('shortdescription').value
-    let description = document.getElementById('description').value
-    let classe = document.getElementById('class').value
-    let enterprise = document.getElementById('enterprise').value
-    let website = document.getElementById('website').value
-    let phone = document.getElementById('phone').value
-    let email = document.getElementById('email').value
+    let designation = document.forms['createinternship']['designation'].value
+    let sdescription = document.forms['createinternship']['shortdescription'].value
+    let description = document.forms['createinternship']['description'].value
+    let classe = document.forms['createinternship']['class'].value
+    let enterprise = document.forms['createinternship']['enterprise'].value
+    let website = document.forms['createinternship']['website'].value
+    let phone = document.forms['createinternship']['phone'].value
+    let email = document.forms['createinternship']['email'].value    
 
     let form = new FormData()
     form.append('ajax', true)

@@ -161,17 +161,17 @@ if ($affiliates){
             <label class="mandatory">
                 Designation:
                 <small id="designationError"></small>
-                <input required placeholder="Designation" id="designation" type="text">
+                <input required placeholder="Designation" name="designation" id="designation" type="text">
             </label>
             <label class="mandatory">
                 Courte description:
                 <small id="sdescriptionError"></small>
-                <textarea required placeholder="Courte description" id="shortdescription" cols="30" style="height: 160px;"></textarea>
+                <textarea required placeholder="Courte description" name="shortdescription" id="shortdescription" cols="30" style="height: 160px;"></textarea>
             </label>
             <label class="mandatory">
                 Description:
                 <small id="descriptionError"></small>
-                <textarea required placeholder="Description" id="description" cols="50" style="height: 400px;"></textarea>
+                <textarea required placeholder="Description" name="description" id="description" cols="50" style="height: 400px;"></textarea>
             </label>
             <small id="errError"></small>
             <button class="btn" id="submit">Créer</button>
@@ -180,7 +180,7 @@ if ($affiliates){
             <label class="mandatory">
                 Classe:
                 <small id="classError"></small>
-                <select required id="class">
+                <select required id="class" name="class">
                     <option selected value="">Selectioner une classe:</option>
                     <optgroup>
                         <?php foreach ($classes as $class): ?>
@@ -192,22 +192,22 @@ if ($affiliates){
             <label class="mandatory">
                 Entreprise:
                 <small id="enterpriseError"></small>
-                <input required type="text" placeholder="Entreprise" id="enterprise">
+                <input required type="text" name="enterprise" placeholder="Entreprise" id="enterprise">
             </label>
             <label>
                 Site web:
                 <small id="sitewebError"></small>
-                <input type="url" placeholder="https://exemple.com" id="website" pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$">
+                <input type="url" name="website" placeholder="https://exemple.com" id="website" pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$">
             </label>
             <label>
                 Téléphone
                 <small id="phoneError"></small>
-                <input type="tel" placeholder="00.00.00.00.00" id="phone">
+                <input type="tel" name="phone" placeholder="0000000000" id="phone">
             </label>
             <label>
                 Courriel
                 <small id="emailError"></small>
-                <input type="email" placeholder="john.doe@exemple.com" id="email" pattern="(([a-zA-Z0-9.-]+)@([a-zA-Z0-9-_]+).([a-zA-Z0-9-_]+))">
+                <input type="email" name="email" placeholder="john.doe@exemple.com" id="email" pattern="(([a-zA-Z0-9.-]+)@([a-zA-Z0-9-_]+).([a-zA-Z0-9-_]+))">
             </label>
         </div>
     </form>
