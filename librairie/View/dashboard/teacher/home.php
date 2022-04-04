@@ -37,6 +37,40 @@ for ($i = 0; $i < count($interests); $i++){
 
 ?>
 
+<style>
+    #dt_home{
+        width: 70%;
+        margin: auto;
+    }
+
+    #dt_home > table{
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 10px;
+    }
+
+    #dt_home > table td{
+        box-shadow: 2px 2px 3px 2px #0000004d;
+        padding: 15px;
+        position: relative;
+        width: 50%;
+    }
+
+    #dt_home > table td h3{
+        position: absolute;
+        top: 15px;
+        
+    }
+
+    #dt_home > table td:first-child h3{
+        left: calc(50% - 152px);
+    }
+
+    #dt_home > table td img{
+        margin-left: 100px;
+    }
+</style>
+
 <div id='dt_home'>
     <div>
         <div>

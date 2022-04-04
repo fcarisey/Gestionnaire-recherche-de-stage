@@ -59,7 +59,87 @@ if (isset($_POST['ajax']) && (isset($_POST['value']) || isset($_POST['id']))){
 ?>
 
 <style>
-    
+    #dt_student{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #dt_student #searchbar > div:first-child{
+        display: flex;
+        justify-content: center;
+        margin: auto;
+    }
+
+    #dt_student #searchbar > div:first-child input{
+        border-radius: 5px 0 0 5px;
+        font-size: 17px;
+        width: 500px;
+    }
+
+    #dt_student #searchbar > div:first-child a{
+        background-color: #f3a847;
+        width: 50px;
+        height: 50px;
+        transition: background 200ms;
+        border-radius: 0 5px 5px 0;
+    }
+
+    #dt_student #searchbar > div:first-child a:hover{
+        cursor: pointer;
+        background-color: #c38638;
+    }
+
+    #dt_student #searchbar > div:first-child a img{
+        width: 40px;
+        height: 40px;
+        margin: 10%;
+    }
+
+    #dt_student #presumedresult{
+        display: flex;
+        flex-direction: column;
+        width: 550px;
+        margin: auto;
+        max-height: 200px;
+        overflow-y: scroll;
+    }
+
+    #dt_student #presumedresult > *{
+        display: flex;
+    }
+
+    #dt_student #presumedresult > *:hover{
+        cursor: pointer;
+    }
+
+    #dt_student #presumedresult > * > div{
+        margin-left: 50px;
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+    }
+
+    #dt_student #presumedresult > * > div > p:last-child{
+        margin-left: 20px;
+    }
+
+    #dt_student #infos{
+        width: 65%;
+        margin: auto;
+        margin-top: 100px;
+        margin-left: 200px;
+    }
+
+    #dt_student #infos > h3{
+        margin-bottom: 30px;
+    }
+
+    #dt_student #infos > div:nth-child(2){
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 </style>
 
 <div id="dt_student">
