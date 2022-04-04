@@ -70,8 +70,8 @@ $notStart = $notStart * 100 / $totalStudent;
             <?php if ($students): ?>
                 <?php foreach ($students as $student): ?>
                     <tr data-id="<?= $student->getIdstudent() ?>">
-                        <td><?= $student->getFirstname() ?></td>
                         <td><?= $student->getLastname() ?></td>
+                        <td><?= $student->getFirstname() ?></td>
 
                         <?php
                             $interests = \Controller\InterestController::SELECT(\Database::SELECT_ALL, ['idstudent' => (int)$student->getIdstudent()]);
