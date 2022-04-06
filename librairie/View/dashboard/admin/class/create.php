@@ -1,6 +1,42 @@
 <?php
 
+if (isset($_POST['ajax'])){
+    $designation = $_POST['designation'];
+    $startDate = \Controller\ControllerController::keyExist('start_date', $_POST);
+    $enddate = \Controller\ControllerController::keyExist('end_date', $_POST);
 
+    $err = [];
+
+    $designationParse = false;
+    if (!empty($designation)){
+        $designationParse = true;
+    }else
+        $err['designation'] = "La designation de la classe est obligatoire !";
+
+    if ($startDate || !$enddate){
+        $err['startDate'] = "Les deux dates doivent être remplient !";
+        $err['endDate'] = "Les deux dates doivent être remplient !";
+    }
+
+    if ($designationParse){
+        if ($startDate && $enddate){
+            \Controller\ClasseController::INSERT([
+                'designation' => $designation,
+                'internshipdatestart' => $startDate,
+                'internshipdateend' => $enddate
+            ]);
+        }else{
+            \Controller\ClasseController::INSERT([
+                'designation' => $designation
+            ]);
+        }
+
+        $err['valide'] = "valide";
+    }
+
+    echo json_encode($err);
+    die;
+}
 
 ?>
 

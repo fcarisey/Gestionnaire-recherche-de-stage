@@ -444,6 +444,8 @@ function createClass(e, form){
             console.log(response)
         }
     }
+
+    form.append('ajax', true)
     xhr.send(form)
 }
 
