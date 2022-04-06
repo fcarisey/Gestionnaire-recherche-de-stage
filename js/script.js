@@ -432,4 +432,19 @@ function modifyInternship(e, id){
     xhr.send(form)
 }
 
+function createClass(e, form){
+    e.preventDefault()
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('POST', "/dashboard/create/class")
+    xhr.onreadystatechange = () => {
+        if (xhr.status === 200 && xhr.responseText && xhr.readyState === 4){
+            let response = JSON.parse(xhr.responseText)
+
+            console.log(response)
+        }
+    }
+    xhr.send(form)
+}
+
 // console.clear()
