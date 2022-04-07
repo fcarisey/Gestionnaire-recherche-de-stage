@@ -89,6 +89,9 @@ class Database{
 
     public function specialRequest(string $SQL, array $execute, string $modelName = null){
         $req = $this->getPDO()->prepare($SQL);
+        
+        (DEBUG_SQL) ? var_dump($SQL) : null;
+
         if ($req->execute($execute))
             if ($modelName)
                 return $modelName::format($req->fetchAll());

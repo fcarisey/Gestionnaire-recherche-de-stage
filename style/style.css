@@ -143,6 +143,10 @@ textarea, select{
     border: 1px solid black;
 }
 
+.inputError{
+    color: red;
+}
+
 /*==================*/
 /*===== HEADER =====*/
 /*==================*/

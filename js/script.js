@@ -436,17 +436,49 @@ function createClass(e, form){
     e.preventDefault()
 
     let xhr = new XMLHttpRequest()
-    xhr.open('POST', "/dashboard/create/class")
+    xhr.open('POST', "/dashboard/class/create")
     xhr.onreadystatechange = () => {
         if (xhr.status === 200 && xhr.responseText && xhr.readyState === 4){
             let response = JSON.parse(xhr.responseText)
+
+            document.getElementById('designationError').innerText = response?.designation || ""
+            Array.from(document.getElementsByClassName('dateError')).forEach(element => {
+                element.innerText = response?.date || ""
+            });
+
+            if (response.valide){
+                
+            }
+
+            console.log(response)
+        }
+    }
+        
+    let nform = new FormData(form)
+
+    nform.append('ajax', true)
+    nform.append('class/create', true)
+    xhr.send(nform)
+}
+
+function createClassFile(e, form){
+    e.preventDefault()
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('POST', "/dashboard/class/create")
+    xhr.onreadystatechange = () => {
+        if (xhr.response && xhr.status === 200 && xhr.readyState === 4){
+            let response = JSON.parse(xhr.response)
 
             console.log(response)
         }
     }
 
-    form.append('ajax', true)
-    xhr.send(form)
+    let nform = new FormData(form)
+    nform.append('ajax', true)
+    nform.append('create/classFile', true)
+
+    xhr.send(nform)
 }
 
 // console.clear()
