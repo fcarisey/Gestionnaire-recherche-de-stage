@@ -46,6 +46,21 @@ if ($_SESSION['role'] == "Teacher"){
                 </div>
             </div>
 
+            <?php if ($_SESSION['role'] == 'Admin'): ?>
+                <div id="teacher">
+                    <div>
+                        <a data-subpage="teacher">Profs</a>
+                        <?php if ($_SESSION['role'] == 'Admin'): ?>
+                            <a></a>
+                        <?php endif ?>
+                    </div>
+                    <ul class="toggler submenu">
+                        <a data-subpage="teacher/add">Ajouter</a>
+                        <a data-subpage="teacher/modify">Modifier</a>
+                    </ul>
+                </div>
+            <?php endif ?>
+
             <div id="class">
                 <div>
                     <a data-subpage="class">Classes</a>
@@ -54,6 +69,7 @@ if ($_SESSION['role'] == "Teacher"){
                 <?php if ($_SESSION['role'] == 'Admin'): ?>
                     <ul class="toggler submenu">
                         <a data-subpage="class/create">Créer</a>
+                        <a data-subpage="class/modify">Modifer</a>
                     </ul>
                 <?php endif ?>
 
@@ -79,20 +95,6 @@ if ($_SESSION['role'] == "Teacher"){
                 <?php endif ?>
 
             </div>
-            
-            <?php if ($_SESSION['role'] == 'Admin'): ?>
-                <div id="teacher">
-                    <div>
-                        <a data-subpage="teacher">Profs</a>
-                        <?php if ($_SESSION['role'] == 'Admin'): ?>
-                            <a></a>
-                        <?php endif ?>
-                    </div>
-                    <ul class="toggler submenu">
-                        <a data-subpage="teacher/add">Ajouter</a>
-                    </ul>
-                </div>
-            <?php endif ?>
             
             <?php if ($_SESSION['role'] == 'Teacher'): ?>
                 <div id="internship">

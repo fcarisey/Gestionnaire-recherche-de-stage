@@ -2,7 +2,10 @@
 
 $classId = \Controller\AffiliateController::SELECT(['idclasse'], [
     'idteacher' => $_SESSION['id']
-])[0]->getIdclasse();
+]);
+
+if ($classId)
+    $classId = $classId[0]->getIdclasse();
 
 $internships = \Controller\InternshipController::SELECT(\Database::SELECT_ALL, [
     'idclasse' => $classId,

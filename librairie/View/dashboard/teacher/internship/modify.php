@@ -172,22 +172,22 @@ if ($affiliates){
 </style>
 
 <div id="dt_internship_modify">
-    <form name="createinternship" onsubmit="modifyInternship(event, <?= $_GET['id'] ?>)">
+    <form name="createinternship" onsubmit="modifyInternship(event, <?= $_GET['id'] ?>, this)">
         <div>
             <label class="mandatory">
                 Designation:
                 <small id="designationError"></small>
-                <input required placeholder="Designation" id="designation" type="text" value="<?= $internship->getDesignation() ?>">
+                <input required placeholder="Designation" name="designation" id="designation" type="text" value="<?= $internship->getDesignation() ?>">
             </label>
             <label class="mandatory">
                 Courte description:
                 <small id="sdescriptionError"></small>
-                <textarea required placeholder="Courte description" id="shortdescription" cols="30" style="height: 100px;" maxlength="250"><?= $internship->getShortdescription() ?></textarea>
+                <textarea required placeholder="Courte description" name="sdescription" id="shortdescription" cols="30" style="height: 100px;" maxlength="250"><?= $internship->getShortdescription() ?></textarea>
             </label>
             <label class="mandatory">
                 Description:
                 <small id="descriptionError"></small>
-                <textarea required placeholder="Description" id="description" cols="50" style="height: 400px;"><?= $internship->getDescription() ?></textarea>
+                <textarea required placeholder="Description" name="description" id="description" cols="50" style="height: 400px;"><?= $internship->getDescription() ?></textarea>
             </label>
             <small id="errError"></small>
             <button id="submit" class="btn">Modifier</button>
@@ -196,7 +196,7 @@ if ($affiliates){
             <label class="mandatory">
                 Classe:
                 <small id="classError"></small>
-                <select required id="class">
+                <select required id="class" name="class">
                     <option selected value="">Selectioner une classe:</option>
                     <optgroup>
                         <?php foreach ($classes as $class): ?>
@@ -208,22 +208,22 @@ if ($affiliates){
             <label class="mandatory">
                 Entreprise:
                 <small id="enterpriseError"></small>
-                <input required type="text" placeholder="Entreprise" id="enterprise" value="<?= $internship->getEnterprise() ?>">
+                <input required type="text" placeholder="Entreprise" name="enterprise" id="enterprise" value="<?= $internship->getEnterprise() ?>">
             </label>
             <label>
                 Site web:
                 <small id="sitewebError"></small>
-                <input type="url" placeholder="https://exemple.com" id="website" pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$" value="<?= $internship->getWebsite() ?>">
+                <input type="url" placeholder="https://exemple.com" name="website" id="website" pattern="^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+$" value="<?= $internship->getWebsite() ?>">
             </label>
             <label>
                 Téléphone
                 <small id="phoneError"></small>
-                <input type="tel" placeholder="00.00.00.00.00" id="phone" value="<?= $internship->getPhone() ?>">
+                <input type="tel" placeholder="00.00.00.00.00" name="phone" id="phone" value="<?= $internship->getPhone() ?>">
             </label>
             <label>
                 Courriel
                 <small id="emailError"></small>
-                <input type="email" placeholder="john.doe@exemple.com" id="email" pattern="(([a-zA-Z0-9.-]+)@([a-zA-Z0-9-_]+).([a-zA-Z0-9-_]+))" value="<?= $internship->getEmail() ?>">
+                <input type="email" placeholder="john.doe@exemple.com" name="email" id="email" pattern="(([a-zA-Z0-9.-]+)@([a-zA-Z0-9-_]+).([a-zA-Z0-9-_]+))" value="<?= $internship->getEmail() ?>">
             </label>
         </div>
     </form>

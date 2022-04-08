@@ -37,7 +37,7 @@ $classes = \Controller\ClasseController::SELECT(\Database::SELECT_ALL);
         <tbody>
             <?php foreach ($classes as $classe): ?>
                 <tr>
-                    <td><a href=""><?= $classe->getDesignation() ?></a></td>
+                    <td><?= $classe->getDesignation() ?></td>
                     <td><?= $classe->getInternshipdatestart() ?></td>
                     <td><?= $classe->getInternshipdateend() ?></td>
 

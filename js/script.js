@@ -14,24 +14,27 @@ window.onload = () => {
 }
 
 function contact() {
+
+    let form = document.forms['contact']
+
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "./contact", true);
     xhr.onreadystatechange = () => {
         if (xhr.readyState === 4 && xhr.status === 200) {
             let response = JSON.parse(xhr.responseText);
 
-            let objectInput = document.forms['contact']['object'];
-            let courrielInput = document.forms['contact']['courriel'];
-            let messageTextarea = document.forms['contact']['message'];
+            let objectInput = form['object'];
+            let courrielInput = form['courriel'];
+            let messageTextarea = form['message'];
 
             objectInput.classList.remove("OK", "KO");
             courrielInput?.classList.remove("OK", "KO");
             messageTextarea.classList.remove("OK", "KO");
 
-            let objectError = document.querySelector("#contact form label #objectError");
-            let courrielError = document.querySelector("#contact form label #courrielError");
-            let messageError = document.querySelector("#contact form label #messageError");
-            let OK = document.querySelector("#contact form div #valide");
+            let objectError = document.getElementById("objectError");
+            let courrielError = document.getElementById("courrielError");
+            let messageError = document.getElementById("messageError");
+            let OK = document.getElementById("valide");
 
             objectError.innerHTML = "";
             if (courrielError) courrielError.innerHTML = "";
@@ -39,8 +42,7 @@ function contact() {
             OK.innerHTML = "";
 
             if (response.object) {
-                if (courrielError)
-                    objectError.innerHTML = response.object;
+                objectError.innerHTML = response?.object;
                 objectInput.classList.add("KO");
             } else
                 objectInput.classList.add("OK");
@@ -75,37 +77,26 @@ function contact() {
         }
     }
 
-    let object = document.querySelector("#contact input[name='object']").value;
-    let courriel = document.querySelector("#contact input[name='courriel']")?.value;
-    let message = document.querySelector("#contact textarea[name='message']").value;
+    let nform = new FormData(form);
+    nform.append("ajax", true);
 
-    let form = new FormData();
-    form.append("ajax", true);
-    form.append("object", object);
-    if (courriel !== null)
-        form.append("courriel", courriel);
-    form.append("message", message);
-
-    xhr.send(form);
+    xhr.send(nform);
 }
 
 function login() {
-    let username = document.forms['login']['username']
-    let password = document.forms['login']['password']
-
-    let form = new FormData()
-    form.append('ajax', true)
-    form.append('username', username.value)
-    form.append('password', password.value)
-
-    let usernameError = document.querySelector("#login form div label #usernameError")
-    let passwordError = document.querySelector("#login form div label #passwordError")
-    let accountError = document.querySelector("#login form #accountError")
+    let usernameError = document.getElementById("usernameError")
+    let passwordError = document.getElementById("passwordError")
+    let accountError = document.getElementById("accountError")
     let btn = document.getElementsByClassName('btn')[0]
 
-    usernameError.innerHTML = ""
-    passwordError.innerHTML = ""
-    accountError.innerHTML = ""
+    usernameError.innerText = ""
+    passwordError.innerText = ""
+    accountError.innerText = ""
+
+    let form = document.forms['login']
+
+    let username = form['username']
+    let password = form['password']
 
     let xhr = new XMLHttpRequest()
     xhr.open('POST', './login')
@@ -142,7 +133,11 @@ function login() {
             }
         }
     };
-    xhr.send(form)
+
+    let nform = new FormData(form)
+    nform.append('ajax', true)
+
+    xhr.send(nform)
 }
 
 function dashboard() {
@@ -350,29 +345,8 @@ function dt_studentsearch() {
     }
 }
 
-function createInternship(e){
+function createInternship(e, form){
     e.preventDefault()
-
-    let designation = document.forms['createinternship']['designation'].value
-    let sdescription = document.forms['createinternship']['shortdescription'].value
-    let description = document.forms['createinternship']['description'].value
-    let classe = document.forms['createinternship']['class'].value
-    let enterprise = document.forms['createinternship']['enterprise'].value
-    let website = document.forms['createinternship']['website'].value
-    let phone = document.forms['createinternship']['phone'].value
-    let email = document.forms['createinternship']['email'].value    
-
-    let form = new FormData()
-    form.append('ajax', true)
-    form.append('internship-1', true)
-    form.append('designation', designation)
-    form.append('sdescription', sdescription)
-    form.append('description', description)
-    form.append('class', classe)
-    form.append('enterprise', enterprise)
-    form.append('website', website)
-    form.append('phone', phone)
-    form.append('email', email)
 
     let xhr = new XMLHttpRequest()
     xhr.open('POST', "/dashboard/internship/create")
@@ -391,20 +365,16 @@ function createInternship(e){
             document.getElementById('errError').innerText = response?.err || null
         }
     }
-    xhr.send(form)
+
+    let nform = new FormData(form)
+    nform.append('ajax', true)
+    nform.append('internship-1', true)
+
+    xhr.send(nform)
 }
 
-function modifyInternship(e, id){
+function modifyInternship(e, id, form){
     e.preventDefault()
-
-    let designation = document.getElementById('designation').value
-    let sdescription = document.getElementById('shortdescription').value
-    let description = document.getElementById('description').value
-    let classe = document.querySelector('form #class').value
-    let enterprise = document.getElementById('enterprise').value
-    let website = document.getElementById('website').value
-    let phone = document.getElementById('phone').value
-    let email = document.getElementById('email').value
 
     let xhr = new XMLHttpRequest()
     xhr.open('POST', "/dashboard/internship/modify")
@@ -416,20 +386,12 @@ function modifyInternship(e, id){
         }
     }
 
-    let form = new FormData()
-    form.append('ajax', true)
-    form.append('internship-1', true)
-    form.append('designation', designation)
-    form.append('sdescription', sdescription)
-    form.append('description', description)
-    form.append('class', classe)
-    form.append('enterprise', enterprise)
-    form.append('website', website)
-    form.append('phone', phone)
-    form.append('email', email)
-    form.append('id', id)
+    let nform = new FormData(form)
+    nform.append('ajax', true)
+    nform.append('internship-1', true)
+    nform.append('id', id)
 
-    xhr.send(form)
+    xhr.send(nform)
 }
 
 function createClass(e, form){
@@ -441,13 +403,21 @@ function createClass(e, form){
         if (xhr.status === 200 && xhr.responseText && xhr.readyState === 4){
             let response = JSON.parse(xhr.responseText)
 
-            document.getElementById('designationError').innerText = response?.designation || ""
+            document.getElementById('designationError').innerText = response?.designation || null
             Array.from(document.getElementsByClassName('dateError')).forEach(element => {
-                element.innerText = response?.date || ""
+                element.innerText = response?.date || null
             });
 
+            let valdiation = document.querySelector('#class_create .formValidation')
+
+            valdiation.classList.remove('OK', 'KO')
+
             if (response.valide){
-                
+                valdiation.classList.add('OK')
+                valdiation.innerText = response.valide || null
+            }else if (response.error){
+                valdiation.classList.add('KO')
+                valdiation.innerText = response.error || null
             }
 
             console.log(response)
@@ -455,9 +425,9 @@ function createClass(e, form){
     }
         
     let nform = new FormData(form)
-
     nform.append('ajax', true)
     nform.append('class/create', true)
+
     xhr.send(nform)
 }
 
@@ -476,7 +446,215 @@ function createClassFile(e, form){
 
     let nform = new FormData(form)
     nform.append('ajax', true)
-    nform.append('create/classFile', true)
+    nform.append('class/createFile', true)
+
+    xhr.send(nform)
+}
+
+function selectClassModify(select){
+    let xhr = new XMLHttpRequest()
+    xhr.open('POST', "/dashboard/class/modify")
+    xhr.onreadystatechange = () => {
+        if (xhr.responseText && xhr.status === 200 && xhr.readyState === 4){
+            let response = JSON.parse(xhr.responseText)
+
+            let form = document.forms['class_modify']
+
+            form['designation'].value = response.designation
+            form['start_date'].value = (response.stageStart?.search("1970")) ? response.stageStart : null
+            form['end_date'].value = (response.stageEnd?.search("1970")) ? response.stageEnd : null
+
+            Array.from(document.forms['class_modify']['teacher'].children[1].children)[0].setAttribute('selected', null)
+
+            Array.from(document.forms['class_modify']['teacher'].children[1].children).forEach(e => {
+                if (e.value == response.idTeacher)
+                    e.setAttribute('selected', null)
+                else
+                    e.removeAttribute('selected')
+            })
+        }
+    }
+
+    let form = new FormData()
+    form.append('ajax', true)
+    form.append('selectClass', true)
+    form.append('id', select.value)
+
+    xhr.send(form)
+}
+
+function modifyClass(e, form){
+    e.preventDefault()
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('POST', "/dashboard/class/modify")
+    xhr.onreadystatechange = () => {
+        if (xhr.responseText && xhr.status === 200 && xhr.readyState === 4){
+            let response = JSON.parse(xhr.responseText)
+
+            document.getElementById('designationError').innerText = response.designation || null
+            Array.from(document.getElementsByClassName('dateError')).forEach(e => {
+                e.innerText = response.date || null
+            })
+
+            let valdiation = document.querySelector('#class_modify .formValidation')
+
+            valdiation.classList.remove('OK', 'KO')
+
+            if (response.valide){
+                valdiation.classList.add('OK')
+                valdiation.innerText = response.valide || null
+            }else if (response.error){
+                valdiation.classList.add('KO')
+                valdiation.innerText = response.error || null
+            }
+        }
+    }
+    
+    let nform = new FormData(form)
+    nform.append('ajax', true)
+    nform.append('modifyClass', true)
+    nform.append('id', document.getElementById('classes').value)
+
+    xhr.send(nform)
+}
+
+function createTeacher(e, form){
+    e.preventDefault()
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('post', "/dashboard/teacher/add")
+    xhr.onreadystatechange = () => {
+        if (xhr.responseText && xhr.status === 200 && xhr.readyState === 4){
+            let response = JSON.parse(xhr.responseText)
+
+            document.getElementById('firstnameError').innerText = response?.firstname || null;
+            document.getElementById('lastnameError').innerText = response?.lastname || null;
+
+            let valdiation = document.querySelector('#teacher_create .formValidation')
+
+            valdiation.classList.remove('OK', 'KO')
+
+            if (response.valide){
+                valdiation.classList.add('OK')
+                valdiation.innerText = response.valide || null
+            }else if (response.error){
+                valdiation.classList.add('KO')
+                valdiation.innerText = response.error || null
+            }
+        }
+    }
+
+    let nform = new FormData(form)
+    nform.append('ajax', true)
+    nform.append('addTeacher', true)
+
+    xhr.send(nform)
+}
+
+function createTeacherFile(e, form){
+    e.preventDefault()
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('post', "/dashboard/teacher/add")
+    xhr.onreadystatechange = () => {
+        if (xhr.responseText && xhr.status === 200 && xhr.readyState === 4){
+            let response = JSON.parse(xhr.responseText)
+
+        }
+    }
+
+    let nform = new FormData(form)
+    nform.append('ajax', true)
+    nform.append('addTeacherFile', true)
+
+    xhr.send(nform)
+}
+
+function searchTeacher(search){
+    let items = document.getElementById('items')
+    items.innerHTML = null
+    
+    if (search.value.length < 2) return;
+
+    let x = 0;
+    for (let i = 0; i < search.value.length; i++) {
+        if (search.value[i] != ' ') break;
+        else x++;
+    }
+
+    search.value = search.value.substring(x)
+
+    if (search.value != ""){
+        let xhr = new XMLHttpRequest()
+        xhr.open('post', "/dashboard/teacher/modify")
+        xhr.onreadystatechange = () => {
+            if (xhr.responseText && xhr.status === 200 && xhr.readyState === 4){
+                let response = JSON.parse(xhr.responseText)
+    
+                response.teachers.forEach(e => {
+                    let div = document.createElement('div')
+                    div.classList.add('item')
+                    div.dataset.id = e.idteacher
+                    div.addEventListener('click', () => {
+                        let xhr = new XMLHttpRequest()
+                        xhr.open('post', "/dashboard/teacher/modify")
+                        xhr.onreadystatechange = () => {
+                            if (xhr.responseText && xhr.status === 200 && xhr.readyState === 4){
+                                let response = JSON.parse(xhr.responseText).teacher
+
+                                let form = document.forms['teacher_modify']
+
+                                console.log(response)
+
+                                form['firstname'].value = response.firstname
+                                form['lastname'].value = response.lastname
+                                form['username'].value = response.username
+                                form['email'].value = response.courriel
+                            }
+                        }
+
+                        let form = new FormData()
+                        form.append('ajax', true)
+                        form.append('teacherGetData', true)
+                        form.append('id', e.idteacher)
+
+                        xhr.send(form)
+                    })
+                    items.insertAdjacentElement('beforeend', div)
+    
+                    let h4 = document.createElement('h4')
+                    h4.innerText = e.lastname + " " + e.firstname
+                    div.insertAdjacentElement('beforeend', h4)
+                })
+            }
+        }
+    
+        let form = new FormData()
+        form.append('ajax', true)
+        form.append('teacherSearch', true)
+        form.append('s', search.value)
+    
+        xhr.send(form)
+    }
+}
+
+function modifyTeacher(e, form){
+    e.preventDefault()
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('post', "/dashboard/teacher/add")
+    xhr.onreadystatechange = () => {
+        if (xhr.responseText && xhr.status === 200 && xhr.readyState === 4){
+            let response = JSON.parse(xhr.responseText)
+
+            console.log(response)
+        }
+    }
+
+    let nform = new FormData(form)
+    nform.append('ajax', true)
+    nform.append('teacherModify', true)
 
     xhr.send(nform)
 }

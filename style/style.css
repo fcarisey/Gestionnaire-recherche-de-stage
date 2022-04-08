@@ -147,6 +147,25 @@ textarea, select{
     color: red;
 }
 
+.formValidation{
+    display: none;
+    background-color: #0080004d;
+    border: 2px solid green;
+    padding: 10px;
+    border-radius: 10px;
+    margin: auto;
+}
+
+.formValidation.OK, .formValidation.KO{
+    display: block;
+}
+
+.formValidation.KO{
+    display: block;
+    border-color: red;
+    background-color: #8000004d;
+}
+
 /*==================*/
 /*===== HEADER =====*/
 /*==================*/

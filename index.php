@@ -5,7 +5,7 @@ use PHPMailer\PHPMailer\SMTP;
 require_once("module/phpmailer/vendor/autoload.php");
 
 const DEBUG = false;
-const DEBUG_SQL = true;
+const DEBUG_SQL = false;
 const DEBUG_MAIL = false;
 
 session_name("SUID");

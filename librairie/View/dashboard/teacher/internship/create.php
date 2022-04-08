@@ -156,7 +156,7 @@ if ($affiliates){
 </style>
 
 <div id="dt_internship_create">
-    <form name="createinternship" onsubmit="createInternship(event)">
+    <form name="createinternship" onsubmit="createInternship(event, this)">
         <div>
             <label class="mandatory">
                 Designation:
@@ -166,7 +166,7 @@ if ($affiliates){
             <label class="mandatory">
                 Courte description:
                 <small id="sdescriptionError"></small>
-                <textarea required placeholder="Courte description" name="shortdescription" id="shortdescription" cols="30" style="height: 160px;"></textarea>
+                <textarea required placeholder="Courte description" name="sdescription" id="shortdescription" cols="30" style="height: 160px;"></textarea>
             </label>
             <label class="mandatory">
                 Description:

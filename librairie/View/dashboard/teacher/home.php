@@ -1,6 +1,8 @@
 <?php
 
-$idclasse = \Controller\AffiliateController::SELECT(['idclasse'], ['idteacher' => $_SESSION['id']])[0]->getIdclasse();
+$idclasse = \Controller\AffiliateController::SELECT(['idclasse'], ['idteacher' => $_SESSION['id']]);
+if ($idclasse)
+    $idclasse = $idclasse[0]->getIdclasse();
 $students = \Controller\StudentController::SELECT(\Database::SELECT_ALL, ['idclasse' => (int)$idclasse]);
 
 $inProgress = 0;
