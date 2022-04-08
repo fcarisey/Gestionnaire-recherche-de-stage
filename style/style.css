@@ -218,26 +218,27 @@ header div nav:nth-child(2) ul li a:hover {
 /*================*/
 
 
-#home .internshipsProposal > .seeMore {
+#home > #seeMore {
     animation: seeMoreUpDown infinite 1.9s;
     margin: auto;
     margin-top: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
+    width: fit-content;
 }
 
-#home .internshipsProposal > .seeMore a{
+#home > #seeMore a{
     color: rgb(0 157 70);
     font-size: 1.4em;
     padding: 10px;
 }
 
-#home .internshipsProposal > .seeMore a::after {
+#home > #seeMore a::after {
     content: "⪻";
     position: absolute;
-    top: 30px;
+    top: 40px;
     transform: rotate(90deg);
     zoom: 75%;
-    right: 60px;
+    right: 66px;
 }
 
 /*===================*/

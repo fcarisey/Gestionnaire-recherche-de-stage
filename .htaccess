@@ -7,10 +7,11 @@ RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(login|contact|internships|logout|dashboard)$ /?page=$1 [QSD,L]
+RewriteRule ^(login|contact|internships|logout|dashboard|account)$ /?page=$1 [QSD,L]
 RewriteRule ^(dashboard)/(home|class|student|internship|teacher)$ /?page=$1&subpage1=$2 [QSD,L]
 RewriteRule ^(dashboard)/(class)/(view)/(.*)$ /?page=$1&subpage1=$2&subpage2=$3&class=$4 [QSD,L]
 RewriteRule ^(dashboard)/(internship)/(modify)/(.*)$ /?page=$1&subpage1=$2&subpage2=$3&id=$4 [QSD,L]
 RewriteRule ^(dashboard)/(home|class|student|internship|teacher)/(.*)$ /?page=$1&subpage1=$2&subpage2=$3 [QSD,L]
 RewriteRule ^(internship)/([0-9]+)$ /?page=$1&id=$2 [QSD,L]
+RewriteRule ^(account)/(files|settings)$ /?page=$1&subpage=$2 [QSD,L]
 RewriteRule ^(picture)/(.*)$ /img/$2

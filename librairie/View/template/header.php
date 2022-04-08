@@ -18,6 +18,7 @@
                         <?php
 
                         if (isset($_SESSION['id'])): ?>
+                            <li><a href="/account">Mon compte</a></li>
                             <li><a href="/logout">Déconnexion</a></li>
                         <?php else: ?>
                             <li><a href="/login">Connexion</a></li>

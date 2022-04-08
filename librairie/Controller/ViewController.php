@@ -18,6 +18,7 @@ class ViewController{
             case 'logout': require_once("librairie/View/logout.php");break;
             case 'dashboard': require_once("librairie/View/dashboard.php");break;
             case 'internship': require_once("librairie/View/internship.php");break;
+            case 'account': require_once("librairie/View/account.php");break;
         }
 
         if (!isset($_POST['ajax']))
@@ -27,7 +28,7 @@ class ViewController{
     public static function userPermission($page){
         $basic = ['home', 'login', 'contact', 'logout'];
         
-        $login = [];
+        $login = ['account'];
         $student = array_merge(['internships', 'internship'], $login);
         $teacher = array_merge(['dashboard'], $login);
         $admin = array_merge(['dashboard'], $login);
