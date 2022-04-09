@@ -605,12 +605,12 @@ function searchTeacher(search){
 
                                 let form = document.forms['teacher_modify']
 
-                                console.log(response)
-
                                 form['firstname'].value = response.firstname
                                 form['lastname'].value = response.lastname
                                 form['username'].value = response.username
-                                form['email'].value = response.courriel
+                                form['courriel'].value = response.courriel
+
+                                form['id'].value = e.idteacher
                             }
                         }
 
@@ -643,10 +643,27 @@ function modifyTeacher(e, form){
     e.preventDefault()
 
     let xhr = new XMLHttpRequest()
-    xhr.open('post', "/dashboard/teacher/add")
+    xhr.open('post', "/dashboard/teacher/modify")
     xhr.onreadystatechange = () => {
         if (xhr.responseText && xhr.status === 200 && xhr.readyState === 4){
             let response = JSON.parse(xhr.responseText)
+
+            document.getElementById('firstnameError').innerText = response?.firstname || null;
+            document.getElementById('lastnameError').innerText = response?.lastname || null;
+            document.getElementById('usernameError').innerText = response?.username || null;
+            document.getElementById('courrielError').innerText = response?.courriel || null;
+
+            let valdiation = document.querySelector('#teacher_modify .formValidation')
+
+            valdiation.classList.remove('OK', 'KO')
+
+            if (response.success){
+                valdiation.classList.add('OK')
+                valdiation.innerText = response.success || null
+            }else if (response.error){
+                valdiation.classList.add('KO')
+                valdiation.innerText = response.error || null
+            }
 
             console.log(response)
         }

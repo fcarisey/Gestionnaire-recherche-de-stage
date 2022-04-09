@@ -22,7 +22,69 @@ if (isset($_POST['ajax']) && (isset($_POST['teacherSearch']) || isset($_POST['te
 
         $err['teacher'] = \Database::$db_array['grds']->specialRequest("SELECT idteacher, firstname, lastname, username, courriel FROM teacher WHERE idteacher = $id", [])[0];
     }else if (isset($_POST['teacherModify'])){
-        
+        $firstname = htmlspecialchars(\Controller\ControllerController::keyExist('firstname', $_POST));
+        $lastname = htmlspecialchars(\Controller\ControllerController::keyExist('lastname', $_POST));
+        $username = htmlspecialchars(\Controller\ControllerController::keyExist('username', $_POST));
+        $courriel = htmlspecialchars(\Controller\ControllerController::keyExist('courriel', $_POST));
+        $id = (int)\Controller\ControllerController::keyExist('id', $_POST);
+
+        $firstnameParse = false;
+        if (!empty($firstname)){
+            $firstnameParse = true;
+        }else
+            $err['firstname'] = "Le prénom est obligatoire !";
+
+        $lastnameParse = false;
+        if (!empty($lastname)){
+            $lastnameParse = true;
+        }else
+            $err['lastname'] = "Le nom est obligatoire !";
+
+        $usernameParse = false;
+        if (!empty($username)){
+            $teacher = \Database::$db_array['grds']->specialRequest("SELECT idteacher FROM teacher WHERE username = ? AND idteacher != ?", [$username, $id], \Model\Teacher::class);
+
+            if (!$teacher){
+                $usernameParse = true;
+            }else
+                $err['username'] = "Ce nom d'utilisateur existe déjà !";
+        }else
+            $err['username'] = "Le nom d'utilisateur est obligatoire !";
+
+        $courrielParse = false;
+        if (!empty($courriel)){
+            if (filter_var($courriel, FILTER_VALIDATE_EMAIL)){
+                $courrielParse = true;
+            }else
+                $err['courriel'] = "Le courriel n'est pas valide !";
+            
+        }else
+            $err['courriel'] = "Le courriel est obligatoire !";
+
+        if ($firstnameParse && $lastnameParse && $usernameParse && $courrielParse){
+            $teacher = \Controller\TeacherController::SELECT(['idteacher'], [
+                'idteacher' => $id
+            ], 1);
+
+            if ($teacher){
+                try{
+                    $teacher = \Controller\TeacherController::UPDATE([
+                        'firstname' => $firstname,
+                        'lastname' => $lastname,
+                        'username' => $username,
+                        'courriel' => $courriel
+                    ], [
+                        'idteacher' => $id
+                    ]);
+
+                    $err['success'] = "Le professeur a bien été modifié !";
+                }catch (\Throwable $e){
+                    $err['error'] = "Une erreur est survenue lors de la modification du professeur !";
+                }
+                
+            }else
+                $err['error'] = "Le professeur n'existe pas !";
+        }
     }
 
     echo json_encode($err);
@@ -110,8 +172,8 @@ if (isset($_POST['ajax']) && (isset($_POST['teacherSearch']) || isset($_POST['te
                     <td>
                         <label class="mandatory">
                             Courriel :
-                            <input autocomplete="off" required type="email" name="email" placeholder="jdoe@exemple.com">
-                            <small class="inputError" id="emailError"></small>
+                            <input autocomplete="off" required type="email" name="courriel" placeholder="jdoe@exemple.com">
+                            <small class="inputError" id="courrielError"></small>
                         </label>
                     </td>
                 </tr>
@@ -121,5 +183,6 @@ if (isset($_POST['ajax']) && (isset($_POST['teacherSearch']) || isset($_POST['te
                 </tr>
             </tbody>
         </table>
+        <input type="hidden" name="id">
     </form>
 </div>

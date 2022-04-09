@@ -66,13 +66,13 @@ if (isset($_POST['ajax']) && (isset($_POST['addTeacher']) || isset($_POST['addTe
             if (!empty($firstname)){
                 $firstnameParse = true;
             }else
-                $err['firstname'] = "Le prénom est obligaoire !";
+                $err['firstname'] = "Le prénom est obligatoire !";
 
             $lastnameParse = false;
             if (!empty($lastname)){
                 $lastnameParse = true;
             }else
-                $err['lastname'] = "Le nom est obligaoire !";
+                $err['lastname'] = "Le nom est obligatoire !";
 
             if ($firstnameParse && $lastnameParse){
                 $teacher = \Controller\TeacherController::SELECT(\Database::SELECT_ALL, [
