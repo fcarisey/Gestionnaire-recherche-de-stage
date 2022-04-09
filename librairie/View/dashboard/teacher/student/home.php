@@ -3,9 +3,10 @@
 if (isset($_POST['ajax']) && (isset($_POST['value']) || isset($_POST['id']))){
     if (isset($_POST['value'])){
         if (!empty(trim($_POST['value']))){
-            $s = explode(' ', ltrim(rtrim($_POST['value'])));
+            $s = explode(' ', trim($_POST['value']));
             $execute = [];
-            $SQL = "SELECT idstudent, username, firstname, lastname, profilpicture FROM student WHERE";
+
+            $SQL = "SELECT idstudent, username, firstname, lastname, profilpicture FROM student WHERE (";
         
             for ($i = 0; $i < count($s); $i++){
                 if ($i > 0 && $i < count($s))
@@ -17,6 +18,22 @@ if (isset($_POST['ajax']) && (isset($_POST['value']) || isset($_POST['id']))){
                 $execute[":lastname$i"] = "%$s[$i]%";
                 $execute[":username$i"] = "%$s[$i]%";
             }
+
+            $SQL .= ")";
+
+            $classesId = \Controller\AffiliateController::SELECT(['idclasse'], ['idteacher' => (int)$_SESSION['id']]);
+
+            $SQL .= " AND (";
+            
+            for ($i = 0; $i < count($classesId); $i++){
+                if ($i > 0 && $i < count($classesId))
+                    $SQL .= " OR";
+
+                $SQL .= " idclasse = :idclasse$i";
+                $execute[":idclasse$i"] = $classesId[$i]->getIdclasse();
+            }
+
+            $SQL .= ")";
         
             $data = \Database::$db_array['grds']->specialRequest($SQL, $execute, \Model\Student::class);
         
@@ -34,11 +51,21 @@ if (isset($_POST['ajax']) && (isset($_POST['value']) || isset($_POST['id']))){
                 }
             }
     
-            echo json_encode($students, JSON_INVALID_UTF8_IGNORE);
+            echo json_encode($students);
         }
     }else if (isset($_POST['id'])){
         $id = $_POST['id'];
         $user = \Controller\StudentController::SELECT(['lastname', 'firstname', 'profilpicture', 'cv', 'lm', 'idclasse'], ['idstudent' => $id])[0];
+
+        $interest = \Controller\InterestController::SELECT(\Database::SELECT_ALL, ['idstudent' => $id]);
+        $currentinternship = \Controller\CurrentinternshipController::SELECT(\Database::SELECT_ALL, ['idstudent' => $id]);
+
+        if ($currentinternship)
+            $status = "Trouvé";
+        else if ($interest)
+            $status = "En cours";
+        else
+            $status = "Pas commencer";
 
         $data = [
             'lastname' => $user->getLastname(),
@@ -47,10 +74,10 @@ if (isset($_POST['ajax']) && (isset($_POST['value']) || isset($_POST['id']))){
             'cv' => $user->getCv(),
             'lm' => $user->getLm(),
             'classe' => \Controller\ClasseController::SELECT(['designation'], ['idclasse' => $user->getIdclasse()])[0]->getDesignation(),
-            'stat' => "En cours"
+            'stat' => $status
         ];
 
-        echo json_encode($data, JSON_INVALID_UTF8_IGNORE);
+        echo json_encode($data);
     }
 
     die;

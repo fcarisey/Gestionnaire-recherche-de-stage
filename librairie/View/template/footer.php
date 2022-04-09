@@ -2,7 +2,7 @@
     </section>
     <footer>
         <div>
-            <p>Copiright © 2022. Tous droits réservés</p>
+            <p>Copyright © 2022. Tous droits réservés</p>
         </div>
     </footer>
 </body>

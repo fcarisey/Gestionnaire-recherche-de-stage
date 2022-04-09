@@ -408,16 +408,16 @@ function createClass(e, form){
                 element.innerText = response?.date || null
             });
 
-            let valdiation = document.querySelector('#class_create .formValidation')
+            let validation = document.querySelector('#class_create .formValidation')
 
-            valdiation.classList.remove('OK', 'KO')
+            validation.classList.remove('OK', 'KO')
 
             if (response.valide){
-                valdiation.classList.add('OK')
-                valdiation.innerText = response.valide || null
+                validation.classList.add('OK')
+                validation.innerText = response.valide || null
             }else if (response.error){
-                valdiation.classList.add('KO')
-                valdiation.innerText = response.error || null
+                validation.classList.add('KO')
+                validation.innerText = response.error || null
             }
 
             console.log(response)
@@ -497,16 +497,16 @@ function modifyClass(e, form){
                 e.innerText = response.date || null
             })
 
-            let valdiation = document.querySelector('#class_modify .formValidation')
+            let validation = document.querySelector('#class_modify .formValidation')
 
-            valdiation.classList.remove('OK', 'KO')
+            validation.classList.remove('OK', 'KO')
 
             if (response.valide){
-                valdiation.classList.add('OK')
-                valdiation.innerText = response.valide || null
+                validation.classList.add('OK')
+                validation.innerText = response.valide || null
             }else if (response.error){
-                valdiation.classList.add('KO')
-                valdiation.innerText = response.error || null
+                validation.classList.add('KO')
+                validation.innerText = response.error || null
             }
         }
     }
@@ -531,16 +531,16 @@ function createTeacher(e, form){
             document.getElementById('firstnameError').innerText = response?.firstname || null;
             document.getElementById('lastnameError').innerText = response?.lastname || null;
 
-            let valdiation = document.querySelector('#teacher_create .formValidation')
+            let validation = document.querySelector('#teacher_create .formValidation')
 
-            valdiation.classList.remove('OK', 'KO')
+            validation.classList.remove('OK', 'KO')
 
             if (response.valide){
-                valdiation.classList.add('OK')
-                valdiation.innerText = response.valide || null
+                validation.classList.add('OK')
+                validation.innerText = response.valide || null
             }else if (response.error){
-                valdiation.classList.add('KO')
-                valdiation.innerText = response.error || null
+                validation.classList.add('KO')
+                validation.innerText = response.error || null
             }
         }
     }
@@ -653,16 +653,16 @@ function modifyTeacher(e, form){
             document.getElementById('usernameError').innerText = response?.username || null;
             document.getElementById('courrielError').innerText = response?.courriel || null;
 
-            let valdiation = document.querySelector('#teacher_modify .formValidation')
+            let validation = document.querySelector('#teacher_modify .formValidation')
 
-            valdiation.classList.remove('OK', 'KO')
+            validation.classList.remove('OK', 'KO')
 
             if (response.success){
-                valdiation.classList.add('OK')
-                valdiation.innerText = response.success || null
+                validation.classList.add('OK')
+                validation.innerText = response.success || null
             }else if (response.error){
-                valdiation.classList.add('KO')
-                valdiation.innerText = response.error || null
+                validation.classList.add('KO')
+                validation.innerText = response.error || null
             }
 
             console.log(response)
@@ -672,6 +672,59 @@ function modifyTeacher(e, form){
     let nform = new FormData(form)
     nform.append('ajax', true)
     nform.append('teacherModify', true)
+
+    xhr.send(nform)
+}
+
+function createStudent(e, form){
+    e.preventDefault()
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('post', "/dashboard/student/add")
+    xhr.onreadystatechange = () => {
+        if (xhr.responseText && xhr.status === 200 && xhr.readyState === 4){
+            let response = JSON.parse(xhr.responseText)
+
+            document.getElementById('firstnameError').innerText = response?.firstname || null;
+            document.getElementById('lastnameError').innerText = response?.lastname || null;
+            document.getElementById('classError').innerText = response?.class || null;
+
+            let validation = document.querySelector('#student_create .formValidation')
+
+            validation.classList.remove('OK', 'KO')
+
+            if (response.success){
+                validation.classList.add('OK')
+                validation.innerText = response.success || null
+            }else if (response.error){
+                validation.classList.add('KO')
+                validation.innerText = response.error || null
+            }
+        }
+    }
+
+    let nform = new FormData(form)
+    nform.append('ajax', true)
+    nform.append('studentAdd', true)
+
+    xhr.send(nform)
+}
+
+function createStudentFile(e, form){
+    e.preventDefault()
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('post', "/dashboard/student/add")
+    xhr.onreadystatechange = () => {
+        if (xhr.responseText && xhr.status === 200 && xhr.readyState === 4){
+            let response = JSON.parse(xhr.responseText)
+            
+        }
+    }
+
+    let nform = new FormData(form)
+    nform.append('ajax', true)
+    nform.append('studentAddFile', true)
 
     xhr.send(nform)
 }

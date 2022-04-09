@@ -17,9 +17,9 @@ if ($students)
     }
 
 
-$inProgress = $inProgress * 100 / $totalStudent;
-$find = $find * 100 / $totalStudent;
-$notStart = $notStart * 100 / $totalStudent;
+$inProgress = floor($inProgress * 100 / $totalStudent);
+$find = floor($find * 100 / $totalStudent);
+$notStart = floor($notStart * 100 / $totalStudent);
 
 ?>
 
