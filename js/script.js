@@ -729,4 +729,107 @@ function createStudentFile(e, form){
     xhr.send(nform)
 }
 
+function searchStudent(search){
+    let items = document.getElementById('items')
+    items.innerHTML = null
+    
+    if (search.value.length < 2) return;
+
+    let x = 0;
+    for (let i = 0; i < search.value.length; i++) {
+        if (search.value[i] != ' ') break;
+        else x++;
+    }
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('post', "/dashboard/student/modify")
+    xhr.onreadystatechange = () => {
+        if (xhr.responseText && xhr.status === 200 && xhr.readyState === 4){
+            let response = JSON.parse(xhr.responseText)
+
+            let items = document.getElementById('items')
+            items.innerHTML = null
+
+            response.students.forEach(e => {
+                let div = document.createElement('div')
+                div.classList.add('item')
+                div.dataset.id = e.idstudent
+                div.addEventListener('click', () => {
+                    let xhr = new XMLHttpRequest()
+                    xhr.open('post', "/dashboard/student/modify")
+                    xhr.onreadystatechange = () => {
+                        if (xhr.responseText && xhr.status === 200 && xhr.readyState === 4){
+                            let response = JSON.parse(xhr.responseText).student
+
+                            let form = document.forms['student_modify']
+
+                            form['firstname'].value = response.firstname
+                            form['lastname'].value = response.lastname
+
+                            Array.from(form['class'].children[1].children).forEach(e => {
+                                if (e.value == response.idclasse) e.selected = true
+                            })
+
+                            form['id'].value = e.idstudent
+                        }
+                    }
+
+                    let form = new FormData()
+                    form.append('ajax', true)
+                    form.append('studentGetData', true)
+                    form.append('id', e.idstudent)
+
+                    xhr.send(form)
+                })
+                items.insertAdjacentElement('beforeend', div)
+
+                let h4 = document.createElement('h4')
+                h4.innerText = e.lastname + " " + e.firstname
+                div.insertAdjacentElement('beforeend', h4)
+            })
+        }
+    }
+
+    let form = new FormData()
+    form.append('ajax', true)
+    form.append('studentSearch', true)
+    form.append('s', search.value)
+
+    xhr.send(form)
+}
+
+function modifyStudent(e, form){
+    e.preventDefault()
+
+    let xhr = new XMLHttpRequest()
+    xhr.open('post', "/dashboard/student/modify")
+    xhr.onreadystatechange = () => {
+        if (xhr.responseText && xhr.status === 200 && xhr.readyState === 4){
+            let response = JSON.parse(xhr.responseText)
+
+            document.getElementById('firstnameError').innerText = response?.firstname || null;
+            document.getElementById('lastnameError').innerText = response?.lastname || null;
+            document.getElementById('classError').innerText = response?.class || null;
+
+            let validation = document.querySelector('#student_modify .formValidation')
+
+            validation.classList.remove('OK', 'KO')
+
+            if (response.success){
+                validation.classList.add('OK')
+                validation.innerText = response.success || null
+            }else if (response.error){
+                validation.classList.add('KO')
+                validation.innerText = response.error || null
+            }
+        }
+    }
+
+    let nform = new FormData(form)
+    nform.append('ajax', true)
+    nform.append('studentModify', true)
+
+    xhr.send(nform)
+}
+
 // console.clear()

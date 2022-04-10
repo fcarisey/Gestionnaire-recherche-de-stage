@@ -18,9 +18,9 @@ if ($students)
         ($interests) ? $inProgress++ : (($currentinternship) ? $find++ : $notStart++);
     }
 
-$inProgress = $inProgress * 100 / $totalStudent;
-$find = $find * 100 / $totalStudent;
-$notStart = $notStart * 100 / $totalStudent;
+$inProgress = floor($inProgress * 100 / $totalStudent);
+$find = floor($find * 100 / $totalStudent);
+$notStart = floor($notStart * 100 / $totalStudent);
 
 $interests = \Database::$db_array['grds']->specialRequest("SELECT COUNT(I.idstudent) AS nb, IT.designation FROM interest I INNER JOIN internship IT ON I.idinternship = IT.idinternship GROUP BY IT.designation ORDER BY COUNT(idstudent) DESC LIMIT 5", []);
 

@@ -107,11 +107,19 @@ else{
     die;
 }
 
-$classId = \Controller\AffiliateController::SELECT(\Database::SELECT_ALL, [
+$classes = \Controller\AffiliateController::SELECT(\Database::SELECT_ALL, [
     'idteacher' => $_SESSION['id']
-])[0]->getIdclasse();
+]);
 
-if ($internship->getIdclasse() != $classId){
+$classesParse = true;
+foreach ($classes as $classe){
+    if ($classe->getIdclasse() == $internship->getIdclasse()){
+        $classesParse = false;
+        break;
+    }
+}
+
+if ($classesParse){
     header("location:javascript://history.go(-1)");
     die;
 }

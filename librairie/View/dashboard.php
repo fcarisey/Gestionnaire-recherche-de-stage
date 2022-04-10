@@ -91,6 +91,7 @@ if ($_SESSION['role'] == "Teacher"){
                 <?php if ($_SESSION['role'] == 'Admin'): ?>
                     <ul class="toggler submenu">
                         <a data-subpage="student/add">Ajouter</a>
+                        <a data-subpage="student/modify">Modifer</a>
                     </ul>
                 <?php endif ?>
 

@@ -20,12 +20,14 @@ if (isset($_POST['ajax']) && isset($_POST['internship-1'])){
 
     $sdescriptionParse = false;
     if (!empty($sdescription)){
+        $sdescription = str_replace("'" , "\'" , $sdescription);
         $sdescriptionParse = true;
     }else
         $err['sdescription'] = "La courte description est obligatoire !";
 
     $descriptionParse = false;
     if (!empty($description)){
+        $description = str_replace("'" , "\'" , $description);
         $descriptionParse = true;
     }else
         $err['description'] = "La description est obligatoire !";
@@ -51,27 +53,34 @@ if (isset($_POST['ajax']) && isset($_POST['internship-1'])){
     }else
         $err['enterprise'] = "Le nom de l'entreprise est obligatoire !";
 
-    $websiteParse = true;
-    if (!filter_var($website, FILTER_VALIDATE_URL) && !empty($website)){
-        $err['website'] = "L'url n'est pas valide !";
-        $websiteParse = false;
+    $websiteParse = false;
+    if (!empty($website)){
+        if (filter_var($website, FILTER_VALIDATE_URL)){
+            $websiteParse = true;   
+        }else
+            $err['website'] = "Le site web n'est pas valide !";
+    }else
+        $err['website'] = "Le site web est obligatoire !";
+        
+
+    $phoneParse = false;
+    if (!empty($phone)){
+        if (preg_match("#^[0-9]{10}$#", $phone)){
+            $phoneParse = true;
+        }else
+            $err['phone'] = "Le numéro de téléphone n'est pas valide !";
     }
         
 
-    $phoneParse = true;
-    if (!preg_match('([0-9]{10})', $phone) && !empty($phone)){
-        $err['phone'] = "Le numéro de téléphone n'est pas valide !";
-        $phoneParse = false;
-    }
-        
-
-    $emailParse = true;
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL) && !empty($email)){
-        $err['email'] = "Le courriel n'est pas valide !";
-        $emailParse = false;
+    $emailParse = false;
+    if (!empty($email)){
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $emailParse = true;
+        }else
+            $err['email'] = "L'email n'est pas valide !";
     }
 
-    if ($designationParse && $sdescriptionParse && $descriptionParse && $classParse && $enterpriseParse && $websiteParse && $phoneParse && $emailParse){
+    if ($designationParse && $sdescriptionParse && $descriptionParse && $classParse && $enterpriseParse){
         $values = [
             'designation' => $designation,
             'description' => $description,

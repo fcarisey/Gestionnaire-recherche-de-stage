@@ -1,17 +1,18 @@
 <?php
 
-$classId = \Controller\AffiliateController::SELECT(['idclasse'], [
+$classes = \Controller\AffiliateController::SELECT(['idclasse'], [
     'idteacher' => $_SESSION['id']
 ]);
 
-if ($classId)
-    $classId = $classId[0]->getIdclasse();
+$SQL = "";
 
-$internships = \Controller\InternshipController::SELECT(\Database::SELECT_ALL, [
-    'idclasse' => $classId,
-    'AND' => Database::WHERE_KEY,
-    'isdone' => 0
-]);
+foreach ($classes as $classe) { 
+    $SQL .= "idclasse = {$classe->getIdclasse()} OR ";
+}
+
+$SQL = substr($SQL, 0, -4);
+
+$internships = \Database::$db_array['grds']->specialRequest("SELECT * FROM internship WHERE $SQL", [], \Model\Internship::class);
 
 $x = 0;
 
