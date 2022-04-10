@@ -56,6 +56,7 @@ if (isset($_POST['ajax']) && (isset($_POST['addTeacher']) || isset($_POST['addTe
         $handle = fopen($file['tmp_name'], 'r');
         $values = "";
         while ($data = fgetcsv($handle, 0, ';')){
+            $data = array_map('utf8_encode', $data);
             $firstname = htmlspecialchars($data[0]);
             $lastname = htmlspecialchars($data[1]);
             $username = strtolower(substr($firstname, 0, 1) . $lastname);

@@ -34,14 +34,20 @@ $teachers = \Controller\TeacherController::SELECT(\Database::SELECT_ALL);
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($teachers as $teacher): ?>
+            <?php if (empty($teachers)): ?>
                 <tr>
-                    <td><?= $teacher->getFirstname() ?></td>
-                    <td><?= $teacher->getLastname() ?></td>
-                    <td><?= $teacher->getUsername() ?></td>
-                    <td><?= $teacher->getCourriel() ?></td>
+                    <td colspan="4">Aucun enseignant n'est enregistré</td>
                 </tr>
-            <?php endforeach ?>
+            <?php else: ?>
+                <?php foreach ($teachers as $teacher): ?>
+                    <tr>
+                        <td><?= $teacher->getFirstname() ?></td>
+                        <td><?= $teacher->getLastname() ?></td>
+                        <td><?= $teacher->getUsername() ?></td>
+                        <td><?= $teacher->getCourriel() ?></td>
+                    </tr>
+                <?php endforeach ?>
+            <?php endif ?>
         </tbody>
         <tfoot>
             <tr>

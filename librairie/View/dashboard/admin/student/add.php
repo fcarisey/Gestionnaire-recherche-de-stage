@@ -59,9 +59,12 @@ if (isset($_POST['ajax']) && (isset($_POST['studentAdd']) || isset($_POST['stude
 
         $handle = fopen($file['tmp_name'], "r");
         while ($data = fgetcsv($handle, 0, ';')){
+            $data = array_map('utf8_encode', $data);
+
             $firstname = htmlspecialchars($data[0]);
             $lastname = htmlspecialchars($data[1]);
             $class = htmlspecialchars($data[2]);
+
 
             $firstnameParse = false;
             if (!empty($firstname)){
@@ -86,6 +89,7 @@ if (isset($_POST['ajax']) && (isset($_POST['studentAdd']) || isset($_POST['stude
             }else
                 $err['class'] = "La classe est obligatoire !";
 
+            
             if ($firstnameParse && $lastnameParse && $classParse){
                 $username = strtolower(substr($firstname, 0, 1).$lastname);
                 $courriel = $username."@groupmontroland.fr";

@@ -406,6 +406,7 @@ header div nav:nth-child(2) ul li a:hover {
     width: 15%;
     background-color: #528AF4;
     border-radius: 0 10px 10px 0;
+    height: 80vh;
 }
 
 #dashboard nav h2{
