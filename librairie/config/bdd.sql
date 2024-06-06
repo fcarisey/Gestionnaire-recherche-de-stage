@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 INSERT INTO `admin` (`idadmin`, `firstname`, `lastname`, `username`, `password`, `profilpicture`, `courriel`) VALUES
-	(1, 'Frédéric', 'Carisey', 'administrateur', '$2y$10$GM.1O.TvXYs1Slc/kGA8.uHnFWL4tJl.kB79x0RAtDQPUVjbNpuG2', 'default.jpg', 'admin@grds.fr');
+	(1, 'Frédéric', 'Carisey', 'administrateur', '$2y$10$h1skiXJD9..bcQ.TBD5RL.RiFGH.GYNbXYlYsjZD5TbqEsUuQOgeO', 'default.jpg', 'admin@grds.fr');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `classe` (
